@@ -20,7 +20,8 @@ namespace PitchATent
 
         private void AddTent_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not yet dumb dumb");
+            tentDGV.Rows.Add();
+            MessageBox.Show(this.tentDGV.Rows[0].Cells[2].Value.ToString());
         }
 
 
@@ -29,5 +30,21 @@ namespace PitchATent
             this.Close();
         }
 
+        private void btn_refresh_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This would loop through the group boxes on the left and calculate the sum of everything.");
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // This seemed too easy, we might get screwed later?
+            PrintDialog print = new PrintDialog();
+            print.ShowDialog();
+        }
+
+        private void tb_truck_TextChanged(object sender, EventArgs e)
+        {
+            // TODO: handle all proper events (leave, hit enter...) Ask Eric if he prefers ComboBox
+        }
     }
 }
