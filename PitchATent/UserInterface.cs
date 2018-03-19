@@ -18,12 +18,27 @@ namespace PitchATent
             dateTime.Value = DateTime.Now;
         }
 
-        private void AddTent_Click(object sender, EventArgs e)
+        private int TentCtr { get; set; }
+
+        private void AddSmallTent_Click(object sender, EventArgs e)
         {
+            var tentDialog = new formSmallTent();
+            tentDialog.ShowDialog();
             tentDGV.Rows.Add();
-            MessageBox.Show(this.tentDGV.Rows[0].Cells[2].Value.ToString());
+            //TODO: Handle combobox errors
+            tentDGV.Rows[TentCtr].Cells[0].Value = tentDialog.TentSize.ToString();
+            tentDGV.Rows[TentCtr].Cells[1].Value = 69;
+            tentDGV.Rows[TentCtr].Cells[2].Value = tentDialog.CoverType.ToString();
+            tentDGV.Rows[TentCtr].Cells[3].Value = tentDialog.TieDown.ToString();
+            tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.Walls.ToString();
+            tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Legs.ToString();
+            TentCtr++;
         }
 
+        private void tentDGV_DataError(object sender, DataGridViewDataErrorEventArgs anError)
+        {
+            anError.Cancel = true;
+        }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -45,6 +60,11 @@ namespace PitchATent
         private void tb_truck_TextChanged(object sender, EventArgs e)
         {
             // TODO: handle all proper events (leave, hit enter...) Ask Eric if he prefers ComboBox
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //var about = new AboutBox();
         }
     }
 }
