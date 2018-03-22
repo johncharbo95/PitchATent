@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="formLargeTent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formLargeTent.Designer.cs">
+      <DependentUpon>formLargeTent.cs</DependentUpon>
+    </Compile>
     <Compile Include="formSmallTent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +65,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="formLargeTent.resx">
+      <DependentUpon>formLargeTent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formSmallTent.resx">
       <DependentUpon>formSmallTent.cs</DependentUpon>
     </EmbeddedResource>

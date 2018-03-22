@@ -30,12 +30,6 @@
         {
             this.tentGroupBox = new System.Windows.Forms.GroupBox();
             this.tentDGV = new System.Windows.Forms.DataGridView();
-            this.tentType = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.tentQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tentCoverType = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.tentHoldDown = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.tentWalls = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.tentLegs = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.accGroupBox = new System.Windows.Forms.GroupBox();
             this.btn_tentAddSmall = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -59,6 +53,12 @@
             this.btn_tentAddLarge = new System.Windows.Forms.Button();
             this.btn_addFrame = new System.Windows.Forms.Button();
             this.btn_addClearSpan = new System.Windows.Forms.Button();
+            this.tentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentCoverType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentHoldDown = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentWalls = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentLegs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tentGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tentDGV)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -93,75 +93,7 @@
             this.tentDGV.RowHeadersVisible = false;
             this.tentDGV.Size = new System.Drawing.Size(624, 263);
             this.tentDGV.TabIndex = 0;
-            // 
-            // tentType
-            // 
-            this.tentType.HeaderText = "Tent";
-            this.tentType.Items.AddRange(new object[] {
-            "10x10",
-            "10x15",
-            "10x20",
-            "15x15",
-            "20x20",
-            "20x30",
-            "20x40",
-            "30x30",
-            "Hexagon"});
-            this.tentType.Name = "tentType";
-            // 
-            // tentQty
-            // 
-            this.tentQty.HeaderText = "Qty";
-            this.tentQty.Name = "tentQty";
-            this.tentQty.Width = 50;
-            // 
-            // tentCoverType
-            // 
-            this.tentCoverType.HeaderText = "Cover Type";
-            this.tentCoverType.Items.AddRange(new object[] {
-            "Regular",
-            "New",
-            "Old",
-            "Barbecue",
-            "Soft"});
-            this.tentCoverType.Name = "tentCoverType";
-            // 
-            // tentHoldDown
-            // 
-            this.tentHoldDown.HeaderText = "Tie Down";
-            this.tentHoldDown.Items.AddRange(new object[] {
-            "Pins",
-            "Water Barrel",
-            "Blocks"});
-            this.tentHoldDown.Name = "tentHoldDown";
-            // 
-            // tentWalls
-            // 
-            this.tentWalls.HeaderText = "Walls";
-            this.tentWalls.Items.AddRange(new object[] {
-            "Full Plain",
-            "Full Window",
-            "Half Plain/Half Window",
-            "Full Plain Fiesta",
-            "Full Window Fiesta",
-            "Half Plain/Half Window Fiesta",
-            "None"});
-            this.tentWalls.Name = "tentWalls";
-            this.tentWalls.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tentWalls.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // tentLegs
-            // 
-            this.tentLegs.HeaderText = "Legs";
-            this.tentLegs.Items.AddRange(new object[] {
-            "8 ft",
-            "8 ft Adjustable",
-            "10 ft",
-            "10 ft Adjustable",
-            "Hexagon**************"});
-            this.tentLegs.Name = "tentLegs";
-            this.tentLegs.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tentLegs.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.tentDGV.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.tentDGV_DataError);
             // 
             // accGroupBox
             // 
@@ -344,6 +276,7 @@
             this.btn_tentAddLarge.TabIndex = 15;
             this.btn_tentAddLarge.Text = "Add Large Tent";
             this.btn_tentAddLarge.UseVisualStyleBackColor = true;
+            this.btn_tentAddLarge.Click += new System.EventHandler(this.btn_tentAddLarge_Click);
             // 
             // btn_addFrame
             // 
@@ -353,6 +286,7 @@
             this.btn_addFrame.TabIndex = 16;
             this.btn_addFrame.Text = "Add Frame";
             this.btn_addFrame.UseVisualStyleBackColor = true;
+            this.btn_addFrame.Click += new System.EventHandler(this.btn_addFrame_Click);
             // 
             // btn_addClearSpan
             // 
@@ -362,6 +296,51 @@
             this.btn_addClearSpan.TabIndex = 17;
             this.btn_addClearSpan.Text = "Add ClearSpan";
             this.btn_addClearSpan.UseVisualStyleBackColor = true;
+            this.btn_addClearSpan.Click += new System.EventHandler(this.btn_addClearSpan_Click);
+            // 
+            // tentType
+            // 
+            this.tentType.HeaderText = "Tent";
+            this.tentType.Name = "tentType";
+            this.tentType.ReadOnly = true;
+            this.tentType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // tentQty
+            // 
+            this.tentQty.HeaderText = "Qty";
+            this.tentQty.Name = "tentQty";
+            this.tentQty.Width = 50;
+            // 
+            // tentCoverType
+            // 
+            this.tentCoverType.HeaderText = "Cover Type";
+            this.tentCoverType.Name = "tentCoverType";
+            this.tentCoverType.ReadOnly = true;
+            this.tentCoverType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentCoverType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // tentHoldDown
+            // 
+            this.tentHoldDown.HeaderText = "Tie Down";
+            this.tentHoldDown.Name = "tentHoldDown";
+            this.tentHoldDown.ReadOnly = true;
+            this.tentHoldDown.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentHoldDown.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // tentWalls
+            // 
+            this.tentWalls.HeaderText = "Walls";
+            this.tentWalls.Name = "tentWalls";
+            this.tentWalls.ReadOnly = true;
+            this.tentWalls.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentWalls.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // tentLegs
+            // 
+            this.tentLegs.HeaderText = "Legs";
+            this.tentLegs.Name = "tentLegs";
+            this.tentLegs.ReadOnly = true;
+            this.tentLegs.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // UserInterface
             // 
@@ -422,13 +401,13 @@
         private System.Windows.Forms.Button btn_tentAddLarge;
         private System.Windows.Forms.Button btn_addFrame;
         private System.Windows.Forms.Button btn_addClearSpan;
-        private System.Windows.Forms.DataGridViewComboBoxColumn tentType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tentQty;
-        private System.Windows.Forms.DataGridViewComboBoxColumn tentCoverType;
-        private System.Windows.Forms.DataGridViewComboBoxColumn tentHoldDown;
-        private System.Windows.Forms.DataGridViewComboBoxColumn tentWalls;
-        private System.Windows.Forms.DataGridViewComboBoxColumn tentLegs;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tentType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tentQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tentCoverType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tentHoldDown;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tentWalls;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tentLegs;
     }
 }
 

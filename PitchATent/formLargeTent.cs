@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PitchATent
 {
-    public partial class formSmallTent : Form
+    public partial class formLargeTent : Form
     {
-        public formSmallTent()
+        public formLargeTent()
         {
             InitializeComponent();
         }
@@ -23,30 +23,30 @@ namespace PitchATent
         public string TieDown { get; set; }
         public string Walls { get; set; }
         //TODO: Add custom wall property
-        public string Legs { get; set; }
+        public string Legs {get; set; }
         public string Notes { get; set; }
 
-        private void cb_ST_walls_SelectedIndexChanged(object sender, EventArgs e)
+        private void cb_LT_walls_SelectedIndexChanged(object sender, EventArgs e)
         {
             //TODO: Add custom GUI for walls if not too much time
-            if(cb_ST_walls.Text == "Custom...")
+            if(cb_LT_walls.Text == "Custom...")
             {
                 MessageBox.Show("Define custom walls...");
             }
         }
 
-        private void btn_ST_add_Click(object sender, EventArgs e)
+        private void btn_LT_add_Click(object sender, EventArgs e)
         {
-            this.TentSize = cb_ST_size.Text;
-            this.Qty = nud_ST_qty.Value;
-            this.CoverType = cb_ST_coverType.Text;
-            this.TieDown = cb_ST_holddown.Text;
-            this.Walls = cb_ST_walls.Text;
-            this.Legs = cb_ST_legs.Text;
+            //TODO: Get all values and return
+            this.TentSize = cb_LT_size.Text;
+            this.Qty = nud_LT_qty.Value;
+            this.CoverType = cb_LT_coverType.Text;
+            this.TieDown = cb_LT_holddown.Text;
+            this.Walls = cb_LT_walls.Text;
             this.Close();
         }
 
-        private void btn_ST_cancel_Click(object sender, EventArgs e)
+        private void btn_LT_cancel_Click(object sender, EventArgs e)
         {
             //TODO: Prompt user to ask if they're sure they want to cancel
             this.Close();

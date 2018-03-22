@@ -24,29 +24,45 @@ namespace PitchATent
         {
             var tentDialog = new formSmallTent();
             tentDialog.ShowDialog();
-            tentDGV.Rows.Add();
-            //TODO: Handle combobox errors
-            tentDGV.Rows[TentCtr].Cells[0].Value = tentDialog.TentSize.ToString();
-            tentDGV.Rows[TentCtr].Cells[1].Value = 69;
-            tentDGV.Rows[TentCtr].Cells[2].Value = tentDialog.CoverType.ToString();
-            tentDGV.Rows[TentCtr].Cells[3].Value = tentDialog.TieDown.ToString();
-            tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.Walls.ToString();
-            tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Legs.ToString();
+            this.tentDGV.Rows.Add();
+            this.tentDGV.Rows[TentCtr].Cells[0].Value = tentDialog.TentSize;
+            this.tentDGV.Rows[TentCtr].Cells[1].Value = tentDialog.Qty.ToString();
+            this.tentDGV.Rows[TentCtr].Cells[2].Value = tentDialog.CoverType;
+            this.tentDGV.Rows[TentCtr].Cells[3].Value = tentDialog.TieDown;
+            this.tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.Walls;
+            this.tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Legs;
+            TentCtr++;
+        }
+
+        private void btn_tentAddLarge_Click(object sender, EventArgs e)
+        {
+            var tentDialog = new formLargeTent();
+            tentDialog.ShowDialog();
+            this.tentDGV.Rows.Add();
+            this.tentDGV.Rows[TentCtr].Cells[0].Value = tentDialog.TentSize;
+            this.tentDGV.Rows[TentCtr].Cells[1].Value = tentDialog.Qty.ToString();
+            this.tentDGV.Rows[TentCtr].Cells[2].Value = tentDialog.CoverType;
+            this.tentDGV.Rows[TentCtr].Cells[3].Value = tentDialog.TieDown;
+            this.tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.Walls;
+            this.tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Legs;
             TentCtr++;
         }
 
         private void tentDGV_DataError(object sender, DataGridViewDataErrorEventArgs anError)
         {
-            anError.Cancel = true;
+            // Cancel the error
+            anError.ThrowException = false;
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Close the form
             this.Close();
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)
         {
+            // TODO: Evaluate using a refresh button or automatic refresh
             MessageBox.Show("This would loop through the group boxes on the left and calculate the sum of everything.");
         }
 
@@ -65,6 +81,16 @@ namespace PitchATent
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //var about = new AboutBox();
+        }
+
+        private void btn_addFrame_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This doesn't do anything yet");
+        }
+
+        private void btn_addClearSpan_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This doesn't do anything yet");
         }
     }
 }
