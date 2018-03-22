@@ -18,34 +18,18 @@ namespace PitchATent
             dateTime.Value = DateTime.Now;
         }
 
+        public enum Tent { small, large, frame, clearspan};
+
         private int TentCtr { get; set; }
 
         private void AddSmallTent_Click(object sender, EventArgs e)
         {
-            var tentDialog = new formSmallTent();
-            tentDialog.ShowDialog();
-            this.tentDGV.Rows.Add();
-            this.tentDGV.Rows[TentCtr].Cells[0].Value = tentDialog.TentSize;
-            this.tentDGV.Rows[TentCtr].Cells[1].Value = tentDialog.Qty.ToString();
-            this.tentDGV.Rows[TentCtr].Cells[2].Value = tentDialog.CoverType;
-            this.tentDGV.Rows[TentCtr].Cells[3].Value = tentDialog.TieDown;
-            this.tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.Walls;
-            this.tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Legs;
-            TentCtr++;
+            openDialog(Tent.small);
         }
 
         private void btn_tentAddLarge_Click(object sender, EventArgs e)
         {
-            var tentDialog = new formLargeTent();
-            tentDialog.ShowDialog();
-            this.tentDGV.Rows.Add();
-            this.tentDGV.Rows[TentCtr].Cells[0].Value = tentDialog.TentSize;
-            this.tentDGV.Rows[TentCtr].Cells[1].Value = tentDialog.Qty.ToString();
-            this.tentDGV.Rows[TentCtr].Cells[2].Value = tentDialog.CoverType;
-            this.tentDGV.Rows[TentCtr].Cells[3].Value = tentDialog.TieDown;
-            this.tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.Walls;
-            this.tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Legs;
-            TentCtr++;
+            openDialog(Tent.large);
         }
 
         private void tentDGV_DataError(object sender, DataGridViewDataErrorEventArgs anError)
@@ -92,5 +76,24 @@ namespace PitchATent
         {
             MessageBox.Show("This doesn't do anything yet");
         }
+
+        private void openDialog(UserInterface.Tent tent)
+        {
+            var tentDialog = new addTentDlg(tent);
+            tentDialog.ShowDialog();
+            //this.tentDGV.Rows.Add();
+            if (tentDialog.Code == true)
+            {
+                this.tentDGV.Rows.Add();
+                this.tentDGV.Rows[TentCtr].Cells[0].Value = tentDialog.TentSize;
+                this.tentDGV.Rows[TentCtr].Cells[1].Value = tentDialog.Qty.ToString();
+                this.tentDGV.Rows[TentCtr].Cells[2].Value = tentDialog.CoverType;
+                this.tentDGV.Rows[TentCtr].Cells[3].Value = tentDialog.TieDown;
+                this.tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.Walls;
+                this.tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Legs;
+                TentCtr++;
+            }
+        }
+
     }
 }
