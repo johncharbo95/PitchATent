@@ -21,6 +21,7 @@ namespace PitchATent
         public enum Tent { small, large, frame, clearspan};
 
         private int TentCtr { get; set; }
+        private bool NewAccessory { get; set; } = true;
 
         private void AddSmallTent_Click(object sender, EventArgs e)
         {
@@ -79,7 +80,7 @@ namespace PitchATent
 
         private void openDialog(UserInterface.Tent tent)
         {
-            var tentDialog = new addTentDlg(tent);
+            var tentDialog = new AddTentDlg(tent);
             tentDialog.ShowDialog();
             //this.tentDGV.Rows.Add();
             if (tentDialog.Code == true)
@@ -95,5 +96,22 @@ namespace PitchATent
             }
         }
 
+        private void btn_AddAcc_Click(object sender, EventArgs e)
+        {
+            if (NewAccessory == true)
+            {
+                var AccessoryDialog = new AccessoryDlg();
+                AccessoryDialog.ShowDialog();
+                NewAccessory = false;
+            }
+            else
+            {
+                var AccessoryDialog = new AccessoryDlg();
+                AccessoryDialog.LoadAccessoryList();
+                AccessoryDialog.ShowDialog();
+                NewAccessory = false;
+            }
+
+        }
     }
 }

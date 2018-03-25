@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace PitchATent
 {
-    public partial class addTentDlg : Form
+    public partial class AddTentDlg : Form
     {
 
         // Constructors
         private UserInterface.Tent tent;
 
-        public addTentDlg(UserInterface.Tent tent)
+        public AddTentDlg(UserInterface.Tent tent)
         {
             this.tent = tent;
             InitializeComponent(this.tent);

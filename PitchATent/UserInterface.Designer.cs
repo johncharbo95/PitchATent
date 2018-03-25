@@ -55,10 +55,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dateTime = new System.Windows.Forms.DateTimePicker();
             this.previewGroupBox = new System.Windows.Forms.GroupBox();
-            this.btn_refresh = new System.Windows.Forms.Button();
             this.btn_tentAddLarge = new System.Windows.Forms.Button();
             this.btn_addFrame = new System.Windows.Forms.Button();
             this.btn_addClearSpan = new System.Windows.Forms.Button();
+            this.btn_AddAcc = new System.Windows.Forms.Button();
             this.tentGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tentDGV)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -70,7 +70,7 @@
             this.tentGroupBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tentGroupBox.Location = new System.Drawing.Point(12, 101);
             this.tentGroupBox.Name = "tentGroupBox";
-            this.tentGroupBox.Size = new System.Drawing.Size(630, 291);
+            this.tentGroupBox.Size = new System.Drawing.Size(724, 291);
             this.tentGroupBox.TabIndex = 0;
             this.tentGroupBox.TabStop = false;
             this.tentGroupBox.Text = "Tents";
@@ -91,7 +91,7 @@
             this.tentDGV.Location = new System.Drawing.Point(3, 25);
             this.tentDGV.Name = "tentDGV";
             this.tentDGV.RowHeadersVisible = false;
-            this.tentDGV.Size = new System.Drawing.Size(624, 263);
+            this.tentDGV.Size = new System.Drawing.Size(718, 263);
             this.tentDGV.TabIndex = 0;
             this.tentDGV.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.tentDGV_DataError);
             // 
@@ -144,7 +144,7 @@
             this.accGroupBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accGroupBox.Location = new System.Drawing.Point(12, 398);
             this.accGroupBox.Name = "accGroupBox";
-            this.accGroupBox.Size = new System.Drawing.Size(630, 291);
+            this.accGroupBox.Size = new System.Drawing.Size(721, 291);
             this.accGroupBox.TabIndex = 1;
             this.accGroupBox.TabStop = false;
             this.accGroupBox.Text = "Accessories";
@@ -294,23 +294,12 @@
             // previewGroupBox
             // 
             this.previewGroupBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.previewGroupBox.Location = new System.Drawing.Point(691, 101);
+            this.previewGroupBox.Location = new System.Drawing.Point(742, 101);
             this.previewGroupBox.Name = "previewGroupBox";
-            this.previewGroupBox.Size = new System.Drawing.Size(261, 546);
+            this.previewGroupBox.Size = new System.Drawing.Size(210, 587);
             this.previewGroupBox.TabIndex = 13;
             this.previewGroupBox.TabStop = false;
             this.previewGroupBox.Text = "Preview";
-            // 
-            // btn_refresh
-            // 
-            this.btn_refresh.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_refresh.Location = new System.Drawing.Point(648, 653);
-            this.btn_refresh.Name = "btn_refresh";
-            this.btn_refresh.Size = new System.Drawing.Size(144, 35);
-            this.btn_refresh.TabIndex = 14;
-            this.btn_refresh.Text = "Refresh Preview";
-            this.btn_refresh.UseVisualStyleBackColor = true;
-            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
             // btn_tentAddLarge
             // 
@@ -342,15 +331,25 @@
             this.btn_addClearSpan.UseVisualStyleBackColor = true;
             this.btn_addClearSpan.Click += new System.EventHandler(this.btn_addClearSpan_Click);
             // 
+            // btn_AddAcc
+            // 
+            this.btn_AddAcc.Location = new System.Drawing.Point(437, 72);
+            this.btn_AddAcc.Name = "btn_AddAcc";
+            this.btn_AddAcc.Size = new System.Drawing.Size(100, 25);
+            this.btn_AddAcc.TabIndex = 18;
+            this.btn_AddAcc.Text = "Accessories";
+            this.btn_AddAcc.UseVisualStyleBackColor = true;
+            this.btn_AddAcc.Click += new System.EventHandler(this.btn_AddAcc_Click);
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(970, 700);
+            this.Controls.Add(this.btn_AddAcc);
             this.Controls.Add(this.btn_addClearSpan);
             this.Controls.Add(this.btn_addFrame);
             this.Controls.Add(this.btn_tentAddLarge);
-            this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.previewGroupBox);
             this.Controls.Add(this.dateTime);
             this.Controls.Add(this.label4);
@@ -397,7 +396,6 @@
         private System.Windows.Forms.DataGridView tentDGV;
         private System.Windows.Forms.DateTimePicker dateTime;
         private System.Windows.Forms.GroupBox previewGroupBox;
-        private System.Windows.Forms.Button btn_refresh;
         private System.Windows.Forms.Button btn_tentAddLarge;
         private System.Windows.Forms.Button btn_addFrame;
         private System.Windows.Forms.Button btn_addClearSpan;
@@ -408,6 +406,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tentHoldDown;
         private System.Windows.Forms.DataGridViewTextBoxColumn tentWalls;
         private System.Windows.Forms.DataGridViewTextBoxColumn tentLegs;
+        private System.Windows.Forms.Button btn_AddAcc;
     }
 }
 

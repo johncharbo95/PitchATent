@@ -1,6 +1,6 @@
 ﻿namespace PitchATent
 {
-    partial class addTentDlg
+    partial class AddTentDlg
     {
         /// <summary>
         /// Required designer variable.
@@ -251,19 +251,19 @@
                     "90x240",
                     "90x270",
                     "90x300"});
-                    this.cb_size.Text = "40x40";
+                    this.cb_size.SelectedIndex = 0;
                     this.cb_holddown.Items.AddRange(new object[] {
                     "Pins",
                     "Water Barrels",
                     "Concrete Blocks"});
-                    this.cb_holddown.Text = "Pins";
+                    this.cb_holddown.SelectedIndex = 0;
                     this.cb_coverType.Items.AddRange(new object[] {
                     "Regular",
                     "New",
                     "Old",
                     "Barbecue",
                     "Soft"});
-                    this.cb_coverType.Text = "Regular";
+                    this.cb_coverType.SelectedIndex = 0;
                     this.cb_walls.Items.AddRange(new object[] {
                     "Full Plain",
                     "Full Window",
@@ -273,7 +273,7 @@
                     "Half Plain Half Window Fiesta",
                     "None",
                     "Custom..."});
-                    this.cb_walls.Text = "Full Plain";
+                    this.cb_walls.SelectedIndex = 0;
                     break;
                 case UserInterface.Tent.small:
                     this.Text = "Add Small Tent";
@@ -288,19 +288,19 @@
                     "30x30",
                     "Hexagon",
                     ""});
-                    this.cb_size.Text = "10x10";
+                    this.cb_size.SelectedIndex = 0;
                     this.cb_holddown.Items.AddRange(new object[] {
                     "Pins",
                     "Water Barrels",
                     "Concrete Blocks"});
-                    this.cb_holddown.Text = "Pins";
+                    this.cb_holddown.SelectedIndex = 0;
                     this.cb_coverType.Items.AddRange(new object[] {
                     "Regular",
                     "New",
                     "Old",
                     "Barbecue",
                     "Soft"});
-                    this.cb_coverType.Text = "Regular";
+                    this.cb_coverType.SelectedIndex = 0;
                     this.cb_walls.Items.AddRange(new object[] {
                     "Full Plain",
                     "Full Window",
@@ -310,14 +310,14 @@
                     "Half Plain Half Window Fiesta",
                     "None",
                     "Custom..."});
-                    this.cb_walls.Text = "Full Plain";
+                    this.cb_walls.SelectedIndex = 0;
                     this.cb_legs.Items.AddRange(new object[] {
                     "8 ft",
                     "8 ft Adjustable",
                     "10 ft",
                     "10 ft Adjustable",
                     "Hexagon"});
-                    this.cb_legs.Text = "8 ft";
+                    this.cb_legs.SelectedIndex = 0;
                     break;
                 case UserInterface.Tent.frame:
                     break;
@@ -352,7 +352,6 @@
             this.Controls.Add(this.label1);
             this.Name = "addTentDlg";
             this.ShowIcon = false;
-            this.Text = "Add Large Tent";
             ((System.ComponentModel.ISupportInitialize)(this.nud_qty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
