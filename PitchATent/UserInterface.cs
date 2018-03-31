@@ -18,17 +18,17 @@ namespace PitchATent
             dateTime.Value = DateTime.Now;
         }
 
-        public enum Tent { small, large, frame, clearspan};
+        public enum Tent { small, large, frame, clearspan,none};
 
         private int TentCtr { get; set; }
         private bool NewAccessory { get; set; } = true;
 
-        private void AddSmallTent_Click(object sender, EventArgs e)
+        private void btn_addSmallTent_Click(object sender, EventArgs e)
         {
             openDialog(Tent.small);
         }
 
-        private void btn_tentAddLarge_Click(object sender, EventArgs e)
+        private void btn_addLargeTent_Click(object sender, EventArgs e)
         {
             openDialog(Tent.large);
         }
@@ -57,12 +57,7 @@ namespace PitchATent
             PrintDialog print = new PrintDialog();
             print.ShowDialog();
         }
-
-        private void tb_truck_TextChanged(object sender, EventArgs e)
-        {
-            // TODO: handle all proper events (leave, hit enter...) Ask Eric if he prefers ComboBox
-        }
-
+        
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //var about = new AboutBox();
@@ -78,6 +73,9 @@ namespace PitchATent
             MessageBox.Show("This doesn't do anything yet");
         }
 
+        /// <summary>
+        /// Creates a new dialog object and shows it to the user. After making the selections, the values in the main dialog are updated with them.
+        /// </summary>
         private void openDialog(UserInterface.Tent tent)
         {
             var tentDialog = new AddTentDlg(tent);
@@ -92,26 +90,93 @@ namespace PitchATent
                 this.tentDGV.Rows[TentCtr].Cells[3].Value = tentDialog.TieDown;
                 this.tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.Walls;
                 this.tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Legs;
+                this.tentDGV.Rows[TentCtr].Cells[6].Value = tentDialog.TypeOfTent;
                 TentCtr++;
             }
         }
 
+        /// <summary>
+        /// On the click of the "Accessories" button, determines if this is the first time adding accessories. 
+        /// If it is, the dialog shows 0 values everywhere. If not, it is considered "Edit mode" and shows the existing accessories.
+        /// </summary>
         private void btn_AddAcc_Click(object sender, EventArgs e)
         {
+            var AccessoryDialog = new AccessoryDlg();
             if (NewAccessory == true)
             {
-                var AccessoryDialog = new AccessoryDlg();
-                AccessoryDialog.ShowDialog();
+                AccessoryDialog.AccList.ForEach(i => Console.WriteLine(i.Item + ", " +  i.Qty.ToString()));
                 NewAccessory = false;
             }
             else
-            {
-                var AccessoryDialog = new AccessoryDlg();
+            {   
                 AccessoryDialog.LoadAccessoryList();
-                AccessoryDialog.ShowDialog();
                 NewAccessory = false;
             }
+            AccessoryDialog.ShowDialog();
+            if (accDGV.Rows.Count != 0)
+            {
+                accDGV.Rows.Clear();
+            }
+            foreach (var n in AccessoryDialog.AccList)
+            {
+                accDGV.Rows.Add(n.Item, n.Qty.ToString());
+            }
+        }
 
+        /// <summary>
+        /// Allows the user to edit the contents of a specific row from the ContextMenuStrip of the DataGridView.
+        /// </summary>
+        private void editRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Get index of selected row
+            int selectedRowIndex = tentDGV.SelectedCells[0].RowIndex;
+
+            // Get the type of tent (enum)
+            Tent typeOfTent = (UserInterface.Tent)tentDGV.Rows[selectedRowIndex].Cells[6].Value;
+
+            // Create new object of AddTentDlg class
+            var TentDLG = new AddTentDlg(typeOfTent);
+
+            // Set properties of object according to values in selected row
+            TentDLG.TentSize = this.tentDGV.Rows[selectedRowIndex].Cells[0].Value.ToString();
+            TentDLG.Qty = Convert.ToDecimal(this.tentDGV.Rows[selectedRowIndex].Cells[1].Value);
+            TentDLG.CoverType = this.tentDGV.Rows[selectedRowIndex].Cells[2].Value.ToString();
+            TentDLG.TieDown = this.tentDGV.Rows[selectedRowIndex].Cells[3].Value.ToString();
+            TentDLG.Walls = this.tentDGV.Rows[selectedRowIndex].Cells[4].Value.ToString();
+            TentDLG.Legs = this.tentDGV.Rows[selectedRowIndex].Cells[5].Value.ToString();
+
+            // Update the Dialog with these values
+            TentDLG.UpdateFields();
+
+            // Show the Dialog
+            TentDLG.ShowDialog();
+
+            // Update Main Dialog with new values
+            this.tentDGV.Rows[selectedRowIndex].Cells[0].Value = TentDLG.TentSize;
+            this.tentDGV.Rows[selectedRowIndex].Cells[1].Value = TentDLG.Qty.ToString();
+            this.tentDGV.Rows[selectedRowIndex].Cells[2].Value = TentDLG.CoverType;
+            this.tentDGV.Rows[selectedRowIndex].Cells[3].Value = TentDLG.TieDown;
+            this.tentDGV.Rows[selectedRowIndex].Cells[4].Value = TentDLG.Walls;
+            this.tentDGV.Rows[selectedRowIndex].Cells[5].Value = TentDLG.Legs;
+            this.tentDGV.Rows[selectedRowIndex].Cells[6].Value = typeOfTent;
+           
+            }
+
+        private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int rowToDelete = tentDGV.Rows.GetFirstRow(DataGridViewElementStates.Selected);
+            tentDGV.Rows.RemoveAt(rowToDelete);
+            tentDGV.ClearSelection();
+        }
+
+        private void tentDGV_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                var hti = tentDGV.HitTest(e.X, e.Y);
+                tentDGV.ClearSelection();
+                tentDGV.Rows[hti.RowIndex].Selected = true;
+            }
         }
     }
 }

@@ -122,12 +122,12 @@
             // btn_add
             // 
             this.btn_add.Location = new System.Drawing.Point(12, 266);
-            this.btn_add.Name = "btn_add";
+            this.btn_add.Name = "btn_done";
             this.btn_add.Size = new System.Drawing.Size(75, 23);
             this.btn_add.TabIndex = 10;
-            this.btn_add.Text = "Add";
+            this.btn_add.Text = "Done";
             this.btn_add.UseVisualStyleBackColor = true;
-            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
+            this.btn_add.Click += new System.EventHandler(this.btn_done_Click);
             // 
             // btn_cancel
             // 
@@ -254,16 +254,17 @@
                     this.cb_size.SelectedIndex = 0;
                     this.cb_holddown.Items.AddRange(new object[] {
                     "Pins",
-                    "Water Barrels",
                     "Concrete Blocks"});
                     this.cb_holddown.SelectedIndex = 0;
-                    this.cb_coverType.Items.AddRange(new object[] {
-                    "Regular",
-                    "New",
-                    "Old",
-                    "Barbecue",
-                    "Soft"});
-                    this.cb_coverType.SelectedIndex = 0;
+                    this.cb_coverType.Enabled = false;
+                    // No cover types
+                    //this.cb_coverType.Items.AddRange(new object[] {
+                    //"Regular",
+                    //"New",
+                    //"Old",
+                    //"Barbecue",
+                    //"Soft"});
+                    //this.cb_coverType.SelectedIndex = 0;
                     this.cb_walls.Items.AddRange(new object[] {
                     "Full Plain",
                     "Full Window",
@@ -288,19 +289,19 @@
                     "30x30",
                     "Hexagon",
                     ""});
-                    this.cb_size.SelectedIndex = 0;
+                    this.cb_size.SelectedIndex = 8;
                     this.cb_holddown.Items.AddRange(new object[] {
                     "Pins",
                     "Water Barrels",
                     "Concrete Blocks"});
-                    this.cb_holddown.SelectedIndex = 0;
+                    this.cb_holddown.SelectedIndex = 2;
                     this.cb_coverType.Items.AddRange(new object[] {
                     "Regular",
                     "New",
                     "Old",
                     "Barbecue",
                     "Soft"});
-                    this.cb_coverType.SelectedIndex = 0;
+                    this.cb_coverType.SelectedIndex = 3;
                     this.cb_walls.Items.AddRange(new object[] {
                     "Full Plain",
                     "Full Window",
@@ -310,14 +311,14 @@
                     "Half Plain Half Window Fiesta",
                     "None",
                     "Custom..."});
-                    this.cb_walls.SelectedIndex = 0;
+                    this.cb_walls.SelectedIndex = 5;
                     this.cb_legs.Items.AddRange(new object[] {
                     "8 ft",
                     "8 ft Adjustable",
                     "10 ft",
                     "10 ft Adjustable",
                     "Hexagon"});
-                    this.cb_legs.SelectedIndex = 0;
+                    this.cb_legs.SelectedIndex = 3;
                     break;
                 case UserInterface.Tent.frame:
                     break;

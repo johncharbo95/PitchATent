@@ -47,7 +47,7 @@
             this.nud_SpotLight = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.nud_Extension = new System.Windows.Forms.NumericUpDown();
+            this.nud_Extension25 = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.nud_SingleDoor = new System.Windows.Forms.NumericUpDown();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -61,6 +61,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.btn_Done = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.nud_Extension100 = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.nud_Extension50 = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -69,13 +73,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_25CL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Chandelier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_SpotLight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension25)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_SingleDoor)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_ExitSign)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_DoubleDoor)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Extinguisher)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension100)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension50)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -85,7 +91,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(234, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(639, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -152,7 +158,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.nud_SpotLight);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(13, 102);
+            this.groupBox2.Location = new System.Drawing.Point(219, 27);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 227);
             this.groupBox2.TabIndex = 2;
@@ -244,16 +250,16 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(10, 16);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(81, 13);
+            this.label6.Size = new System.Drawing.Size(111, 13);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Extension Cord:";
+            this.label6.Text = "Extension Cord (25 ft):";
             // 
-            // nud_Extension
+            // nud_Extension25
             // 
-            this.nud_Extension.Location = new System.Drawing.Point(10, 32);
-            this.nud_Extension.Name = "nud_Extension";
-            this.nud_Extension.Size = new System.Drawing.Size(184, 20);
-            this.nud_Extension.TabIndex = 11;
+            this.nud_Extension25.Location = new System.Drawing.Point(10, 32);
+            this.nud_Extension25.Name = "nud_Extension25";
+            this.nud_Extension25.Size = new System.Drawing.Size(184, 20);
+            this.nud_Extension25.TabIndex = 11;
             // 
             // label7
             // 
@@ -279,7 +285,7 @@
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.nud_SingleDoor);
-            this.groupBox3.Location = new System.Drawing.Point(13, 336);
+            this.groupBox3.Location = new System.Drawing.Point(7, 114);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(200, 140);
             this.groupBox3.TabIndex = 14;
@@ -320,14 +326,18 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Controls.Add(this.nud_Extension50);
+            this.groupBox4.Controls.Add(this.nud_Extension100);
             this.groupBox4.Controls.Add(this.checkbox_TarFiller);
             this.groupBox4.Controls.Add(this.nud_Extinguisher);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.nud_Extension);
-            this.groupBox4.Location = new System.Drawing.Point(13, 497);
+            this.groupBox4.Controls.Add(this.nud_Extension25);
+            this.groupBox4.Location = new System.Drawing.Point(425, 27);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 125);
+            this.groupBox4.Size = new System.Drawing.Size(200, 198);
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Miscellaneous";
@@ -335,7 +345,7 @@
             // checkbox_TarFiller
             // 
             this.checkbox_TarFiller.AutoSize = true;
-            this.checkbox_TarFiller.Location = new System.Drawing.Point(13, 98);
+            this.checkbox_TarFiller.Location = new System.Drawing.Point(13, 177);
             this.checkbox_TarFiller.Name = "checkbox_TarFiller";
             this.checkbox_TarFiller.Size = new System.Drawing.Size(66, 17);
             this.checkbox_TarFiller.TabIndex = 14;
@@ -344,7 +354,7 @@
             // 
             // nud_Extinguisher
             // 
-            this.nud_Extinguisher.Location = new System.Drawing.Point(10, 71);
+            this.nud_Extinguisher.Location = new System.Drawing.Point(12, 153);
             this.nud_Extinguisher.Name = "nud_Extinguisher";
             this.nud_Extinguisher.Size = new System.Drawing.Size(184, 20);
             this.nud_Extinguisher.TabIndex = 13;
@@ -352,7 +362,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(10, 55);
+            this.label10.Location = new System.Drawing.Point(12, 137);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 13);
             this.label10.TabIndex = 12;
@@ -360,7 +370,7 @@
             // 
             // btn_Done
             // 
-            this.btn_Done.Location = new System.Drawing.Point(13, 629);
+            this.btn_Done.Location = new System.Drawing.Point(431, 231);
             this.btn_Done.Name = "btn_Done";
             this.btn_Done.Size = new System.Drawing.Size(91, 23);
             this.btn_Done.TabIndex = 16;
@@ -370,7 +380,7 @@
             // 
             // btn_Cancel
             // 
-            this.btn_Cancel.Location = new System.Drawing.Point(122, 629);
+            this.btn_Cancel.Location = new System.Drawing.Point(534, 231);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(91, 23);
             this.btn_Cancel.TabIndex = 17;
@@ -378,12 +388,44 @@
             this.btn_Cancel.UseVisualStyleBackColor = true;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(10, 99);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(117, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Extension Cord (100 ft):";
+            // 
+            // nud_Extension100
+            // 
+            this.nud_Extension100.Location = new System.Drawing.Point(10, 115);
+            this.nud_Extension100.Name = "nud_Extension100";
+            this.nud_Extension100.Size = new System.Drawing.Size(184, 20);
+            this.nud_Extension100.TabIndex = 16;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(10, 60);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(111, 13);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "Extension Cord (50 ft):";
+            // 
+            // nud_Extension50
+            // 
+            this.nud_Extension50.Location = new System.Drawing.Point(10, 76);
+            this.nud_Extension50.Name = "nud_Extension50";
+            this.nud_Extension50.Size = new System.Drawing.Size(184, 20);
+            this.nud_Extension50.TabIndex = 18;
+            // 
             // AccessoryDlg
             // 
             this.AcceptButton = this.btn_Done;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 677);
+            this.ClientSize = new System.Drawing.Size(639, 264);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Done);
             this.Controls.Add(this.groupBox4);
@@ -405,7 +447,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_25CL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Chandelier)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_SpotLight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension25)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_SingleDoor)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -414,6 +456,8 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Extinguisher)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension100)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension50)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,7 +484,7 @@
         private System.Windows.Forms.NumericUpDown nud_SpotLight;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown nud_Extension;
+        private System.Windows.Forms.NumericUpDown nud_Extension25;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown nud_SingleDoor;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -454,5 +498,9 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btn_Done;
         private System.Windows.Forms.Button btn_Cancel;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown nud_Extension50;
+        private System.Windows.Forms.NumericUpDown nud_Extension100;
     }
 }

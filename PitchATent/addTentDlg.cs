@@ -22,6 +22,7 @@ namespace PitchATent
             InitializeComponent(this.tent);
         }
 
+
         // Properties
         public string TentSize { get; set; }
         public decimal Qty { get; set; }
@@ -32,6 +33,7 @@ namespace PitchATent
         public string Legs { get; set; }
         public string Notes { get; set; }
         public bool Code { get; set; }
+        public UserInterface.Tent TypeOfTent { get; set; }
         
 
         private void cb_walls_SelectedIndexChanged(object sender, EventArgs e)
@@ -42,16 +44,37 @@ namespace PitchATent
                 MessageBox.Show("Define custom walls...");
             }
         }
-
-        private void btn_add_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Updates the fields in the dialog with the values stored in the properties.
+        /// </summary>
+        public void UpdateFields()
         {
-            //TODO: Get all values and return
+            cb_coverType.Text = this.CoverType;
+            cb_size.Text = this.TentSize;
+            nud_qty.Value = this.Qty;
+            cb_holddown.Text = this.TieDown;
+            cb_walls.Text = this.Walls;
+            cb_legs.Text = this.Legs;
+        }
+
+        /// <summary>
+        /// Updates the properties of the class depending on the values currently in the dialog.
+        /// </summary>
+        public void UpdateProperties()
+        {
             this.TentSize = cb_size.Text;
             this.Qty = nud_qty.Value;
             this.CoverType = cb_coverType.Text;
             this.TieDown = cb_holddown.Text;
             this.Walls = cb_walls.Text;
             this.Legs = cb_legs.Text;
+            this.TypeOfTent = tent;
+
+        }
+
+        private void btn_done_Click(object sender, EventArgs e)
+        {
+            UpdateProperties();
             this.Close();
         }
 

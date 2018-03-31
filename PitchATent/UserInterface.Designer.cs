@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tentGroupBox = new System.Windows.Forms.GroupBox();
             this.tentDGV = new System.Windows.Forms.DataGridView();
             this.tentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,8 +37,20 @@
             this.tentHoldDown = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tentWalls = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tentLegs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeOfTent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addSmallTentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addLargeTentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addClearSpanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.editRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accGroupBox = new System.Windows.Forms.GroupBox();
-            this.btn_tentAddSmall = new System.Windows.Forms.Button();
+            this.accDGV = new System.Windows.Forms.DataGridView();
+            this.Accessory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_addSmallTent = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.file = new System.Windows.Forms.ToolStripMenuItem();
             this.newTruckLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,12 +68,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dateTime = new System.Windows.Forms.DateTimePicker();
             this.previewGroupBox = new System.Windows.Forms.GroupBox();
-            this.btn_tentAddLarge = new System.Windows.Forms.Button();
+            this.btn_addLargeTent = new System.Windows.Forms.Button();
             this.btn_addFrame = new System.Windows.Forms.Button();
             this.btn_addClearSpan = new System.Windows.Forms.Button();
             this.btn_AddAcc = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tentGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tentDGV)).BeginInit();
+            this.tentContextMenu.SuspendLayout();
+            this.accGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.accDGV)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +95,9 @@
             // tentDGV
             // 
             this.tentDGV.AllowUserToAddRows = false;
+            this.tentDGV.AllowUserToResizeRows = false;
+            this.tentDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.tentDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.tentDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tentDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.tentType,
@@ -85,79 +105,190 @@
             this.tentCoverType,
             this.tentHoldDown,
             this.tentWalls,
-            this.tentLegs});
+            this.tentLegs,
+            this.typeOfTent});
+            this.tentDGV.ContextMenuStrip = this.tentContextMenu;
             this.tentDGV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tentDGV.GridColor = System.Drawing.SystemColors.Control;
             this.tentDGV.Location = new System.Drawing.Point(3, 25);
             this.tentDGV.Name = "tentDGV";
             this.tentDGV.RowHeadersVisible = false;
+            this.tentDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tentDGV.Size = new System.Drawing.Size(718, 263);
             this.tentDGV.TabIndex = 0;
             this.tentDGV.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.tentDGV_DataError);
+            this.tentDGV.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tentDGV_MouseDown);
             // 
             // tentType
             // 
+            this.tentType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.tentType.HeaderText = "Tent";
             this.tentType.Name = "tentType";
             this.tentType.ReadOnly = true;
             this.tentType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentType.Width = 63;
             // 
             // tentQty
             // 
+            this.tentQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.tentQty.HeaderText = "Qty";
             this.tentQty.Name = "tentQty";
-            this.tentQty.Width = 50;
+            this.tentQty.Width = 60;
             // 
             // tentCoverType
             // 
+            this.tentCoverType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.tentCoverType.HeaderText = "Cover Type";
             this.tentCoverType.Name = "tentCoverType";
             this.tentCoverType.ReadOnly = true;
             this.tentCoverType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.tentCoverType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tentCoverType.Width = 93;
             // 
             // tentHoldDown
             // 
+            this.tentHoldDown.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.tentHoldDown.HeaderText = "Tie Down";
             this.tentHoldDown.Name = "tentHoldDown";
             this.tentHoldDown.ReadOnly = true;
             this.tentHoldDown.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.tentHoldDown.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tentHoldDown.Width = 81;
             // 
             // tentWalls
             // 
+            this.tentWalls.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.tentWalls.HeaderText = "Walls";
             this.tentWalls.Name = "tentWalls";
             this.tentWalls.ReadOnly = true;
             this.tentWalls.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.tentWalls.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tentWalls.Width = 53;
             // 
             // tentLegs
             // 
+            this.tentLegs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.tentLegs.HeaderText = "Legs";
             this.tentLegs.Name = "tentLegs";
             this.tentLegs.ReadOnly = true;
             this.tentLegs.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentLegs.Width = 67;
+            // 
+            // typeOfTent
+            // 
+            this.typeOfTent.HeaderText = "Column1";
+            this.typeOfTent.Name = "typeOfTent";
+            this.typeOfTent.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.typeOfTent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.typeOfTent.Visible = false;
+            // 
+            // tentContextMenu
+            // 
+            this.tentContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addSmallTentToolStripMenuItem,
+            this.addLargeTentToolStripMenuItem,
+            this.addFrameToolStripMenuItem,
+            this.addClearSpanToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.editRowToolStripMenuItem,
+            this.deleteRowToolStripMenuItem});
+            this.tentContextMenu.Name = "tentContextMenu";
+            this.tentContextMenu.Size = new System.Drawing.Size(155, 164);
+            // 
+            // addSmallTentToolStripMenuItem
+            // 
+            this.addSmallTentToolStripMenuItem.Name = "addSmallTentToolStripMenuItem";
+            this.addSmallTentToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.addSmallTentToolStripMenuItem.Text = "Add Small Tent";
+            // 
+            // addLargeTentToolStripMenuItem
+            // 
+            this.addLargeTentToolStripMenuItem.Name = "addLargeTentToolStripMenuItem";
+            this.addLargeTentToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.addLargeTentToolStripMenuItem.Text = "Add Large Tent";
+            // 
+            // addFrameToolStripMenuItem
+            // 
+            this.addFrameToolStripMenuItem.Name = "addFrameToolStripMenuItem";
+            this.addFrameToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.addFrameToolStripMenuItem.Text = "Add Frame";
+            // 
+            // addClearSpanToolStripMenuItem
+            // 
+            this.addClearSpanToolStripMenuItem.Name = "addClearSpanToolStripMenuItem";
+            this.addClearSpanToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.addClearSpanToolStripMenuItem.Text = "Add ClearSpan";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(151, 6);
+            // 
+            // editRowToolStripMenuItem
+            // 
+            this.editRowToolStripMenuItem.Name = "editRowToolStripMenuItem";
+            this.editRowToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.editRowToolStripMenuItem.Text = "Edit Row...";
+            this.editRowToolStripMenuItem.Click += new System.EventHandler(this.editRowToolStripMenuItem_Click);
+            // 
+            // deleteRowToolStripMenuItem
+            // 
+            this.deleteRowToolStripMenuItem.Name = "deleteRowToolStripMenuItem";
+            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.deleteRowToolStripMenuItem.Text = "Delete Row";
+            this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.deleteRowToolStripMenuItem_Click);
             // 
             // accGroupBox
             // 
+            this.accGroupBox.Controls.Add(this.accDGV);
             this.accGroupBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accGroupBox.Location = new System.Drawing.Point(12, 398);
             this.accGroupBox.Name = "accGroupBox";
-            this.accGroupBox.Size = new System.Drawing.Size(721, 291);
+            this.accGroupBox.Size = new System.Drawing.Size(295, 291);
             this.accGroupBox.TabIndex = 1;
             this.accGroupBox.TabStop = false;
             this.accGroupBox.Text = "Accessories";
             // 
-            // btn_tentAddSmall
+            // accDGV
             // 
-            this.btn_tentAddSmall.Location = new System.Drawing.Point(12, 72);
-            this.btn_tentAddSmall.Name = "btn_tentAddSmall";
-            this.btn_tentAddSmall.Size = new System.Drawing.Size(100, 25);
-            this.btn_tentAddSmall.TabIndex = 2;
-            this.btn_tentAddSmall.Text = "Add Small Tent";
-            this.btn_tentAddSmall.UseVisualStyleBackColor = true;
-            this.btn_tentAddSmall.Click += new System.EventHandler(this.AddSmallTent_Click);
+            this.accDGV.AllowUserToAddRows = false;
+            this.accDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.accDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Accessory,
+            this.Qty});
+            this.accDGV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.accDGV.Location = new System.Drawing.Point(3, 25);
+            this.accDGV.Name = "accDGV";
+            this.accDGV.ReadOnly = true;
+            this.accDGV.RowHeadersVisible = false;
+            this.accDGV.Size = new System.Drawing.Size(289, 263);
+            this.accDGV.TabIndex = 0;
+            // 
+            // Accessory
+            // 
+            this.Accessory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Accessory.HeaderText = "Accessory";
+            this.Accessory.Name = "Accessory";
+            this.Accessory.ReadOnly = true;
+            this.Accessory.Width = 104;
+            // 
+            // Qty
+            // 
+            this.Qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Qty.HeaderText = "Quantity";
+            this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
+            this.Qty.Width = 95;
+            // 
+            // btn_addSmallTent
+            // 
+            this.btn_addSmallTent.Location = new System.Drawing.Point(12, 72);
+            this.btn_addSmallTent.Name = "btn_addSmallTent";
+            this.btn_addSmallTent.Size = new System.Drawing.Size(100, 25);
+            this.btn_addSmallTent.TabIndex = 2;
+            this.btn_addSmallTent.Text = "Add Small Tent";
+            this.btn_addSmallTent.UseVisualStyleBackColor = true;
+            this.btn_addSmallTent.Click += new System.EventHandler(this.btn_addSmallTent_Click);
             // 
             // menuStrip1
             // 
@@ -238,7 +369,6 @@
             this.tb_truck.Name = "tb_truck";
             this.tb_truck.Size = new System.Drawing.Size(100, 20);
             this.tb_truck.TabIndex = 5;
-            this.tb_truck.TextChanged += new System.EventHandler(this.tb_truck_TextChanged);
             // 
             // label2
             // 
@@ -301,15 +431,15 @@
             this.previewGroupBox.TabStop = false;
             this.previewGroupBox.Text = "Preview";
             // 
-            // btn_tentAddLarge
+            // btn_addLargeTent
             // 
-            this.btn_tentAddLarge.Location = new System.Drawing.Point(117, 72);
-            this.btn_tentAddLarge.Name = "btn_tentAddLarge";
-            this.btn_tentAddLarge.Size = new System.Drawing.Size(100, 25);
-            this.btn_tentAddLarge.TabIndex = 15;
-            this.btn_tentAddLarge.Text = "Add Large Tent";
-            this.btn_tentAddLarge.UseVisualStyleBackColor = true;
-            this.btn_tentAddLarge.Click += new System.EventHandler(this.btn_tentAddLarge_Click);
+            this.btn_addLargeTent.Location = new System.Drawing.Point(117, 72);
+            this.btn_addLargeTent.Name = "btn_addLargeTent";
+            this.btn_addLargeTent.Size = new System.Drawing.Size(100, 25);
+            this.btn_addLargeTent.TabIndex = 15;
+            this.btn_addLargeTent.Text = "Add Large Tent";
+            this.btn_addLargeTent.UseVisualStyleBackColor = true;
+            this.btn_addLargeTent.Click += new System.EventHandler(this.btn_addLargeTent_Click);
             // 
             // btn_addFrame
             // 
@@ -341,15 +471,26 @@
             this.btn_AddAcc.UseVisualStyleBackColor = true;
             this.btn_AddAcc.Click += new System.EventHandler(this.btn_AddAcc_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(330, 398);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(403, 291);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Frame/ClearSpan";
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(970, 700);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_AddAcc);
             this.Controls.Add(this.btn_addClearSpan);
             this.Controls.Add(this.btn_addFrame);
-            this.Controls.Add(this.btn_tentAddLarge);
+            this.Controls.Add(this.btn_addLargeTent);
             this.Controls.Add(this.previewGroupBox);
             this.Controls.Add(this.dateTime);
             this.Controls.Add(this.label4);
@@ -359,7 +500,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tb_truck);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btn_tentAddSmall);
+            this.Controls.Add(this.btn_addSmallTent);
             this.Controls.Add(this.accGroupBox);
             this.Controls.Add(this.tentGroupBox);
             this.Controls.Add(this.menuStrip1);
@@ -367,6 +508,9 @@
             this.Text = "PitchATent";
             this.tentGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tentDGV)).EndInit();
+            this.tentContextMenu.ResumeLayout(false);
+            this.accGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.accDGV)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -378,7 +522,7 @@
 
         private System.Windows.Forms.GroupBox tentGroupBox;
         private System.Windows.Forms.GroupBox accGroupBox;
-        private System.Windows.Forms.Button btn_tentAddSmall;
+        private System.Windows.Forms.Button btn_addSmallTent;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem file;
         private System.Windows.Forms.ToolStripMenuItem newTruckLoadToolStripMenuItem;
@@ -396,17 +540,30 @@
         private System.Windows.Forms.DataGridView tentDGV;
         private System.Windows.Forms.DateTimePicker dateTime;
         private System.Windows.Forms.GroupBox previewGroupBox;
-        private System.Windows.Forms.Button btn_tentAddLarge;
+        private System.Windows.Forms.Button btn_addLargeTent;
         private System.Windows.Forms.Button btn_addFrame;
         private System.Windows.Forms.Button btn_addClearSpan;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button btn_AddAcc;
+        private System.Windows.Forms.ContextMenuStrip tentContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem addSmallTentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addLargeTentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addFrameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addClearSpanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tentType;
         private System.Windows.Forms.DataGridViewTextBoxColumn tentQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn tentCoverType;
         private System.Windows.Forms.DataGridViewTextBoxColumn tentHoldDown;
         private System.Windows.Forms.DataGridViewTextBoxColumn tentWalls;
         private System.Windows.Forms.DataGridViewTextBoxColumn tentLegs;
-        private System.Windows.Forms.Button btn_AddAcc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeOfTent;
+        private System.Windows.Forms.DataGridView accDGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Accessory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
     }
 }
 

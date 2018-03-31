@@ -11,6 +11,7 @@ using System.IO;
 
 namespace PitchATent
 {
+
     public partial class AccessoryDlg : Form
     {
         public AccessoryDlg()
@@ -18,20 +19,259 @@ namespace PitchATent
             InitializeComponent();
         }
 
-        // Declare Properties
-        public bool BlackFloor { get; set; } = false;
-        public bool VarnishFloor { get; set; } = false;
-        public bool TarFiller { get; set; } = false;
-        public int SpotLights { get; set; } = 0;
-        public int Chandelier { get; set; } = 0;
-        public int Cafe25 { get; set; } = 0;
-        public int Cafe50 { get; set; } = 0;
-        public int Cafe100 { get; set; } = 0;
-        public int ExtensionCord { get; set; } = 0;
-        public int SingleDoor { get; set; } = 0;
-        public int DoubleDoor { get; set; } = 0;
-        public int ExitSign { get; set; } = 0;
-        public int FireExtinguisher { get; set; } = 0;
+        #region Properties
+        
+        /// <summary>
+        /// Class to hold properties of an accessory: the accessory name and the quantity
+        /// </summary>
+        public class Accessory
+        {
+            // Constructor
+            public Accessory(string Item, int Qty)
+            {
+                this.Item = Item;
+                this.Qty = Qty;
+            }
+
+            // Properties
+            public string Item { get; set; }
+            public int Qty { get; set; }
+        }
+
+        // List of accessories
+        public List<Accessory> AccList = new List<Accessory>();
+
+        private bool _BlackFloor = false;
+        public bool BlackFloor
+        {
+            get
+            {
+                return _BlackFloor;
+            }
+            set
+            {
+                _BlackFloor = value;
+                CheckList("Black Floor", Convert.ToInt32(_BlackFloor));
+            }
+
+        }
+
+        private bool _VarnishFloor = false;
+        public bool VarnishFloor
+        {
+            get
+            {
+                return _VarnishFloor;
+            }
+            set
+            {
+                _VarnishFloor = value;
+                CheckList("Varnish Floor", Convert.ToInt32(_VarnishFloor));
+            }
+        }
+        private bool _TarFiller;
+        public bool TarFiller
+        {
+            get
+            {
+                return _TarFiller;
+            }
+            set
+            {
+                _TarFiller = value;
+                CheckList("Tar Filler", Convert.ToInt32(_TarFiller));
+            }
+        }
+
+        private int _SpotLights = 0;
+        public int SpotLights
+        {
+            get
+            {
+                return _SpotLights;
+            }
+            set
+            {
+                _SpotLights = value;
+                CheckList("Spot Lights", _SpotLights);
+            }
+        }
+
+        private int _Chandelier = 0;
+        public int Chandelier
+        {
+            get
+            {
+                return _Chandelier;
+            }
+            set
+            {
+                _Chandelier = value;
+                CheckList("Chandelier", _Chandelier);
+            }
+        }
+
+        private int _Cafe25 = 0;
+        public int Cafe25
+        {
+            get
+            {
+                return _Cafe25;
+            }
+            set
+            {
+                _Cafe25 = value;
+                CheckList("Cafe Lights, 25 ft.", _Cafe25);
+            }
+        }
+
+        private int _Cafe50 = 0;
+        public int Cafe50
+        {
+            get
+            {
+                return _Cafe50;
+            }
+            set
+            {
+                _Cafe50 = value;
+                CheckList("Cafe Lights, 50 ft.", _Cafe50);
+            }
+        }
+
+        private int _Cafe100 = 0;
+        public int Cafe100
+        {
+            get
+            {
+                return _Cafe100;
+            }
+            set
+            {
+                _Cafe100 = value;
+                CheckList("Cafe Lights, 100 ft.", _Cafe100);
+            }
+        }
+
+        private int _Extension25 = 0;
+        public int Extension25
+        {
+            get
+            {
+                return _Extension25;
+            }
+            set
+            {
+                _Extension25 = value;
+                CheckList("Extension Cord, 25 ft.", _Extension25);
+            }
+        }
+
+        private int _Extension50 = 0;
+        public int Extension50
+        {
+            get
+            {
+                return _Extension50;
+            }
+            set
+            {
+                _Extension50 = value;
+                CheckList("Extension Cord, 50 ft.", _Extension50);
+            }
+        }
+
+        private int _Extension100 = 0;
+        public int Extension100
+        {
+            get
+            {
+                return _Extension100;
+            }
+            set
+            {
+                _Extension100 = value;
+                CheckList("Extension Cord, 100 ft.", _Extension100);
+            }
+        }
+
+        private int _SingleDoor = 0;
+        public int SingleDoor
+        {
+            get
+            {
+                return _SingleDoor;
+            }
+            set
+            {
+                _SingleDoor = value;
+                CheckList("Single Door", _SingleDoor);
+            }
+        }
+
+        private int _DoubleDoor = 0;
+        public int DoubleDoor
+        {
+            get
+            {
+                return _DoubleDoor;
+            }
+            set
+            {
+                _DoubleDoor = value;
+                CheckList("Double Door", _DoubleDoor);
+            }
+        }
+
+        private int _ExitSign = 0;
+        public int ExitSign
+        {
+            get
+            {
+                return _ExitSign;
+            }
+            set
+            {
+                _ExitSign = value;
+                CheckList("Exit Sign", _ExitSign);
+            }
+        }
+
+        private int _FireExtinguisher = 0;
+        public int FireExtinguisher
+        {
+            get
+            {
+                return _FireExtinguisher;
+            }
+            set
+            {
+                _FireExtinguisher = value;
+                CheckList("Fire Extinguisher", _FireExtinguisher);
+            }
+        }
+
+        /// <summary>
+        /// Checks the existing accessory list  for the a string. 
+        /// 
+        /// If the string does not exist, it adds the object to the list.
+        /// If the string exists in the list and the current quantity is zero, the object is removed from the list.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="quantity"></param>
+        public void CheckList(string item, int quantity)
+        {
+            if (!AccList.Any(a => a.Item == item) && quantity != 0)
+            {
+                AccList.Add(new Accessory(item, quantity));
+            }
+            else if (quantity == 0 && AccList.Any(a => a.Item == item))
+            {
+                AccList.RemoveAll(a => a.Item == item);
+            }
+        }
+
+        #endregion
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
@@ -41,6 +281,7 @@ namespace PitchATent
         private void btn_Done_Click(object sender, EventArgs e)
         {
             // Simnply retrieve values and update properties
+
             this.BlackFloor = checkbox_BlackFloor.Checked;
             this.VarnishFloor = checkbox_VarnishFloor.Checked;
             this.TarFiller = checkbox_TarFiller.Checked;
@@ -49,13 +290,16 @@ namespace PitchATent
             this.Cafe25 = Convert.ToInt32(nud_25CL.Value);
             this.Cafe50 = Convert.ToInt32(nud_50CL.Value);
             this.Cafe100 = Convert.ToInt32(nud_100CL.Value);
-            this.ExtensionCord = Convert.ToInt32(nud_Extension.Value);
+            this.Extension25 = Convert.ToInt32(nud_Extension25.Value);
+            this.Extension50 = Convert.ToInt32(nud_Extension50.Value);
+            this.Extension100 = Convert.ToInt32(nud_Extension100.Value);
             this.SingleDoor = Convert.ToInt32(nud_SingleDoor.Value);
             this.DoubleDoor = Convert.ToInt32(nud_DoubleDoor.Value);
             this.FireExtinguisher = Convert.ToInt32(nud_Extinguisher.Value);
             SaveAccessoryList();
             this.Close();
         }
+        
 
         #region IO
         private void SaveAccessoryList()
@@ -73,7 +317,9 @@ namespace PitchATent
                     file.WriteLine("Cafe25,{0}", Cafe25.ToString());
                     file.WriteLine("Cafe50,{0}", Cafe50.ToString());
                     file.WriteLine("Cafe100,{0}", Cafe100.ToString());
-                    file.WriteLine("ExtensionCord,{0}", ExtensionCord.ToString());
+                    file.WriteLine("Extension25,{0}", Extension25.ToString());
+                    file.WriteLine("Extension50,{0}", Extension50.ToString());
+                    file.WriteLine("Extension100,{0}", Extension100.ToString());
                     file.WriteLine("SingleDoor,{0}", SingleDoor.ToString());
                     file.WriteLine("DoubleDoor,{0}", DoubleDoor.ToString());
                     file.WriteLine("FireExtinguisher,{0}", FireExtinguisher.ToString());
@@ -94,7 +340,7 @@ namespace PitchATent
             foreach (string line in lines)
             {
 #if DEBUG
-                Console.WriteLine(line);
+                //Console.WriteLine(line);
 #endif
                 string[] tokens = line.Split(',');
                 switch (tokens[0])
@@ -152,9 +398,17 @@ namespace PitchATent
                         Cafe100 = Convert.ToInt32(tokens[1]);
                         nud_100CL.Value = Convert.ToDecimal(Cafe100);
                         break;
-                    case "ExtensionCord":
-                        ExtensionCord = Convert.ToInt32(tokens[1]);
-                        nud_Extension.Value = Convert.ToDecimal(ExtensionCord);
+                    case "Extension25":
+                        Extension25 = Convert.ToInt32(tokens[1]);
+                        nud_Extension25.Value = Convert.ToDecimal(Extension25);
+                        break;
+                    case "Extension50":
+                        Extension50 = Convert.ToInt32(tokens[1]);
+                        nud_Extension50.Value = Convert.ToDecimal(Extension50);
+                        break;
+                    case "Extension100":
+                        Extension100 = Convert.ToInt32(tokens[1]);
+                        nud_Extension100.Value = Convert.ToDecimal(Extension100);
                         break;
                     case "SingleDoor":
                         SingleDoor = Convert.ToInt32(tokens[1]);
