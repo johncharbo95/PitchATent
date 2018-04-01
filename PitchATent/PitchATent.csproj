@@ -18,9 +18,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,6 +53,12 @@
     <Compile Include="AccessoryDlg.Designer.cs">
       <DependentUpon>AccessoryDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddCustomWallsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCustomWallsDlg.Designer.cs">
+      <DependentUpon>AddCustomWallsDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddTentDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +75,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AccessoryDlg.resx">
       <DependentUpon>AccessoryDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddCustomWallsDlg.resx">
+      <DependentUpon>AddCustomWallsDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddTentDlg.resx">
       <DependentUpon>AddTentDlg.cs</DependentUpon>

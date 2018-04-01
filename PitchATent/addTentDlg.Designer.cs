@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent(UserInterface.Tent size)
+        private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
             this.cb_size = new System.Windows.Forms.ComboBox();
@@ -193,142 +193,11 @@
             // cb_legs
             // 
             this.cb_legs.FormattingEnabled = true;
-            this.cb_legs.Items.AddRange(new object[] {
-            "8 ft",
-            "10 ft"});
             this.cb_legs.Location = new System.Drawing.Point(84, 170);
             this.cb_legs.Name = "cb_legs";
             this.cb_legs.Size = new System.Drawing.Size(121, 21);
             this.cb_legs.TabIndex = 17;
             this.cb_legs.Text = "8 ft";
-
-            switch (size)
-            {
-                case UserInterface.Tent.large:
-                    this.Text = "Add Large Tent";
-                    this.cb_size.Items.AddRange(new object[] {
-                    "40x40",
-                    "40x60",
-                    "40x80",
-                    "40x100",
-                    "40x120",
-                    "40x140",
-                    "40x160",
-                    "40x180",
-                    "40x200",
-                    "40x220",
-                    "40x240",
-                    "40x260",
-                    "40x280",
-                    "40x300",
-                    "60x40",
-                    "60x60",
-                    "60x70",
-                    "60x80",
-                    "60x90",
-                    "60x100",
-                    "60x110",
-                    "60x120",
-                    "60x130",
-                    "60x140",
-                    "60x150",
-                    "60x160",
-                    "60x170",
-                    "60x180",
-                    "60x190",
-                    "60x200",
-                    "60x210",
-                    "60x220",
-                    "60x230",
-                    "60x240",
-                    "60x250",
-                    "90x60",
-                    "90x90",
-                    "90x120",
-                    "90x150",
-                    "90x180",
-                    "90x210",
-                    "90x240",
-                    "90x270",
-                    "90x300"});
-                    this.cb_size.SelectedIndex = 0;
-                    this.cb_holddown.Items.AddRange(new object[] {
-                    "Pins",
-                    "Concrete Blocks"});
-                    this.cb_holddown.SelectedIndex = 0;
-                    this.cb_coverType.Enabled = false;
-                    // No cover types
-                    //this.cb_coverType.Items.AddRange(new object[] {
-                    //"Regular",
-                    //"New",
-                    //"Old",
-                    //"Barbecue",
-                    //"Soft"});
-                    //this.cb_coverType.SelectedIndex = 0;
-                    this.cb_walls.Items.AddRange(new object[] {
-                    "Full Plain",
-                    "Full Window",
-                    "Half Plain Half Window",
-                    "Full Plain Fiesta",
-                    "Full Window Fiesta",
-                    "Half Plain Half Window Fiesta",
-                    "None",
-                    "Custom..."});
-                    this.cb_walls.SelectedIndex = 0;
-                    break;
-                case UserInterface.Tent.small:
-                    this.Text = "Add Small Tent";
-                    this.cb_size.Items.AddRange(new object[] {
-                    "10x10",
-                    "10x15",
-                    "10x20",
-                    "15x15",
-                    "20x20",
-                    "20x30",
-                    "20x40",
-                    "30x30",
-                    "Hexagon",
-                    ""});
-                    this.cb_size.SelectedIndex = 8;
-                    this.cb_holddown.Items.AddRange(new object[] {
-                    "Pins",
-                    "Water Barrels",
-                    "Concrete Blocks"});
-                    this.cb_holddown.SelectedIndex = 2;
-                    this.cb_coverType.Items.AddRange(new object[] {
-                    "Regular",
-                    "New",
-                    "Old",
-                    "Barbecue",
-                    "Soft"});
-                    this.cb_coverType.SelectedIndex = 3;
-                    this.cb_walls.Items.AddRange(new object[] {
-                    "Full Plain",
-                    "Full Window",
-                    "Half Plain Half Window",
-                    "Full Plain Fiesta",
-                    "Full Window Fiesta",
-                    "Half Plain Half Window Fiesta",
-                    "None",
-                    "Custom..."});
-                    this.cb_walls.SelectedIndex = 5;
-                    this.cb_legs.Items.AddRange(new object[] {
-                    "8 ft",
-                    "8 ft Adjustable",
-                    "10 ft",
-                    "10 ft Adjustable",
-                    "Hexagon"});
-                    this.cb_legs.SelectedIndex = 3;
-                    break;
-                case UserInterface.Tent.frame:
-                    break;
-                case UserInterface.Tent.clearspan:
-                    break;
-                default:
-                    break;
-
-            } // end switch
-
             // 
             // addTentDlg
             // 

@@ -18,25 +18,37 @@ namespace PitchATent
             dateTime.Value = DateTime.Now;
         }
 
-        public enum Tent { small, large, frame, clearspan,none};
+        public enum Tent { Small, Large, Frame, ClearSpan,none};
 
         private int TentCtr { get; set; }
         private bool NewAccessory { get; set; } = true;
 
+        #region Add Tent Buttons
         private void btn_addSmallTent_Click(object sender, EventArgs e)
         {
-            openDialog(Tent.small);
+            openTentDialog(Tent.Small);
         }
 
         private void btn_addLargeTent_Click(object sender, EventArgs e)
         {
-            openDialog(Tent.large);
+            openTentDialog(Tent.Large);
         }
 
-        private void tentDGV_DataError(object sender, DataGridViewDataErrorEventArgs anError)
+        private void btn_addFrame_Click(object sender, EventArgs e)
+        {
+            openTentDialog(Tent.Frame);
+        }
+
+        private void btn_addClearSpan_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This doesn't do anything yet");
+        }
+        #endregion
+
+        private void tentDGV_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             // Cancel the error
-            anError.ThrowException = false;
+            e.ThrowException = false;
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,13 +56,7 @@ namespace PitchATent
             // Close the form
             this.Close();
         }
-
-        private void btn_refresh_Click(object sender, EventArgs e)
-        {
-            // TODO: Evaluate using a refresh button or automatic refresh
-            MessageBox.Show("This would loop through the group boxes on the left and calculate the sum of everything.");
-        }
-
+        
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // This seemed too easy, we might get screwed later?
@@ -62,35 +68,24 @@ namespace PitchATent
         {
             //var about = new AboutBox();
         }
-
-        private void btn_addFrame_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("This doesn't do anything yet");
-        }
-
-        private void btn_addClearSpan_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("This doesn't do anything yet");
-        }
-
+        
         /// <summary>
         /// Creates a new dialog object and shows it to the user. After making the selections, the values in the main dialog are updated with them.
         /// </summary>
-        private void openDialog(UserInterface.Tent tent)
+        private void openTentDialog(UserInterface.Tent tent)
         {
             var tentDialog = new AddTentDlg(tent);
             tentDialog.ShowDialog();
-            //this.tentDGV.Rows.Add();
             if (tentDialog.Code == true)
             {
                 this.tentDGV.Rows.Add();
-                this.tentDGV.Rows[TentCtr].Cells[0].Value = tentDialog.TentSize;
-                this.tentDGV.Rows[TentCtr].Cells[1].Value = tentDialog.Qty.ToString();
-                this.tentDGV.Rows[TentCtr].Cells[2].Value = tentDialog.CoverType;
-                this.tentDGV.Rows[TentCtr].Cells[3].Value = tentDialog.TieDown;
-                this.tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.Walls;
-                this.tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Legs;
-                this.tentDGV.Rows[TentCtr].Cells[6].Value = tentDialog.TypeOfTent;
+                this.tentDGV.Rows[TentCtr].Cells[0].Value = tentDialog.TypeOfTent;
+                this.tentDGV.Rows[TentCtr].Cells[1].Value = tentDialog.TentSize;
+                this.tentDGV.Rows[TentCtr].Cells[2].Value = tentDialog.Qty.ToString();
+                this.tentDGV.Rows[TentCtr].Cells[3].Value = tentDialog.CoverType;
+                this.tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.TieDown;
+                this.tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Walls;
+                this.tentDGV.Rows[TentCtr].Cells[6].Value = tentDialog.Legs;
                 TentCtr++;
             }
         }
@@ -123,6 +118,7 @@ namespace PitchATent
             }
         }
 
+        #region Tent DataGridView Context Menu Strip
         /// <summary>
         /// Allows the user to edit the contents of a specific row from the ContextMenuStrip of the DataGridView.
         /// </summary>
@@ -138,12 +134,12 @@ namespace PitchATent
             var TentDLG = new AddTentDlg(typeOfTent);
 
             // Set properties of object according to values in selected row
-            TentDLG.TentSize = this.tentDGV.Rows[selectedRowIndex].Cells[0].Value.ToString();
-            TentDLG.Qty = Convert.ToDecimal(this.tentDGV.Rows[selectedRowIndex].Cells[1].Value);
-            TentDLG.CoverType = this.tentDGV.Rows[selectedRowIndex].Cells[2].Value.ToString();
-            TentDLG.TieDown = this.tentDGV.Rows[selectedRowIndex].Cells[3].Value.ToString();
-            TentDLG.Walls = this.tentDGV.Rows[selectedRowIndex].Cells[4].Value.ToString();
-            TentDLG.Legs = this.tentDGV.Rows[selectedRowIndex].Cells[5].Value.ToString();
+            TentDLG.TentSize = this.tentDGV.Rows[selectedRowIndex].Cells[1].Value.ToString();
+            TentDLG.Qty = Convert.ToDecimal(this.tentDGV.Rows[selectedRowIndex].Cells[2].Value);
+            TentDLG.CoverType = this.tentDGV.Rows[selectedRowIndex].Cells[3].Value.ToString();
+            TentDLG.TieDown = this.tentDGV.Rows[selectedRowIndex].Cells[4].Value.ToString();
+            TentDLG.Walls = this.tentDGV.Rows[selectedRowIndex].Cells[5].Value.ToString();
+            TentDLG.Legs = this.tentDGV.Rows[selectedRowIndex].Cells[6].Value.ToString();
 
             // Update the Dialog with these values
             TentDLG.UpdateFields();
@@ -153,13 +149,12 @@ namespace PitchATent
 
             // Update Main Dialog with new values
             this.tentDGV.Rows[selectedRowIndex].Cells[0].Value = TentDLG.TentSize;
-            this.tentDGV.Rows[selectedRowIndex].Cells[1].Value = TentDLG.Qty.ToString();
-            this.tentDGV.Rows[selectedRowIndex].Cells[2].Value = TentDLG.CoverType;
-            this.tentDGV.Rows[selectedRowIndex].Cells[3].Value = TentDLG.TieDown;
-            this.tentDGV.Rows[selectedRowIndex].Cells[4].Value = TentDLG.Walls;
-            this.tentDGV.Rows[selectedRowIndex].Cells[5].Value = TentDLG.Legs;
-            this.tentDGV.Rows[selectedRowIndex].Cells[6].Value = typeOfTent;
-           
+            this.tentDGV.Rows[selectedRowIndex].Cells[1].Value = typeOfTent;
+            this.tentDGV.Rows[selectedRowIndex].Cells[2].Value = TentDLG.Qty.ToString();
+            this.tentDGV.Rows[selectedRowIndex].Cells[3].Value = TentDLG.CoverType;
+            this.tentDGV.Rows[selectedRowIndex].Cells[4].Value = TentDLG.TieDown;
+            this.tentDGV.Rows[selectedRowIndex].Cells[5].Value = TentDLG.Walls;
+            this.tentDGV.Rows[selectedRowIndex].Cells[6].Value = TentDLG.Legs;
             }
 
         private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
@@ -168,6 +163,8 @@ namespace PitchATent
             tentDGV.Rows.RemoveAt(rowToDelete);
             tentDGV.ClearSelection();
         }
+
+        #endregion
 
         private void tentDGV_MouseDown(object sender, MouseEventArgs e)
         {
