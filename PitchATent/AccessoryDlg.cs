@@ -259,14 +259,27 @@ namespace PitchATent
         /// </summary>
         /// <param name="item"></param>
         /// <param name="quantity"></param>
-        public void CheckList(string item, int quantity)
+        private void CheckList(string item, int quantity)
         {
+            // If item is not in the list and quantity is not 0
             if (!AccList.Any(a => a.Item == item) && quantity != 0)
             {
+                // Add it to the list
                 AccList.Add(new Accessory(item, quantity));
             }
+            // Else, if the item is in the list and quantity is not 0
+            else if(AccList.Any(a => a.Item == item) && quantity != 0)
+            {
+                // Remove the previous item
+                AccList.RemoveAll(a => a.Item == item);
+
+                // Add the one with new quantity
+                AccList.Add(new Accessory(item, quantity));
+            }
+            // Else, if the item is in the list and quantity is 0
             else if (quantity == 0 && AccList.Any(a => a.Item == item))
             {
+                // Remove it from the list
                 AccList.RemoveAll(a => a.Item == item);
             }
         }
