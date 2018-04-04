@@ -41,7 +41,7 @@ namespace PitchATent
 
         private void btn_addClearSpan_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This doesn't do anything yet");
+            openTentDialog(Tent.ClearSpan);
         }
         #endregion
 

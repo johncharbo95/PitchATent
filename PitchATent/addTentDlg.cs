@@ -108,6 +108,7 @@ namespace PitchATent
                     "Hexagon",
                     ""});
                     this.cb_size.SelectedIndex = 0;
+                    // TODO: Give option to choose which type of blocks to bring
                     this.cb_holddown.Items.AddRange(new object[] {
                     "Pins",
                     "Water Barrels",
@@ -120,6 +121,7 @@ namespace PitchATent
                     "Barbecue",
                     "Soft"});
                     this.cb_coverType.SelectedIndex = 0;
+                    // No 8x10 Window walls
                     this.cb_walls.Items.AddRange(new object[] {
                     "Full Plain",
                     "Full Window",
@@ -130,6 +132,7 @@ namespace PitchATent
                     "None",
                     "Custom..."});
                     this.cb_walls.SelectedIndex = 0;
+                    // TODO: Can't have 10 foot fiesta walls (if 10 ft legs is selected)
                     this.cb_legs.Items.AddRange(new object[] {
                     "8 ft",
                     "8 ft Adjustable",
@@ -177,6 +180,30 @@ namespace PitchATent
                     this.cb_legs.SelectedIndex = 0;
                     break;
                 case UserInterface.Tent.ClearSpan:
+                    this.Text = "Add ClearSpan";
+                    this.cb_size.Items.AddRange(new object[]{
+                        "30x30",
+                        "40x30",
+                        "50x30",
+                    });
+                    this.cb_size.SelectedIndex = 0;
+                    this.cb_holddown.Enabled = false;
+                    this.cb_coverType.Items.AddRange(new object[] {
+                    "Regular",
+                    "Clear"});
+                    this.cb_coverType.SelectedIndex = 0;
+                    this.cb_walls.Items.AddRange(new object[] {
+                    "Full Plain",
+                    "Full Bay Window",
+                    "Full French Window",
+                    "Half Plain Half Bay Window",
+                    "None",
+                    "Custom..."});
+                    this.cb_walls.SelectedIndex = 0;
+                    this.cb_legs.Items.AddRange(new object[] {
+                    "8 ft",
+                    "10 ft"});
+                    this.cb_legs.SelectedIndex = 0;
                     break;
                 default:
                     break;

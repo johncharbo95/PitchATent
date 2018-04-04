@@ -72,6 +72,9 @@
             this.tentHoldDown = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tentWalls = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tentLegs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hiddenTieDownIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hiddenWallsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hiddenLegsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tentGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tentDGV)).BeginInit();
             this.tentContextMenu.SuspendLayout();
@@ -105,7 +108,10 @@
             this.tentCoverType,
             this.tentHoldDown,
             this.tentWalls,
-            this.tentLegs});
+            this.tentLegs,
+            this.hiddenTieDownIndex,
+            this.hiddenWallsIndex,
+            this.hiddenLegsIndex});
             this.tentDGV.ContextMenuStrip = this.tentContextMenu;
             this.tentDGV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tentDGV.GridColor = System.Drawing.SystemColors.Control;
@@ -470,6 +476,27 @@
             this.tentLegs.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.tentLegs.Width = 67;
             // 
+            // hiddenTieDownIndex
+            // 
+            this.hiddenTieDownIndex.HeaderText = "Hidden Tie Down Index";
+            this.hiddenTieDownIndex.Name = "hiddenTieDownIndex";
+            this.hiddenTieDownIndex.Visible = false;
+            this.hiddenTieDownIndex.Width = 195;
+            // 
+            // hiddenWallsIndex
+            // 
+            this.hiddenWallsIndex.HeaderText = "Hidden Walls Index";
+            this.hiddenWallsIndex.Name = "hiddenWallsIndex";
+            this.hiddenWallsIndex.Visible = false;
+            this.hiddenWallsIndex.Width = 167;
+            // 
+            // hiddenLegsIndex
+            // 
+            this.hiddenLegsIndex.HeaderText = "Hidden Legs Index";
+            this.hiddenLegsIndex.Name = "hiddenLegsIndex";
+            this.hiddenLegsIndex.Visible = false;
+            this.hiddenLegsIndex.Width = 162;
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -552,6 +579,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tentHoldDown;
         private System.Windows.Forms.DataGridViewTextBoxColumn tentWalls;
         private System.Windows.Forms.DataGridViewTextBoxColumn tentLegs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hiddenTieDownIndex;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hiddenWallsIndex;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hiddenLegsIndex;
     }
 }
 
