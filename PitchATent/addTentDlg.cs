@@ -72,7 +72,7 @@ namespace PitchATent
                     this.cb_size.SelectedIndex = 0;
                     this.cb_holddown.Items.AddRange(new object[] {
                     "Pins",
-                    "Concrete Blocks"});
+                    "1 ton Concrete Block"});
                     this.cb_holddown.SelectedIndex = 0;
                     this.cb_coverType.Enabled = false;
                     // No cover types
@@ -112,7 +112,11 @@ namespace PitchATent
                     this.cb_holddown.Items.AddRange(new object[] {
                     "Pins",
                     "Water Barrels",
-                    "Concrete Blocks"});
+                    "250 lb Concrete Block",
+                    "400 lb Concrete Block",
+                    "600 lb Concrete Block",
+                    "1/2 ton Concrete Block",
+                    "1 ton Concrete Block"});
                     this.cb_holddown.SelectedIndex = 0;
                     this.cb_coverType.Items.AddRange(new object[] {
                     "Regular",
@@ -160,7 +164,8 @@ namespace PitchATent
                     this.cb_holddown.Items.AddRange(new object[] {
                     "Pins",
                     "Water Barrels",
-                    "Concrete Blocks"});
+                    "1/2 ton Concrete Block",
+                    "1 ton Concrete Block"});
                     this.cb_holddown.SelectedIndex = 0;
                     this.cb_coverType.Items.AddRange(new object[] {
                     "Regular",

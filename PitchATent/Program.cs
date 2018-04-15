@@ -8,12 +8,6 @@ namespace PitchATent
 {
     static class Program
     {
-
-        static void ShowStupidBox()
-        {
-            MessageBox.Show("Let's see how this works.");
-        }
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

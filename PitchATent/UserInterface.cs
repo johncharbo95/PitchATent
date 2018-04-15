@@ -18,7 +18,7 @@ namespace PitchATent
             dateTime.Value = DateTime.Now;
         }
 
-        public enum Tent { Small, Large, Frame, ClearSpan,none};
+        public enum Tent { Small, Large, Frame, ClearSpan};
 
         private int TentCtr { get; set; }
         private bool NewAccessory { get; set; } = true;
@@ -86,8 +86,9 @@ namespace PitchATent
                 this.tentDGV.Rows[TentCtr].Cells[4].Value = tentDialog.TieDown;
                 this.tentDGV.Rows[TentCtr].Cells[5].Value = tentDialog.Walls;
                 this.tentDGV.Rows[TentCtr].Cells[6].Value = tentDialog.Legs;
-                TentCtr++;
+                TentCtr++; 
             }
+            UpdateList();
         }
 
         /// <summary>
@@ -165,6 +166,35 @@ namespace PitchATent
         }
 
         #endregion
+
+        private void UpdateList()
+        {
+
+            // Declare lists
+            List<Tent> tentTypes = new List<Tent>();
+            List<string> tentSizes = new List<string>();
+            List<int> tentQties = new List<int>();
+            List<string> tentCoverTypes = new List<string>();
+            List<string> tentHoldDowns = new List<string>();
+            List<string> tentWalls = new List<string>();
+            List<string> tentLegs = new List<string>();
+
+            // Loop through tentDGV and store data in lists
+            foreach(DataGridViewRow row in tentDGV.Rows)
+            {
+                tentTypes.Add((Tent)row.Cells[0].Value);
+                tentSizes.Add(row.Cells[1].Value.ToString());
+                tentQties.Add(Convert.ToInt32(row.Cells[2].Value));
+                tentCoverTypes.Add(row.Cells[3].Value.ToString());
+                tentHoldDowns.Add(row.Cells[4].Value.ToString());
+                tentWalls.Add(row.Cells[5].Value.ToString());
+                tentLegs.Add(row.Cells[6].Value.ToString());
+            }
+
+            // Create object with the lists and send for processing
+            var ListOfLists = new ListNames(tentTypes, tentSizes, tentQties, tentCoverTypes, tentHoldDowns, tentWalls, tentLegs);
+            DataHandler.CountTents(ref ListOfLists);
+        }
 
         private void tentDGV_MouseDown(object sender, MouseEventArgs e)
         {
