@@ -129,7 +129,7 @@ namespace PitchATent
             int selectedRowIndex = tentDGV.SelectedCells[0].RowIndex;
 
             // Get the type of tent (enum)
-            Tent typeOfTent = (UserInterface.Tent)tentDGV.Rows[selectedRowIndex].Cells[6].Value;
+            Tent typeOfTent = (UserInterface.Tent)tentDGV.Rows[selectedRowIndex].Cells[0].Value;
 
             // Create new object of AddTentDlg class
             var TentDLG = new AddTentDlg(typeOfTent);
