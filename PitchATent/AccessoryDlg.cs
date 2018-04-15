@@ -41,8 +41,8 @@ namespace PitchATent
         // List of accessories
         public List<Accessory> AccList = new List<Accessory>();
 
-        private bool _BlackFloor = false;
-        public bool BlackFloor
+        private int _BlackFloor = 0;
+        public int BlackFloor
         {
             get
             {
@@ -56,8 +56,8 @@ namespace PitchATent
 
         }
 
-        private bool _VarnishFloor = false;
-        public bool VarnishFloor
+        private int _VarnishFloor = 0;
+        public int VarnishFloor
         {
             get
             {
@@ -295,8 +295,8 @@ namespace PitchATent
         {
             // Simnply retrieve values and update properties
 
-            this.BlackFloor = checkbox_BlackFloor.Checked;
-            this.VarnishFloor = checkbox_VarnishFloor.Checked;
+            this.BlackFloor = Convert.ToInt32(nud_BlackFloor.Value);
+            this.VarnishFloor = Convert.ToInt32(nud_VarnishFloor.Value);
             this.TarFiller = checkbox_TarFiller.Checked;
             this.SpotLights = Convert.ToInt32(nud_SpotLight.Value);
             this.Chandelier = Convert.ToInt32(nud_Chandelier.Value);
@@ -312,6 +312,7 @@ namespace PitchATent
             SaveAccessoryList();
             this.Close();
         }
+        
         
 
         #region IO
@@ -368,26 +369,12 @@ namespace PitchATent
                     switch (tokens[0])
                     {
                         case "BlackFloor":
-                            if (tokens[1] == "False")
-                            {
-                                BlackFloor = false;
-                            }
-                            else
-                            {
-                                BlackFloor = true;
-                            }
-                            checkbox_BlackFloor.Checked = BlackFloor;
+                            BlackFloor = Convert.ToInt32(tokens[1]);
+                            nud_BlackFloor.Value = Convert.ToDecimal(BlackFloor);
                             break;
                         case "VarnishFloor":
-                            if (tokens[1] == "False")
-                            {
-                                VarnishFloor = false;
-                            }
-                            else
-                            {
-                                VarnishFloor = true;
-                            }
-                            checkbox_VarnishFloor.Checked = VarnishFloor;
+                            VarnishFloor = Convert.ToInt32(tokens[1]);
+                            nud_VarnishFloor.Value = Convert.ToDecimal(VarnishFloor);
                             break;
                         case "TarFiller":
                             if (tokens[1] == "False")

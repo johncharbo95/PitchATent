@@ -33,8 +33,6 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkbox_VarnishFloor = new System.Windows.Forms.CheckBox();
-            this.checkbox_BlackFloor = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.nud_100CL = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -56,15 +54,19 @@
             this.nud_DoubleDoor = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.nud_Extension50 = new System.Windows.Forms.NumericUpDown();
+            this.nud_Extension100 = new System.Windows.Forms.NumericUpDown();
             this.checkbox_TarFiller = new System.Windows.Forms.CheckBox();
             this.nud_Extinguisher = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.btn_Done = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.nud_Extension100 = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
-            this.nud_Extension50 = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.nud_BlackFloor = new System.Windows.Forms.NumericUpDown();
+            this.nud_VarnishFloor = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -79,9 +81,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_ExitSign)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_DoubleDoor)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_Extinguisher)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension100)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Extension50)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension100)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Extinguisher)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_BlackFloor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_VarnishFloor)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -117,34 +121,16 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkbox_VarnishFloor);
-            this.groupBox1.Controls.Add(this.checkbox_BlackFloor);
+            this.groupBox1.Controls.Add(this.nud_VarnishFloor);
+            this.groupBox1.Controls.Add(this.nud_BlackFloor);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Location = new System.Drawing.Point(13, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 69);
+            this.groupBox1.Size = new System.Drawing.Size(200, 73);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Floors";
-            // 
-            // checkbox_VarnishFloor
-            // 
-            this.checkbox_VarnishFloor.AutoSize = true;
-            this.checkbox_VarnishFloor.Location = new System.Drawing.Point(7, 43);
-            this.checkbox_VarnishFloor.Name = "checkbox_VarnishFloor";
-            this.checkbox_VarnishFloor.Size = new System.Drawing.Size(87, 17);
-            this.checkbox_VarnishFloor.TabIndex = 1;
-            this.checkbox_VarnishFloor.Text = "Varnish Floor";
-            this.checkbox_VarnishFloor.UseVisualStyleBackColor = true;
-            // 
-            // checkbox_BlackFloor
-            // 
-            this.checkbox_BlackFloor.AutoSize = true;
-            this.checkbox_BlackFloor.Location = new System.Drawing.Point(7, 20);
-            this.checkbox_BlackFloor.Name = "checkbox_BlackFloor";
-            this.checkbox_BlackFloor.Size = new System.Drawing.Size(79, 17);
-            this.checkbox_BlackFloor.TabIndex = 0;
-            this.checkbox_BlackFloor.Text = "Black Floor";
-            this.checkbox_BlackFloor.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -342,6 +328,38 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Miscellaneous";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(10, 60);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(111, 13);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "Extension Cord (50 ft):";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(10, 99);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(117, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Extension Cord (100 ft):";
+            // 
+            // nud_Extension50
+            // 
+            this.nud_Extension50.Location = new System.Drawing.Point(10, 76);
+            this.nud_Extension50.Name = "nud_Extension50";
+            this.nud_Extension50.Size = new System.Drawing.Size(184, 20);
+            this.nud_Extension50.TabIndex = 18;
+            // 
+            // nud_Extension100
+            // 
+            this.nud_Extension100.Location = new System.Drawing.Point(10, 115);
+            this.nud_Extension100.Name = "nud_Extension100";
+            this.nud_Extension100.Size = new System.Drawing.Size(184, 20);
+            this.nud_Extension100.TabIndex = 16;
+            // 
             // checkbox_TarFiller
             // 
             this.checkbox_TarFiller.AutoSize = true;
@@ -388,37 +406,37 @@
             this.btn_Cancel.UseVisualStyleBackColor = true;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
-            // label11
+            // label13
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(10, 99);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(117, 13);
-            this.label11.TabIndex = 15;
-            this.label11.Text = "Extension Cord (100 ft):";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 20);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(63, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Black Floor:";
             // 
-            // nud_Extension100
+            // label14
             // 
-            this.nud_Extension100.Location = new System.Drawing.Point(10, 115);
-            this.nud_Extension100.Name = "nud_Extension100";
-            this.nud_Extension100.Size = new System.Drawing.Size(184, 20);
-            this.nud_Extension100.TabIndex = 16;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(8, 44);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(71, 13);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "Varnish Floor:";
             // 
-            // label12
+            // nud_BlackFloor
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(10, 60);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(111, 13);
-            this.label12.TabIndex = 17;
-            this.label12.Text = "Extension Cord (50 ft):";
+            this.nud_BlackFloor.Location = new System.Drawing.Point(97, 18);
+            this.nud_BlackFloor.Name = "nud_BlackFloor";
+            this.nud_BlackFloor.Size = new System.Drawing.Size(91, 20);
+            this.nud_BlackFloor.TabIndex = 2;
             // 
-            // nud_Extension50
+            // nud_VarnishFloor
             // 
-            this.nud_Extension50.Location = new System.Drawing.Point(10, 76);
-            this.nud_Extension50.Name = "nud_Extension50";
-            this.nud_Extension50.Size = new System.Drawing.Size(184, 20);
-            this.nud_Extension50.TabIndex = 18;
+            this.nud_VarnishFloor.Location = new System.Drawing.Point(97, 42);
+            this.nud_VarnishFloor.Name = "nud_VarnishFloor";
+            this.nud_VarnishFloor.Size = new System.Drawing.Size(91, 20);
+            this.nud_VarnishFloor.TabIndex = 3;
             // 
             // AccessoryDlg
             // 
@@ -455,9 +473,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_DoubleDoor)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_Extinguisher)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension100)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Extension50)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Extension100)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Extinguisher)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_BlackFloor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_VarnishFloor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -470,8 +490,6 @@
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkbox_VarnishFloor;
-        private System.Windows.Forms.CheckBox checkbox_BlackFloor;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.NumericUpDown nud_100CL;
         private System.Windows.Forms.Label label5;
@@ -502,5 +520,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown nud_Extension50;
         private System.Windows.Forms.NumericUpDown nud_Extension100;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown nud_VarnishFloor;
+        private System.Windows.Forms.NumericUpDown nud_BlackFloor;
     }
 }
