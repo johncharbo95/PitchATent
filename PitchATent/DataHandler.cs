@@ -51,6 +51,20 @@ namespace PitchATent
     {
         //https://stackoverflow.com/questions/39659145/t-does-not-contain-a-definition?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
         string Size { get; set; }
+        int Legs { get; set; }
+        int MiddlePost { get; set; }
+        int PinsW { get; set; }
+        int PinsR { get; set; }
+        int Barrels { get; set; }
+        int Concrete250 { get; set; }
+        int Concrete400 { get; set; }
+        int Concrete600 { get; set; }
+        int ConcreteHalfTon { get; set; }
+        int ConcreteTon { get; set; }
+        int Walls10 { get; set; }
+        int Walls15 { get; set; }
+        int Walls20 { get; set; }
+        int ComeAlong { get; set; }
     }
 
     public class SmallTentDB:DatabaseInterface
@@ -79,6 +93,27 @@ namespace PitchATent
         public int Walls15 { get; set; }
         public int Walls20 { get; set; }
     }
+
+    public class LargeTentDB:DatabaseInterface
+    {
+        public string Size { get; set; }
+        public int MiddlePost { get; set; }
+        public int PinsW { get; set; }
+        public int PinsR { get; set; }
+        public int ConcreteTon { get; set; }
+        public int ComeAlong { get; set; }
+        public int Legs { get; set; }
+        public int Walls10 { get; set; }
+        public int Walls15 { get; set; }
+        public int Walls20 { get; set; }
+        public int Mid20 { get; set; }
+        public int Mid30 { get; set; }
+        public int Barrels { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Concrete250 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Concrete400 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Concrete600 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int ConcreteHalfTon { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    }
     #endregion
 
     public class DataHandler
@@ -93,6 +128,16 @@ namespace PitchATent
             List<TentItems> CoverList = new List<TentItems>();
             List<TentItems> HoldDownList = new List<TentItems>();
 
+            // Read databases. This returns the full database as IEnumerable type.
+            var SmallDB = ReadTentDatabase<SmallTentDB>(UserInterface.Tent.Small);
+            var LargeDB = ReadTentDatabase<LargeTentDB>(UserInterface.Tent.Large);
+            // TODO: Add frame and clearspan classes.
+
+            // Declare variables.
+            Legs leg = Legs.none;
+            string legTentType = null;
+            DatabaseInterface db = null;
+
             // Loop through all tents
             for (int i = 0; i < ListOfLists.tentType.Count; ++i)
             {
@@ -102,28 +147,27 @@ namespace PitchATent
                 // Get the cover size and type of tent
                 string size = ListOfLists.tentSizes[i];
                 UserInterface.Tent typeOfTent = ListOfLists.tentType[i];
-
-                // Send the size to the ReadDatabase function and return an object with the values
-                var db = ReadTentDatabase<SmallTentDB>(size, typeOfTent);
-
-                // Depending on the type of tent, load database and retrieve values unique to that type of tent
-                Legs leg = Legs.none;
-                string legTentType = null;
+                
+                // Depending on the type and size of tent, get the appropriate row in the database.
                 switch (ListOfLists.tentType[i])
                 {
                     case UserInterface.Tent.Small:
                         legTentType = "pour petites tentes";
-                        if (db != null)
+
+                        // Get the appropriate row from the small tent database, depending on the size of the tent.
+                        SmallTentDB SmallRow = GetDataBaseRow<SmallTentDB>(SmallDB, size);
+                        db = SmallRow;
+                        if (SmallRow != null)
                         {
                             // Metal list
                             // TODO: string builder for legs, cable, poteau de milieu
-                            HandleList("Pipe", db.Pipe * qty, MetalItemList);
-                            HandleList("Pipe 5ft", db.Pipe5 * qty, MetalItemList);
-                            HandleList("T - 20x30/20x40", db.SmallTee * qty, MetalItemList);
-                            HandleList("T - 30x30", db.LargeTee * qty, MetalItemList);
-                            HandleList("Entures", db.Enture * qty, MetalItemList);
-                            HandleList("Coins", db.Corner * qty, MetalItemList);
-                            HandleList("Brace", db.Brace * qty, MetalItemList);
+                            HandleList("Pipe", SmallRow.Pipe * qty, MetalItemList);
+                            HandleList("Pipe 5ft", SmallRow.Pipe5 * qty, MetalItemList);
+                            HandleList("T - 20x30/20x40", SmallRow.SmallTee * qty, MetalItemList);
+                            HandleList("T - 30x30", SmallRow.LargeTee * qty, MetalItemList);
+                            HandleList("Entures", SmallRow.Enture * qty, MetalItemList);
+                            HandleList("Coins", SmallRow.Corner * qty, MetalItemList);
+                            HandleList("Brace", SmallRow.Brace * qty, MetalItemList);
                         }
                         else
                         {
@@ -133,12 +177,18 @@ namespace PitchATent
 
                     case UserInterface.Tent.Large:
                         legTentType = "pour grosses tentes";
+
+                        // Get the appropriate row from the large tent database, depending on the size of the tent.
+                        LargeTentDB LargeRow = GetDataBaseRow<LargeTentDB>(LargeDB, size);
+                        db = LargeRow;
                         break;
 
                     case UserInterface.Tent.Frame:
+                        db = null;
                         break;
 
                     case UserInterface.Tent.ClearSpan:
+                        db = null;
                         break;
                 }
 
@@ -304,8 +354,23 @@ namespace PitchATent
             HoldDowns.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
             Console.WriteLine("///////////////////////////////////////////////////////////////////////");
         }
-        private static Database ReadTentDatabase<Database>(string size,UserInterface.Tent typeOfTent)
-            where Database:DatabaseInterface
+
+        private static Database GetDataBaseRow<Database>(IEnumerable<Database> db, string size)
+            where Database : DatabaseInterface
+        {
+            foreach (var row in db)
+            {
+                if (row.Size == size)
+                {
+                    return row;
+                }
+            }
+
+            return default(Database);
+        }
+
+
+        private static IEnumerable<Database> ReadTentDatabase<Database>(UserInterface.Tent typeOfTent)
         {
             
             string filename = null;
@@ -333,22 +398,8 @@ namespace PitchATent
 
             // Get the records in the CSV file according to class SmallTentDB
             var records = csv.GetRecords<Database>();
+            return records;
 
-            // Loop through the records
-            foreach (var record in records)
-            {
-
-                // If the size field in the record matches the function parameter, return the object.
-                if (record.Size == size)
-                {
-                    var db = record;
-                    return db;
-                }
-            }
-
-            // If there was no match, return null
-            return default(Database);
-            
         }
         
         private static void HandleList(string item, int quantity, List<TentItems> list)
