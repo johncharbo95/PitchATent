@@ -78,6 +78,7 @@
             this.btn_addFrame = new System.Windows.Forms.Button();
             this.btn_addClearSpan = new System.Windows.Forms.Button();
             this.btn_AddAcc = new System.Windows.Forms.Button();
+            this.btn_GeneratePDF = new System.Windows.Forms.Button();
             this.tentGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tentDGV)).BeginInit();
             this.tentContextMenu.SuspendLayout();
@@ -541,12 +542,23 @@
             this.btn_AddAcc.UseVisualStyleBackColor = true;
             this.btn_AddAcc.Click += new System.EventHandler(this.btn_AddAcc_Click);
             // 
+            // btn_GeneratePDF
+            // 
+            this.btn_GeneratePDF.Location = new System.Drawing.Point(313, 635);
+            this.btn_GeneratePDF.Name = "btn_GeneratePDF";
+            this.btn_GeneratePDF.Size = new System.Drawing.Size(200, 50);
+            this.btn_GeneratePDF.TabIndex = 19;
+            this.btn_GeneratePDF.Text = "Generate List";
+            this.btn_GeneratePDF.UseVisualStyleBackColor = true;
+            this.btn_GeneratePDF.Click += new System.EventHandler(this.btn_GeneratePDF_Click);
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1238, 700);
+            this.Controls.Add(this.btn_GeneratePDF);
             this.Controls.Add(this.btn_AddAcc);
             this.Controls.Add(this.btn_addClearSpan);
             this.Controls.Add(this.btn_addFrame);
@@ -631,6 +643,7 @@
         private System.Windows.Forms.DataGridView previewDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
+        private System.Windows.Forms.Button btn_GeneratePDF;
     }
 }
 

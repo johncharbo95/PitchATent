@@ -308,6 +308,11 @@ namespace PitchATent
             }
         }
 
-        
+        private void btn_GeneratePDF_Click(object sender, EventArgs e)
+        {
+            // Generate the PDF
+
+            MessageBox.Show("This will pop up a window of a PDF in the next commit!");
+        }
     }
 }
