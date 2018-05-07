@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
 
 namespace PitchATent
 {
@@ -311,8 +314,26 @@ namespace PitchATent
         private void btn_GeneratePDF_Click(object sender, EventArgs e)
         {
             // Generate the PDF
+            Createpdf pdf = new Createpdf();
+            // Create a MigraDoc document
+            Document document = pdf.CreateDocument();
+            document.UseCmykColor = true;
 
-            MessageBox.Show("This will pop up a window of a PDF in the next commit!");
+            // Create a renderer for PDF that uses Unicode font encoding
+            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true);
+
+            // Set the MigraDoc document
+            pdfRenderer.Document = document;
+
+            // Create the PDF document
+            pdfRenderer.RenderDocument();
+
+            // Save the PDF document...
+            string filename = "Invoice.pdf";
+
+            pdfRenderer.Save(filename);
+            // ...and start a viewer.
+            Process.Start(filename);
         }
     }
 }

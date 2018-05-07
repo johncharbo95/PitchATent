@@ -83,6 +83,7 @@
     <Compile Include="AddTentDlg.Designer.cs">
       <DependentUpon>AddTentDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Createpdf.cs" />
     <Compile Include="DataHandler.cs" />
     <Compile Include="UserInterface.cs">
       <SubType>Form</SubType>
