@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace PitchATent
 {
@@ -364,6 +366,13 @@ namespace PitchATent
             counts.Metal = MetalItemList;
             counts.TieDowns = HoldDownList;
             counts.Walls = WallList;
+
+            //// Serialize the list
+            //var serializer = new XmlSerializer(counts.GetType());
+            //using (var writer = XmlWriter.Create("list.xml"))
+            //{
+            //    serializer.Serialize(writer, counts);
+            //}
 
             return counts;
 
