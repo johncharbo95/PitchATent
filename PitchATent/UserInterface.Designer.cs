@@ -31,6 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.tentGroupBox = new System.Windows.Forms.GroupBox();
             this.tentDGV = new System.Windows.Forms.DataGridView();
+            this.tentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentCoverType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentHoldDown = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentWalls = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentLegs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hiddenTieDownIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hiddenWallsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hiddenLegsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tentContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addSmallTentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addLargeTentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,26 +71,21 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dateTime = new System.Windows.Forms.DateTimePicker();
             this.previewGroupBox = new System.Windows.Forms.GroupBox();
+            this.previewDGV = new System.Windows.Forms.DataGridView();
+            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_addLargeTent = new System.Windows.Forms.Button();
             this.btn_addFrame = new System.Windows.Forms.Button();
             this.btn_addClearSpan = new System.Windows.Forms.Button();
             this.btn_AddAcc = new System.Windows.Forms.Button();
-            this.tentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tentSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tentQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tentCoverType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tentHoldDown = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tentWalls = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tentLegs = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hiddenTieDownIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hiddenWallsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hiddenLegsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tentGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tentDGV)).BeginInit();
             this.tentContextMenu.SuspendLayout();
             this.accGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.accDGV)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.previewGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // tentGroupBox
@@ -122,7 +127,92 @@
             this.tentDGV.Size = new System.Drawing.Size(718, 263);
             this.tentDGV.TabIndex = 0;
             this.tentDGV.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.tentDGV_DataError);
+            this.tentDGV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tentDGV_KeyDown);
             this.tentDGV.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tentDGV_MouseDown);
+            // 
+            // tentType
+            // 
+            this.tentType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.tentType.HeaderText = "Tent";
+            this.tentType.Name = "tentType";
+            this.tentType.ReadOnly = true;
+            this.tentType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentType.Width = 63;
+            // 
+            // tentSize
+            // 
+            this.tentSize.HeaderText = "Size";
+            this.tentSize.Name = "tentSize";
+            this.tentSize.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentSize.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tentSize.Width = 44;
+            // 
+            // tentQty
+            // 
+            this.tentQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.tentQty.HeaderText = "Qty";
+            this.tentQty.Name = "tentQty";
+            this.tentQty.Width = 60;
+            // 
+            // tentCoverType
+            // 
+            this.tentCoverType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.tentCoverType.HeaderText = "Cover Type";
+            this.tentCoverType.Name = "tentCoverType";
+            this.tentCoverType.ReadOnly = true;
+            this.tentCoverType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentCoverType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tentCoverType.Width = 93;
+            // 
+            // tentHoldDown
+            // 
+            this.tentHoldDown.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.tentHoldDown.HeaderText = "Tie Down";
+            this.tentHoldDown.Name = "tentHoldDown";
+            this.tentHoldDown.ReadOnly = true;
+            this.tentHoldDown.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentHoldDown.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tentHoldDown.Width = 81;
+            // 
+            // tentWalls
+            // 
+            this.tentWalls.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.tentWalls.HeaderText = "Walls";
+            this.tentWalls.Name = "tentWalls";
+            this.tentWalls.ReadOnly = true;
+            this.tentWalls.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentWalls.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tentWalls.Width = 53;
+            // 
+            // tentLegs
+            // 
+            this.tentLegs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.tentLegs.HeaderText = "Legs";
+            this.tentLegs.Name = "tentLegs";
+            this.tentLegs.ReadOnly = true;
+            this.tentLegs.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tentLegs.Width = 67;
+            // 
+            // hiddenTieDownIndex
+            // 
+            this.hiddenTieDownIndex.HeaderText = "Hidden Tie Down Index";
+            this.hiddenTieDownIndex.Name = "hiddenTieDownIndex";
+            this.hiddenTieDownIndex.Visible = false;
+            this.hiddenTieDownIndex.Width = 195;
+            // 
+            // hiddenWallsIndex
+            // 
+            this.hiddenWallsIndex.HeaderText = "Hidden Walls Index";
+            this.hiddenWallsIndex.Name = "hiddenWallsIndex";
+            this.hiddenWallsIndex.Visible = false;
+            this.hiddenWallsIndex.Width = 167;
+            // 
+            // hiddenLegsIndex
+            // 
+            this.hiddenLegsIndex.HeaderText = "Hidden Legs Index";
+            this.hiddenLegsIndex.Name = "hiddenLegsIndex";
+            this.hiddenLegsIndex.Visible = false;
+            this.hiddenLegsIndex.Width = 162;
             // 
             // tentContextMenu
             // 
@@ -239,7 +329,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(970, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1238, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -365,13 +455,51 @@
             // 
             // previewGroupBox
             // 
+            this.previewGroupBox.Controls.Add(this.previewDGV);
             this.previewGroupBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.previewGroupBox.Location = new System.Drawing.Point(742, 101);
             this.previewGroupBox.Name = "previewGroupBox";
-            this.previewGroupBox.Size = new System.Drawing.Size(210, 587);
+            this.previewGroupBox.Size = new System.Drawing.Size(446, 587);
             this.previewGroupBox.TabIndex = 13;
             this.previewGroupBox.TabStop = false;
             this.previewGroupBox.Text = "Preview";
+            // 
+            // previewDGV
+            // 
+            this.previewDGV.AllowUserToAddRows = false;
+            this.previewDGV.AllowUserToDeleteRows = false;
+            this.previewDGV.AllowUserToResizeColumns = false;
+            this.previewDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.previewDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Item,
+            this.Quantity});
+            this.previewDGV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.previewDGV.Location = new System.Drawing.Point(3, 31);
+            this.previewDGV.Name = "previewDGV";
+            this.previewDGV.ReadOnly = true;
+            this.previewDGV.RowHeadersVisible = false;
+            this.previewDGV.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.previewDGV.Size = new System.Drawing.Size(440, 553);
+            this.previewDGV.TabIndex = 0;
+            // 
+            // Item
+            // 
+            this.Item.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Item.FillWeight = 75F;
+            this.Item.HeaderText = "Item";
+            this.Item.MinimumWidth = 250;
+            this.Item.Name = "Item";
+            this.Item.ReadOnly = true;
+            this.Item.Width = 250;
+            // 
+            // Quantity
+            // 
+            this.Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Quantity.FillWeight = 25F;
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            this.Quantity.Width = 118;
             // 
             // btn_addLargeTent
             // 
@@ -413,96 +541,12 @@
             this.btn_AddAcc.UseVisualStyleBackColor = true;
             this.btn_AddAcc.Click += new System.EventHandler(this.btn_AddAcc_Click);
             // 
-            // tentType
-            // 
-            this.tentType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.tentType.HeaderText = "Tent";
-            this.tentType.Name = "tentType";
-            this.tentType.ReadOnly = true;
-            this.tentType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tentType.Width = 63;
-            // 
-            // tentSize
-            // 
-            this.tentSize.HeaderText = "Size";
-            this.tentSize.Name = "tentSize";
-            this.tentSize.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tentSize.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.tentSize.Width = 44;
-            // 
-            // tentQty
-            // 
-            this.tentQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.tentQty.HeaderText = "Qty";
-            this.tentQty.Name = "tentQty";
-            this.tentQty.Width = 60;
-            // 
-            // tentCoverType
-            // 
-            this.tentCoverType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.tentCoverType.HeaderText = "Cover Type";
-            this.tentCoverType.Name = "tentCoverType";
-            this.tentCoverType.ReadOnly = true;
-            this.tentCoverType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tentCoverType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.tentCoverType.Width = 93;
-            // 
-            // tentHoldDown
-            // 
-            this.tentHoldDown.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.tentHoldDown.HeaderText = "Tie Down";
-            this.tentHoldDown.Name = "tentHoldDown";
-            this.tentHoldDown.ReadOnly = true;
-            this.tentHoldDown.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tentHoldDown.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.tentHoldDown.Width = 81;
-            // 
-            // tentWalls
-            // 
-            this.tentWalls.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.tentWalls.HeaderText = "Walls";
-            this.tentWalls.Name = "tentWalls";
-            this.tentWalls.ReadOnly = true;
-            this.tentWalls.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tentWalls.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.tentWalls.Width = 53;
-            // 
-            // tentLegs
-            // 
-            this.tentLegs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.tentLegs.HeaderText = "Legs";
-            this.tentLegs.Name = "tentLegs";
-            this.tentLegs.ReadOnly = true;
-            this.tentLegs.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tentLegs.Width = 67;
-            // 
-            // hiddenTieDownIndex
-            // 
-            this.hiddenTieDownIndex.HeaderText = "Hidden Tie Down Index";
-            this.hiddenTieDownIndex.Name = "hiddenTieDownIndex";
-            this.hiddenTieDownIndex.Visible = false;
-            this.hiddenTieDownIndex.Width = 195;
-            // 
-            // hiddenWallsIndex
-            // 
-            this.hiddenWallsIndex.HeaderText = "Hidden Walls Index";
-            this.hiddenWallsIndex.Name = "hiddenWallsIndex";
-            this.hiddenWallsIndex.Visible = false;
-            this.hiddenWallsIndex.Width = 167;
-            // 
-            // hiddenLegsIndex
-            // 
-            this.hiddenLegsIndex.HeaderText = "Hidden Legs Index";
-            this.hiddenLegsIndex.Name = "hiddenLegsIndex";
-            this.hiddenLegsIndex.Visible = false;
-            this.hiddenLegsIndex.Width = 162;
-            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(970, 700);
+            this.ClientSize = new System.Drawing.Size(1238, 700);
             this.Controls.Add(this.btn_AddAcc);
             this.Controls.Add(this.btn_addClearSpan);
             this.Controls.Add(this.btn_addFrame);
@@ -529,6 +573,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.accDGV)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.previewGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.previewDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -582,6 +628,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn hiddenTieDownIndex;
         private System.Windows.Forms.DataGridViewTextBoxColumn hiddenWallsIndex;
         private System.Windows.Forms.DataGridViewTextBoxColumn hiddenLegsIndex;
+        private System.Windows.Forms.DataGridView previewDGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Item;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
     }
 }
 

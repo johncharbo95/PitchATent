@@ -35,6 +35,14 @@ namespace PitchATent
         public List<string> tentLegs { get; set; }
     }
 
+    public class ItemCounts
+    {
+        public List<TentItems> Metal { get; set; }
+        public List<TentItems> Walls { get; set; }
+        public List<TentItems> Covers { get; set; }
+        public List<TentItems> TieDowns { get; set; }
+    }
+    
     #region Objects
     public class TentItems
     {
@@ -108,35 +116,35 @@ namespace PitchATent
         public int Walls20 { get; set; }
         public int Mid20 { get; set; }
         public int Mid30 { get; set; }
-        public int Barrels { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Concrete250 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Concrete400 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Concrete600 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int ConcreteHalfTon { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Plates { get; set; }
+        public int Barrels { get; set; }
+        public int Concrete250 { get; set; }
+        public int Concrete400 { get; set; }
+        public int Concrete600 { get; set; }
+        public int ConcreteHalfTon { get; set; }
     }
     #endregion
 
     public class DataHandler
     {
+        
         public enum Legs { shortLegs, longLegs, none};
-
-        public static void CountTents(ref ListNames ListOfLists)
+        
+        public ItemCounts CountTents(ref ListNames ListOfLists)
         {
             // Declare lists of TentItems
             List<TentItems> MetalItemList = new List<TentItems>();
             List<TentItems> WallList = new List<TentItems>();
             List<TentItems> CoverList = new List<TentItems>();
             List<TentItems> HoldDownList = new List<TentItems>();
-
-            // Read databases. This returns the full database as IEnumerable type.
-            var SmallDB = ReadTentDatabase<SmallTentDB>(UserInterface.Tent.Small);
-            var LargeDB = ReadTentDatabase<LargeTentDB>(UserInterface.Tent.Large);
-            // TODO: Add frame and clearspan classes.
+            
+            // Declare object of ItemCounts class
+            ItemCounts counts = new ItemCounts();
 
             // Declare variables.
             Legs leg = Legs.none;
             string legTentType = null;
-            DatabaseInterface db = null;
+            DatabaseInterface db = new SmallTentDB();
 
             // Loop through all tents
             for (int i = 0; i < ListOfLists.tentType.Count; ++i)
@@ -147,31 +155,34 @@ namespace PitchATent
                 // Get the cover size and type of tent
                 string size = ListOfLists.tentSizes[i];
                 UserInterface.Tent typeOfTent = ListOfLists.tentType[i];
-                
+
+                IEnumerable<SmallTentDB> SmallDB = ReadTentDatabase<SmallTentDB>(UserInterface.Tent.Small);
+                IEnumerable<LargeTentDB> LargeDB = ReadTentDatabase<LargeTentDB>(UserInterface.Tent.Large);
+
                 // Depending on the type and size of tent, get the appropriate row in the database.
                 switch (ListOfLists.tentType[i])
                 {
                     case UserInterface.Tent.Small:
-                        legTentType = "pour petites tentes";
+                        {
+                            legTentType = "pour petites tentes";
 
-                        // Get the appropriate row from the small tent database, depending on the size of the tent.
-                        SmallTentDB SmallRow = GetDataBaseRow<SmallTentDB>(SmallDB, size);
-                        db = SmallRow;
-                        if (SmallRow != null)
-                        {
-                            // Metal list
-                            // TODO: string builder for legs, cable, poteau de milieu
-                            HandleList("Pipe", SmallRow.Pipe * qty, MetalItemList);
-                            HandleList("Pipe 5ft", SmallRow.Pipe5 * qty, MetalItemList);
-                            HandleList("T - 20x30/20x40", SmallRow.SmallTee * qty, MetalItemList);
-                            HandleList("T - 30x30", SmallRow.LargeTee * qty, MetalItemList);
-                            HandleList("Entures", SmallRow.Enture * qty, MetalItemList);
-                            HandleList("Coins", SmallRow.Corner * qty, MetalItemList);
-                            HandleList("Brace", SmallRow.Brace * qty, MetalItemList);
-                        }
-                        else
-                        {
-                            throw new System.ArgumentNullException("Small Tent Database Object");
+                            // Get the appropriate row from the small tent database, depending on the size of the tent.
+                            SmallTentDB SmallRow = GetDataBaseRow<SmallTentDB>(SmallDB, size);
+                            db = SmallRow;
+                            if (SmallRow != null)
+                            {
+                                // Metal list
+                                // TODO: string builder for legs, cable, poteau de milieu
+                                HandleList("Pipe", SmallRow.Pipe * qty, MetalItemList);
+                                HandleList("Pipe 5ft", SmallRow.Pipe5 * qty, MetalItemList);
+                                HandleList("T - 20x30/20x40", SmallRow.SmallTee * qty, MetalItemList);
+                                HandleList("T - 30x30", SmallRow.LargeTee * qty, MetalItemList);
+                                HandleList("Entures", SmallRow.Enture * qty, MetalItemList);
+                                HandleList("Coins", SmallRow.Corner * qty, MetalItemList);
+                                HandleList("Brace", SmallRow.Brace * qty, MetalItemList);
+                                HandleList(string.Format("Poteau de milieu {0}", size), SmallRow.MiddlePost * qty, MetalItemList);
+                                HandleList(string.Format("Cables {0}", size), SmallRow.Cable * qty, WallList);
+                            }
                         }
                         break;
 
@@ -181,6 +192,19 @@ namespace PitchATent
                         // Get the appropriate row from the large tent database, depending on the size of the tent.
                         LargeTentDB LargeRow = GetDataBaseRow<LargeTentDB>(LargeDB, size);
                         db = LargeRow;
+                        
+                        if (LargeRow != null)
+                        {
+                            HandleList(string.Format("Poteau de milieu {0}", size), LargeRow.MiddlePost * qty, MetalItemList);
+                            HandleList("Plates", LargeRow.Plates * qty, MetalItemList);
+                            HandleList("Mid 20 pieds", LargeRow.Mid20 * qty, CoverList);
+                            HandleList("Mid 30 pieds", LargeRow.Mid30 * qty, CoverList);
+                            HandleList(string.Format("End {0}", size), 2 * qty, CoverList);
+                        }
+                        else
+                        {
+                            throw new System.ArgumentNullException("Large Tent Database Object");
+                        }
                         break;
 
                     case UserInterface.Tent.Frame:
@@ -329,50 +353,25 @@ namespace PitchATent
                     throw new Exception("Leg enum assigned null value");
                 }
 
-                string cables = string.Format("Cables {0}", ListOfLists.tentSizes[i]);
-                HandleList(cables, qty, WallList);
+                HandleList(string.Format("Cables {0}", ListOfLists.tentSizes[i]), qty, WallList);
 
                 string covers = string.Format("Cover {0} {1}", ListOfLists.tentSizes[i], ListOfLists.tentCoverTypes[i]);
                 HandleList(covers, qty, CoverList);
             }
 
             DataHandler.printAllLists(MetalItemList,WallList,CoverList,HoldDownList);
+            counts.Covers = CoverList;
+            counts.Metal = MetalItemList;
+            counts.TieDowns = HoldDownList;
+            counts.Walls = WallList;
+
+            return counts;
 
         }
-
-        // Temporary function to print lists to command line for debugging instead of generating a PDF
-        public static void printAllLists(List<TentItems> Metal, List<TentItems> Walls, List<TentItems> Covers, List<TentItems> HoldDowns)
-        {
-            Console.WriteLine("///////////////////////////////////////////////////////////////////////");
-            Console.WriteLine("-------------METAL------------");
-            Metal.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
-            Console.WriteLine("-------------WALLS------------");
-            Walls.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
-            Console.WriteLine("------------COVERS------------");
-            Covers.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
-            Console.WriteLine("------------HOLDDOWNS---------");
-            HoldDowns.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
-            Console.WriteLine("///////////////////////////////////////////////////////////////////////");
-        }
-
-        private static Database GetDataBaseRow<Database>(IEnumerable<Database> db, string size)
-            where Database : DatabaseInterface
-        {
-            foreach (var row in db)
-            {
-                if (row.Size == size)
-                {
-                    return row;
-                }
-            }
-
-            return default(Database);
-        }
-
 
         private static IEnumerable<Database> ReadTentDatabase<Database>(UserInterface.Tent typeOfTent)
         {
-            
+
             string filename = null;
             switch (typeOfTent)
             {
@@ -380,7 +379,7 @@ namespace PitchATent
                     filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\SmallTents.csv";
                     break;
                 case UserInterface.Tent.Large:
-                    Console.WriteLine("No database yet");
+                    filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\LargeTents.csv";
                     break;
                 case UserInterface.Tent.Frame:
                     Console.WriteLine("No database yet");
@@ -398,8 +397,38 @@ namespace PitchATent
 
             // Get the records in the CSV file according to class SmallTentDB
             var records = csv.GetRecords<Database>();
+
             return records;
 
+        }
+
+        // Temporary function to print lists to command line for debugging instead of generating a PDF
+        public static void printAllLists(List<TentItems> Metal, List<TentItems> Walls, List<TentItems> Covers, List<TentItems> HoldDowns)
+        {
+            Console.WriteLine("///////////////////////////////////////////////////////////////////////");
+            Console.WriteLine("-------------METAL------------");
+            Metal.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
+            Console.WriteLine("-------------WALLS------------");
+            Walls.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
+            Console.WriteLine("------------COVERS------------");
+            Covers.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
+            Console.WriteLine("------------HOLDDOWNS---------");
+            HoldDowns.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
+            Console.WriteLine("///////////////////////////////////////////////////////////////////////");
+        }
+        
+        private static Database GetDataBaseRow<Database>(IEnumerable<Database> db, string size)
+            where Database : DatabaseInterface
+        {
+            foreach (var row in db)
+            {
+                if (row.Size == size)
+                {
+                    return row;
+                }
+            }
+
+            return default(Database);
         }
         
         private static void HandleList(string item, int quantity, List<TentItems> list)

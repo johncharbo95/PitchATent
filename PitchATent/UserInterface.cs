@@ -160,9 +160,43 @@ namespace PitchATent
 
         private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int rowToDelete = tentDGV.Rows.GetFirstRow(DataGridViewElementStates.Selected);
-            tentDGV.Rows.RemoveAt(rowToDelete);
+            foreach (DataGridViewRow row in tentDGV.SelectedRows)
+            {
+                // Remove the row
+                tentDGV.Rows.Remove(row);
+
+                // Decrease row count by one
+                --TentCtr;
+            }
+
+            // Update the list
+            UpdateList();
+
+            // Clear selected rows
             tentDGV.ClearSelection();
+        }
+
+        private void tentDGV_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyCode == Keys.Delete)
+            {
+                Console.WriteLine("Delete key pressed.");
+                foreach(DataGridViewRow row in tentDGV.SelectedRows)
+                {
+                    // Remove the row
+                    tentDGV.Rows.Remove(row);
+
+                    // Decrease count
+                    --TentCtr;
+                }
+
+                // Update the list of items
+                UpdateList();
+
+                tentDGV.ClearSelection();                
+                e.Handled = true;
+            }
         }
 
         #endregion
@@ -180,30 +214,100 @@ namespace PitchATent
             List<string> tentLegs = new List<string>();
 
             // Loop through tentDGV and store data in lists
-            foreach(DataGridViewRow row in tentDGV.Rows)
+            if (tentDGV.Rows.Count != 0)
             {
-                tentTypes.Add((Tent)row.Cells[0].Value);
-                tentSizes.Add(row.Cells[1].Value.ToString());
-                tentQties.Add(Convert.ToInt32(row.Cells[2].Value));
-                tentCoverTypes.Add(row.Cells[3].Value.ToString());
-                tentHoldDowns.Add(row.Cells[4].Value.ToString());
-                tentWalls.Add(row.Cells[5].Value.ToString());
-                tentLegs.Add(row.Cells[6].Value.ToString());
-            }
+                foreach (DataGridViewRow row in tentDGV.Rows)
+                {
+                    tentTypes.Add((Tent)row.Cells[0].Value);
+                    tentSizes.Add(row.Cells[1].Value.ToString());
+                    tentQties.Add(Convert.ToInt32(row.Cells[2].Value));
+                    tentCoverTypes.Add(row.Cells[3].Value.ToString());
+                    tentHoldDowns.Add(row.Cells[4].Value.ToString());
+                    tentWalls.Add(row.Cells[5].Value.ToString());
+                    tentLegs.Add(row.Cells[6].Value.ToString());
+                }
 
-            // Create object with the lists and send for processing
-            var ListOfLists = new ListNames(tentTypes, tentSizes, tentQties, tentCoverTypes, tentHoldDowns, tentWalls, tentLegs);
-            DataHandler.CountTents(ref ListOfLists);
+                // Create object with the lists and send for processing
+                var ListOfLists = new ListNames(tentTypes, tentSizes, tentQties, tentCoverTypes, tentHoldDowns, tentWalls, tentLegs);
+                DataHandler handler = new DataHandler();
+                var counts = handler.CountTents(ref ListOfLists);
+                PopulatePreview(counts);
+                
+            }
+            
         }
 
+        private void PopulatePreview(ItemCounts counts)
+        {
+
+            if (this.previewDGV.Rows.Count != 0)
+            {
+                this.previewDGV.Rows.Clear();
+            }
+
+            var metals = counts.Metal;
+            var walls = counts.Walls;
+            var covers = counts.Covers;
+            var tiedowns = counts.TieDowns;
+
+            int i = 0;
+
+            // Loop through all items in covers list
+            foreach (var cover in covers)
+            {
+                this.previewDGV.Rows.Add();
+                this.previewDGV.Rows[i].Cells[0].Value = cover.Type;
+                this.previewDGV.Rows[i].Cells[1].Value = cover.Qty.ToString();
+                i++;
+            }
+
+            // Loop through all items in metal list
+            foreach (var metal in metals)
+            {
+                this.previewDGV.Rows.Add();
+                this.previewDGV.Rows[i].Cells[0].Value = metal.Type;
+                this.previewDGV.Rows[i].Cells[1].Value = metal.Qty.ToString();
+                i++;
+            }
+
+            // Loop through all items in wall list
+            foreach (var wall in walls)
+            {
+                this.previewDGV.Rows.Add();
+                this.previewDGV.Rows[i].Cells[0].Value = wall.Type;
+                this.previewDGV.Rows[i].Cells[1].Value = wall.Qty.ToString();
+                i++;
+            }
+
+            // Loop through all items in tie down list
+            foreach (var tiedown in tiedowns)
+            {
+                this.previewDGV.Rows.Add();
+                this.previewDGV.Rows[i].Cells[0].Value = tiedown.Type;
+                this.previewDGV.Rows[i].Cells[1].Value = tiedown.Qty.ToString();
+                i++;
+            }
+        }
+
+        
         private void tentDGV_MouseDown(object sender, MouseEventArgs e)
         {
             if(e.Button == MouseButtons.Right)
             {
                 var hti = tentDGV.HitTest(e.X, e.Y);
-                tentDGV.ClearSelection();
-                tentDGV.Rows[hti.RowIndex].Selected = true;
+                if (hti.RowIndex != -1)
+                {
+                    if (tentDGV.SelectedRows.Count < 2)
+                    {
+                        tentDGV.ClearSelection();
+                    }
+                    
+                    tentDGV.Rows[hti.RowIndex].Selected = true;
+                }
+                
             }
         }
+
+        
     }
 }
