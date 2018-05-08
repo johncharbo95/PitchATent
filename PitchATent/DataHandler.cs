@@ -146,6 +146,28 @@ namespace PitchATent
         public int Cover15 { get; set; }
         public int Cover10 { get; set; }
     }
+
+    public class ClearSpanDB : DatabaseInterface
+    {
+        public string Size { get; set; }
+        public int Legs { get; set; }
+        public int MiddlePost { get; set; }
+        public int PinsW { get; set; }
+        public int PinsR { get; set; }
+        public int Barrels { get; set; }
+        public int Concrete250 { get; set; }
+        public int Concrete400 { get; set; }
+        public int Concrete600 { get; set; }
+        public int ConcreteHalfTon { get; set; }
+        public int ConcreteTon { get; set; }
+        public int Walls10 { get; set; }
+        public int Walls15 { get; set; }
+        public int Walls20 { get; set; }
+        public int ComeAlong { get; set; }
+        public int Cover15 { get; set; }
+        public int Cover10 { get; set; }
+        public int Triangle { get; set; }
+    }
     #endregion
 
     public class DataHandler
@@ -182,6 +204,7 @@ namespace PitchATent
                 IEnumerable<SmallTentDB> SmallDB = ReadTentDatabase<SmallTentDB>(UserInterface.Tent.Small);
                 IEnumerable<LargeTentDB> LargeDB = ReadTentDatabase<LargeTentDB>(UserInterface.Tent.Large);
                 IEnumerable<FrameDB> FrameDB = ReadTentDatabase<FrameDB>(UserInterface.Tent.Frame);
+                IEnumerable<ClearSpanDB> ClearSpanDB = ReadTentDatabase<ClearSpanDB>(UserInterface.Tent.ClearSpan);
 
                 // Depending on the type and size of tent, get the appropriate row in the database.
                 switch (ListOfLists.tentType[i])
@@ -234,14 +257,38 @@ namespace PitchATent
 
                         if (FrameRow != null)
                         {
-                            HandleList("Cover Frame 10'", FrameRow.Cover10, CoverList);
-                            HandleList("Cover Frame 15'", FrameRow.Cover15, CoverList);
+                            HandleList("Cover Frame 10'", FrameRow.Cover10 * qty, CoverList);
+                            HandleList("Cover Frame 15'", FrameRow.Cover15 * qty, CoverList);
                         }
 
                         break;
 
                     case UserInterface.Tent.ClearSpan:
-                        db = null;
+                        // Get the appropriate row from the ClearSpan database, depending on the size of the tent.
+                        ClearSpanDB ClearSpanRow = GetDataBaseRow<ClearSpanDB>(ClearSpanDB, size);
+                        db = ClearSpanRow;
+
+                        // Get the width of the ClearSpan
+                        int ClearSpanWidth = Convert.ToInt32(size.Substring(0, 2));                       
+
+                        if (ClearSpanRow != null)
+                        {
+                            HandleList("Cover ClearSpan 10'", ClearSpanRow.Cover10 * qty, CoverList);
+                            HandleList("Cover ClearSpan 15'", ClearSpanRow.Cover15 * qty, CoverList);
+                            
+                            switch(ClearSpanWidth)
+                            {
+                                case 30:
+                                    HandleList("Triangle ClearSpan 30 pieds", ClearSpanRow.Triangle * qty, CoverList);
+                                    break;
+                                case 40:
+                                    HandleList("Triangle ClearSpan 40 pieds", ClearSpanRow.Triangle * qty, CoverList);
+                                    break;
+                                case 50:
+                                    HandleList("Triangle ClearSpan 50 pieds", ClearSpanRow.Triangle * qty, CoverList);
+                                    break;
+                            }
+                        }
                         break;
                 }
 
@@ -363,7 +410,7 @@ namespace PitchATent
                     throw new Exception("Leg enum assigned null value");
                 }
 
-                HandleList(string.Format("Cables {0}", ListOfLists.tentSizes[i]), qty, WallList);
+                //HandleList(string.Format("Cables {0}", ListOfLists.tentSizes[i]), qty, WallList);
 
                 if (typeOfTent != UserInterface.Tent.Frame && typeOfTent != UserInterface.Tent.ClearSpan)
                 {
@@ -407,7 +454,7 @@ namespace PitchATent
                     filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\Frames.csv";
                     break;
                 case UserInterface.Tent.ClearSpan:
-                    Console.WriteLine("No database yet");
+                    filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\ClearSpans.csv";
                     break;
             }
 
