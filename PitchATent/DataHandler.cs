@@ -76,7 +76,7 @@ namespace PitchATent
         int Walls20 { get; set; }
         int ComeAlong { get; set; }
     }
-
+    
     public class SmallTentDB:DatabaseInterface
     {
         public string Size { get; set; }
@@ -125,13 +125,56 @@ namespace PitchATent
         public int Concrete600 { get; set; }
         public int ConcreteHalfTon { get; set; }
     }
+
+    public class FrameDB : DatabaseInterface
+    {
+        public string Size { get; set; }
+        public int Legs { get; set; }
+        public int MiddlePost { get; set; }
+        public int PinsW { get; set; }
+        public int PinsR { get; set; }
+        public int Barrels { get; set; }
+        public int Concrete250 { get; set; }
+        public int Concrete400 { get; set; }
+        public int Concrete600 { get; set; }
+        public int ConcreteHalfTon { get; set; }
+        public int ConcreteTon { get; set; }
+        public int Walls10 { get; set; }
+        public int Walls15 { get; set; }
+        public int Walls20 { get; set; }
+        public int ComeAlong { get; set; }
+        public int Cover15 { get; set; }
+        public int Cover10 { get; set; }
+    }
+
+    public class ClearSpanDB : DatabaseInterface
+    {
+        public string Size { get; set; }
+        public int Legs { get; set; }
+        public int MiddlePost { get; set; }
+        public int PinsW { get; set; }
+        public int PinsR { get; set; }
+        public int Barrels { get; set; }
+        public int Concrete250 { get; set; }
+        public int Concrete400 { get; set; }
+        public int Concrete600 { get; set; }
+        public int ConcreteHalfTon { get; set; }
+        public int ConcreteTon { get; set; }
+        public int Walls10 { get; set; }
+        public int Walls15 { get; set; }
+        public int Walls20 { get; set; }
+        public int ComeAlong { get; set; }
+        public int Cover15 { get; set; }
+        public int Cover10 { get; set; }
+        public int Triangle { get; set; }
+    }
     #endregion
 
     public class DataHandler
     {
         
         public enum Legs { shortLegs, longLegs, none};
-        
+
         public ItemCounts CountTents(ref ListNames ListOfLists)
         {
             // Declare lists of TentItems
@@ -139,7 +182,7 @@ namespace PitchATent
             List<TentItems> WallList = new List<TentItems>();
             List<TentItems> CoverList = new List<TentItems>();
             List<TentItems> HoldDownList = new List<TentItems>();
-            
+
             // Declare object of ItemCounts class
             ItemCounts counts = new ItemCounts();
 
@@ -160,6 +203,8 @@ namespace PitchATent
 
                 IEnumerable<SmallTentDB> SmallDB = ReadTentDatabase<SmallTentDB>(UserInterface.Tent.Small);
                 IEnumerable<LargeTentDB> LargeDB = ReadTentDatabase<LargeTentDB>(UserInterface.Tent.Large);
+                IEnumerable<FrameDB> FrameDB = ReadTentDatabase<FrameDB>(UserInterface.Tent.Frame);
+                IEnumerable<ClearSpanDB> ClearSpanDB = ReadTentDatabase<ClearSpanDB>(UserInterface.Tent.ClearSpan);
 
                 // Depending on the type and size of tent, get the appropriate row in the database.
                 switch (ListOfLists.tentType[i])
@@ -194,7 +239,7 @@ namespace PitchATent
                         // Get the appropriate row from the large tent database, depending on the size of the tent.
                         LargeTentDB LargeRow = GetDataBaseRow<LargeTentDB>(LargeDB, size);
                         db = LargeRow;
-                        
+
                         if (LargeRow != null)
                         {
                             HandleList(string.Format("Poteau de milieu {0}", size), LargeRow.MiddlePost * qty, MetalItemList);
@@ -203,18 +248,47 @@ namespace PitchATent
                             HandleList("Mid 30 pieds", LargeRow.Mid30 * qty, CoverList);
                             HandleList(string.Format("End {0}", size), 2 * qty, CoverList);
                         }
-                        else
-                        {
-                            throw new System.ArgumentNullException("Large Tent Database Object");
-                        }
                         break;
 
                     case UserInterface.Tent.Frame:
-                        db = null;
+                        // Get the appropriate row from the frame database, depending on the size of the tent.
+                        FrameDB FrameRow = GetDataBaseRow<FrameDB>(FrameDB, size);
+                        db = FrameRow;
+
+                        if (FrameRow != null)
+                        {
+                            HandleList("Cover Frame 10'", FrameRow.Cover10 * qty, CoverList);
+                            HandleList("Cover Frame 15'", FrameRow.Cover15 * qty, CoverList);
+                        }
+
                         break;
 
                     case UserInterface.Tent.ClearSpan:
-                        db = null;
+                        // Get the appropriate row from the ClearSpan database, depending on the size of the tent.
+                        ClearSpanDB ClearSpanRow = GetDataBaseRow<ClearSpanDB>(ClearSpanDB, size);
+                        db = ClearSpanRow;
+
+                        // Get the width of the ClearSpan
+                        int ClearSpanWidth = Convert.ToInt32(size.Substring(0, 2));                       
+
+                        if (ClearSpanRow != null)
+                        {
+                            HandleList("Cover ClearSpan 10'", ClearSpanRow.Cover10 * qty, CoverList);
+                            HandleList("Cover ClearSpan 15'", ClearSpanRow.Cover15 * qty, CoverList);
+                            
+                            switch(ClearSpanWidth)
+                            {
+                                case 30:
+                                    HandleList("Triangle ClearSpan 30 pieds", ClearSpanRow.Triangle * qty, CoverList);
+                                    break;
+                                case 40:
+                                    HandleList("Triangle ClearSpan 40 pieds", ClearSpanRow.Triangle * qty, CoverList);
+                                    break;
+                                case 50:
+                                    HandleList("Triangle ClearSpan 50 pieds", ClearSpanRow.Triangle * qty, CoverList);
+                                    break;
+                            }
+                        }
                         break;
                 }
 
@@ -252,7 +326,7 @@ namespace PitchATent
                 string tentLegs = ListOfLists.tentLegs[i];
                 if (tentLegs != "Hexagon")
                 {
-                    
+
                     string LegsForList = string.Format("Pattes {0} {1}", tentLegs, legTentType);
                     HandleList(LegsForList, db.Legs * qty, MetalItemList);
 
@@ -281,84 +355,69 @@ namespace PitchATent
 
                 // This can definitely be optimized but it works...
                 // Insert walls in list.
-                if (leg == Legs.shortLegs)
+                if (leg != Legs.none)
                 {
+
+                    string leg_length = null;
+                    if (leg == Legs.longLegs)
+                    {
+                        leg_length = "10 pieds";
+                    }
+
                     switch (ListOfLists.tentWalls[i])
                     {
                         case "Full Plain":
-                            HandleList("Murs 10 pieds, plain", db.Walls10 * qty, WallList);
-                            HandleList("Murs 15 pieds, plain", db.Walls15 * qty, WallList);
-                            HandleList("Murs 20 pieds, plain", db.Walls20 * qty, WallList);
+                            HandleList(string.Format("Murs 10 pieds, plain, {0}",leg_length), db.Walls10 * qty, WallList);
+                            HandleList(string.Format("Murs 15 pieds, plain, {0}", leg_length), db.Walls15 * qty, WallList);
+                            HandleList(string.Format("Murs 20 pieds, plain, {0}", leg_length), db.Walls20 * qty, WallList);
                             break;
                         case "Full Window":
-                            HandleList("Murs 10 pieds, window", db.Walls10 * qty, WallList);
-                            HandleList("Murs 15 pieds, window", db.Walls15 * qty, WallList);
-                            HandleList("Murs 20 pieds, window", db.Walls20 * qty, WallList);
+                            HandleList(string.Format("Murs 10 pieds, window, {0}", leg_length), db.Walls10 * qty, WallList);
+                            HandleList(string.Format("Murs 15 pieds, window, {0}", leg_length), db.Walls15 * qty, WallList);
+                            HandleList(string.Format("Murs 20 pieds, window, {0}", leg_length), db.Walls20 * qty, WallList);
                             break;
                         case "Half Plain Half Window":
-                            HandleList("Murs 10 pieds, plain", (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
-                            HandleList("Murs 15 pieds, plain", (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
-                            HandleList("Murs 20 pieds, plain", (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
-                            HandleList("Murs 10 pieds, window", (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
-                            HandleList("Murs 15 pieds, window", (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
-                            HandleList("Murs 20 pieds, window", (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 10 pieds, plain, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 15 pieds, plain, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 20 pieds, plain, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 10 pieds, window, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 15 pieds, window, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 20 pieds, window, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
                             break;
                         case "Full Plain Fiesta":
-                            HandleList("Murs 10 pieds, plain, Fiesta", db.Walls10 * qty, WallList);
-                            HandleList("Murs 15 pieds, plain, Fiesta", db.Walls15 * qty, WallList);
-                            HandleList("Murs 20 pieds, plain, Fiesta", db.Walls20 * qty, WallList);
+                            HandleList(string.Format("Murs 10 pieds, plain, Fiesta, {0}", leg_length), db.Walls10 * qty, WallList);
+                            HandleList(string.Format("Murs 15 pieds, plain, Fiesta, {0}", leg_length), db.Walls15 * qty, WallList);
+                            HandleList(string.Format("Murs 20 pieds, plain, Fiesta, {0}", leg_length), db.Walls20 * qty, WallList);
                             break;
                         case "Full Window Fiesta":
-                            HandleList("Murs 10 pieds, window, Fiesta", db.Walls10 * qty, WallList);
-                            HandleList("Murs 15 pieds, window, Fiesta", db.Walls15 * qty, WallList);
-                            HandleList("Murs 20 pieds, window, Fiesta", db.Walls20 * qty, WallList);
+                            HandleList(string.Format("Murs 10 pieds, window, Fiesta, {0}", leg_length), db.Walls10 * qty, WallList);
+                            HandleList(string.Format("Murs 15 pieds, window, Fiesta, {0}", leg_length), db.Walls15 * qty, WallList);
+                            HandleList(string.Format("Murs 20 pieds, window, Fiesta, {0}", leg_length), db.Walls20 * qty, WallList);
                             break;
                         case "Half Plain Half Window Fiesta":
-                            HandleList("Murs 10 pieds, plain, Fiesta", (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
-                            HandleList("Murs 15 pieds, plain, Fiesta", (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
-                            HandleList("Murs 20 pieds, plain, Fiesta", (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
-                            HandleList("Murs 10 pieds, window, Fiesta", (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
-                            HandleList("Murs 15 pieds, window, Fiesta", (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
-                            HandleList("Murs 20 pieds, window, Fiesta", (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 10 pieds, plain, Fiesta, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 15 pieds, plain, Fiesta, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 20 pieds, plain, Fiesta, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 10 pieds, window, Fiesta, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 15 pieds, window, Fiesta, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 20 pieds, window, Fiesta, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
                             break;
                     }
 
-                }
-                else if (leg == Legs.longLegs)
-                {
-                    switch (ListOfLists.tentWalls[i])
-                    {
-                        case "Full Plain":
-                            HandleList("Murs 10 pieds, plain, pour pattes de 10 pieds", db.Walls10 * qty, WallList);
-                            HandleList("Murs 15 pieds, plain, pour pattes de 10 pieds", db.Walls15 * qty, WallList);
-                            HandleList("Murs 20 pieds, plain, pour pattes de 10 pieds", db.Walls20 * qty, WallList);
-                            break;
-                        case "Full Window":
-                            HandleList("Murs 10 pieds, window, pour pattes de 10 pieds", db.Walls10 * qty, WallList);
-                            HandleList("Murs 15 pieds, window, pour pattes de 10 pieds", db.Walls15 * qty, WallList);
-                            HandleList("Murs 20 pieds, window, pour pattes de 10 pieds", db.Walls20 * qty, WallList);
-                            break;
-                        case "Half Plain Half Window":
-                            HandleList("Murs 10 pieds, plain, pour pattes de 10 pieds", (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
-                            HandleList("Murs 15 pieds, plain, pour pattes de 10 pieds", (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
-                            HandleList("Murs 20 pieds, plain, pour pattes de 10 pieds", (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
-                            HandleList("Murs 10 pieds, window, pour pattes de 10 pieds", (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
-                            HandleList("Murs 15 pieds, window, pour pattes de 10 pieds", (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
-                            HandleList("Murs 20 pieds, window, pour pattes de 10 pieds", (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
-                            break;
-                        default:
-                            throw new Exception("Fiesta walls are not available for tents with 10 ft legs");
-                    }
                 }
                 else
                 {
                     throw new Exception("Leg enum assigned null value");
                 }
 
-                HandleList(string.Format("Cables {0}", ListOfLists.tentSizes[i]), qty, WallList);
+                //HandleList(string.Format("Cables {0}", ListOfLists.tentSizes[i]), qty, WallList);
 
-                string covers = string.Format("Cover {0} {1}", ListOfLists.tentSizes[i], ListOfLists.tentCoverTypes[i]);
-                HandleList(covers, qty, CoverList);
+                if (typeOfTent != UserInterface.Tent.Frame && typeOfTent != UserInterface.Tent.ClearSpan)
+                {
+                    string covers = string.Format("Cover {0} {1}", ListOfLists.tentSizes[i], ListOfLists.tentCoverTypes[i]);
+                    HandleList(covers, qty, CoverList);
+                }
+                
             }
 
             DataHandler.printAllLists(MetalItemList,WallList,CoverList,HoldDownList);
@@ -382,6 +441,7 @@ namespace PitchATent
         {
 
             string filename = null;
+           
             switch (typeOfTent)
             {
                 case UserInterface.Tent.Small:
@@ -391,10 +451,10 @@ namespace PitchATent
                     filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\LargeTents.csv";
                     break;
                 case UserInterface.Tent.Frame:
-                    Console.WriteLine("No database yet");
+                    filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\Frames.csv";
                     break;
                 case UserInterface.Tent.ClearSpan:
-                    Console.WriteLine("No database yet");
+                    filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\ClearSpans.csv";
                     break;
             }
 
