@@ -63,7 +63,7 @@ namespace PitchATent
             // Because all styles are derived from Normal, the next line changes the 
             // font of the whole document. Or, more exactly, it changes the font of
             // all styles and paragraphs that do not redefine the font.
-            style.Font.Name = "Verdana";
+            style.Font.Name = "Calibri";
 
             style = this.document.Styles[StyleNames.Header];
             style.ParagraphFormat.AddTabStop("16cm", TabAlignment.Right);
@@ -73,7 +73,7 @@ namespace PitchATent
 
             // Create a new style called Table based on style Normal
             style = this.document.Styles.AddStyle("Table", "Normal");
-            style.Font.Name = "Verdana";
+            style.Font.Name = "Calibri";
             style.Font.Name = "Times New Roman";
             style.Font.Size = 12;
 
@@ -99,9 +99,10 @@ namespace PitchATent
             //----------------------------------------------------------------------------
 
             // Put a logo in the header
-            Image image = section.Headers.Primary.AddImage("../../logo.png");
-            image.Height = "2.5cm";
-            image.LockAspectRatio = true;
+            Image image = section.Headers.Primary.AddImage("../../logo2.png");
+            image.Width = "18cm";
+            image.LockAspectRatio = false;
+            //image.Height = "2.5cm";
             image.RelativeVertical = RelativeVertical.Line;
             image.RelativeHorizontal = RelativeHorizontal.Margin;
             image.Top = ShapePosition.Top;
@@ -130,9 +131,10 @@ namespace PitchATent
             //----------------------------------------------------------------------------
 
             // Put sender in address frame
-            paragraph = this.addressFrame.AddParagraph("Tents For All Events");
-            paragraph.Format.Font.Name = "comic sans MS";
-            paragraph.Format.Font.Color = Colors.Orange;
+            paragraph = this.addressFrame.AddParagraph("     Tents For All Events");
+            paragraph.Format.Font.Name = "Calibri";
+            paragraph.Format.Font.Bold = true;
+            paragraph.Format.Font.Color = Colors.DarkOrange;
             paragraph.Format.Font.Size = 14;
             paragraph.Format.SpaceAfter = 3;
 
@@ -140,20 +142,21 @@ namespace PitchATent
 
             // Add the print date field
             paragraph = section.AddParagraph();
-            paragraph.Format.SpaceBefore = "3cm";
+            paragraph.Format.SpaceBefore = "2cm";
             paragraph.Style = "Reference";
-            paragraph.AddFormattedText("Material List", TextFormat.Bold);
+            paragraph.AddFormattedText("List Of Materials", TextFormat.Bold);
             paragraph.AddTab();
-            paragraph.AddText("Truck, ");
+            paragraph.AddText("Truck And Trailer, ");
             paragraph.AddDateField("dd.MM.yyyy");
+            paragraph.Format.Font.Size = 14;
 
             //--------------------------------------------------------------------------//
-            //------//-----------//----       Table         ------//----------//--------//
+            //------//-----------//----     Metal Table      -----//----------//--------//
             //--------------------------------------------------------------------------//
 
             // Create the item table
             this.table = section.AddTable();
-            table.Rows.Alignment = RowAlignment.Left;
+            table.Rows.Alignment = RowAlignment.Center;
             this.table.Style = "Table";
             this.table.Borders.Color = Colors.Black;
             this.table.Borders.Width = 1;
@@ -164,25 +167,37 @@ namespace PitchATent
             //----------------------------------------------------------------------------
 
             // Before you can add a row, you must define the columns
-            Column column = this.table.AddColumn("0.75cm");
+            Column column = this.table.AddColumn("0.5cm");
             column.Format.Alignment = ParagraphAlignment.Center;
 
-            column = this.table.AddColumn("4cm");
+            column = this.table.AddColumn("3cm");
             column.Format.Alignment = ParagraphAlignment.Right;
 
-            column = this.table.AddColumn("2cm");
-            column.Format.Alignment = ParagraphAlignment.Right;
-
-            column = this.table.AddColumn("1cm");
+            column = this.table.AddColumn("0.5cm");
             column.Format.Alignment = ParagraphAlignment.Right;
 
             column = this.table.AddColumn("0.75cm");
-            column.Format.Alignment = ParagraphAlignment.Center;
-
-            column = this.table.AddColumn("4cm");
             column.Format.Alignment = ParagraphAlignment.Right;
 
-            column = this.table.AddColumn("2cm");
+            column = this.table.AddColumn("0.5cm");
+            column.Format.Alignment = ParagraphAlignment.Center;
+
+            column = this.table.AddColumn("3cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+
+            column = this.table.AddColumn("0.5cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+
+            column = this.table.AddColumn("0.75cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+
+            column = this.table.AddColumn("0.5cm");
+            column.Format.Alignment = ParagraphAlignment.Center;
+
+            column = this.table.AddColumn("3cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+
+            column = this.table.AddColumn("0.5cm");
             column.Format.Alignment = ParagraphAlignment.Right;
 
             //----------------------------------------------------------------------------
@@ -192,7 +207,7 @@ namespace PitchATent
             row.HeadingFormat = true;
             row.Format.Alignment = ParagraphAlignment.Center;
             row.Format.Font.Bold = true;
-            row.Shading.Color = Colors.Cornsilk;
+            row.Shading.Color = TableGray;
 
 
             // Makes the new rows for the Metal 
@@ -200,7 +215,7 @@ namespace PitchATent
             row.Cells[0].Format.Font.Bold = true;
             row.Cells[0].Format.Alignment = ParagraphAlignment.Center;
             row.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-            row.Cells[0].MergeRight = 6;
+            row.Cells[0].MergeRight = 10;
 
             int i = 0;
 
@@ -224,7 +239,7 @@ namespace PitchATent
                 //row.Cells[1].MergeRight = 0;
                 //row.Cells[1].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("###");
+                row.Cells[b].AddParagraph("#");
                 row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[2].MergeDown = 1;
@@ -241,265 +256,559 @@ namespace PitchATent
                 //row.Cells[1].MergeRight = 0;
                 //row.Cells[1].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("###");
+                row.Cells[b].AddParagraph("#");
+                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                b++;
+                b++;
+                row.Cells[b].AddParagraph("□");
+                row.Cells[b].Format.Font.Bold = true;
+                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                //row.Cells[0].MergeDown = 1;
+                b++;
+                row.Cells[b].AddParagraph("Item Name");
+                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                //row.Cells[1].MergeRight = 0;
+                //row.Cells[1].MergeDown = 1;
+                b++;
+                row.Cells[b].AddParagraph("#");
                 row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 i++;
             }
 
-            //adds an invisible row to space out the two tables 
             row = table.AddRow();
             row.Borders.Visible = false;
 
-            // Makes the new rows for the covers  
-            row = table.AddRow();
-            row.HeadingFormat = true;
-            row.Format.Alignment = ParagraphAlignment.Center;
-            row.Format.Font.Bold = true;
-            row.Shading.Color = Colors.Cornsilk;
-            row.Cells[0].AddParagraph("Covers");
-            row.Cells[0].Format.Font.Bold = true;
-            row.Cells[0].Format.Alignment = ParagraphAlignment.Center;
-            row.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-            row.Cells[0].MergeRight = 6;
+            //--------------------------------------------------------------------------//
+            //------//-----------//----     Covers Table     -----//----------//--------//
+            //--------------------------------------------------------------------------//
+
+            // Create the item table
+            this.table = section.AddTable();
+            table.Rows.Alignment = RowAlignment.Center;
+            this.table.Style = "Table";
+            this.table.Borders.Color = Colors.Black;
+            this.table.Borders.Width = 1;
+            this.table.Borders.Left.Width = 1;
+            this.table.Borders.Right.Width = 1;
+            this.table.Rows.LeftIndent = 0;
+
+            //----------------------------------------------------------------------------
+
+            // Before you can add a row, you must define the columns
+            Column column2 = this.table.AddColumn("0.5cm");
+            column2.Format.Alignment = ParagraphAlignment.Center;
+
+            column2 = this.table.AddColumn("3cm");
+            column2.Format.Alignment = ParagraphAlignment.Right;
+
+            column2 = this.table.AddColumn("0.5cm");
+            column2.Format.Alignment = ParagraphAlignment.Right;
+
+            column2 = this.table.AddColumn("0.75cm");
+            column2.Format.Alignment = ParagraphAlignment.Right;
+
+            column2 = this.table.AddColumn("0.5cm");
+            column2.Format.Alignment = ParagraphAlignment.Center;
+
+            column2 = this.table.AddColumn("3cm");
+            column2.Format.Alignment = ParagraphAlignment.Right;
+
+            column2 = this.table.AddColumn("0.5cm");
+            column2.Format.Alignment = ParagraphAlignment.Right;
+
+            column2 = this.table.AddColumn("0.75cm");
+            column2.Format.Alignment = ParagraphAlignment.Right;
+
+            column2 = this.table.AddColumn("0.5cm");
+            column2.Format.Alignment = ParagraphAlignment.Center;
+
+            column2 = this.table.AddColumn("3cm");
+            column2.Format.Alignment = ParagraphAlignment.Right;
+
+            column2 = this.table.AddColumn("0.5cm");
+            column2.Format.Alignment = ParagraphAlignment.Right;
+
+            //----------------------------------------------------------------------------
+
+            // Create the header of the table
+            Row row2 = table.AddRow();
+            row2.HeadingFormat = true;
+            row2.Format.Alignment = ParagraphAlignment.Center;
+            row2.Format.Font.Bold = true;
+            row2.Shading.Color = TableGray;
+
+            row2.Cells[0].AddParagraph("Covers");
+            row2.Cells[0].Format.Font.Bold = true;
+            row2.Cells[0].Format.Alignment = ParagraphAlignment.Center;
+            row2.Cells[0].VerticalAlignment = VerticalAlignment.Center;
+            row2.Cells[0].MergeRight = 10;
 
             i = 0;
-
             while (i < 3) //max number of columns for one page before cutting into other tings is 33 (or 32 for i)
             {
                 int b = 0;
 
-                row = table.AddRow();
-                row.HeadingFormat = true;
-                row.Format.Alignment = ParagraphAlignment.Center;
-                row.Format.Font.Bold = true;
-                row.Shading.Color = Colors.Beige;
-                row.Cells[b].AddParagraph("□");
-                row.Cells[b].Format.Font.Bold = true;
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row2 = table.AddRow();
+                row2.HeadingFormat = true;
+                row2.Format.Alignment = ParagraphAlignment.Center;
+                row2.Format.Font.Bold = true;
+                row2.Shading.Color = Colors.Beige;
+                row2.Cells[b].AddParagraph("□");
+                row2.Cells[b].Format.Font.Bold = true;
+                row2.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row2.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[0].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("Item Name");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row2.Cells[b].AddParagraph("Item Name");
+                row2.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 //row.Cells[1].MergeRight = 0;
                 //row.Cells[1].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("###");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row2.Cells[b].AddParagraph("#");
+                row2.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row2.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[2].MergeDown = 1;
                 b++;
                 b++;
-                row.Cells[b].AddParagraph("□");
-                row.Cells[b].Format.Font.Bold = true;
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row2.Cells[b].AddParagraph("□");
+                row2.Cells[b].Format.Font.Bold = true;
+                row2.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row2.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[0].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("Item Name");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row2.Cells[b].AddParagraph("Item Name");
+                row2.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 //row.Cells[1].MergeRight = 0;
                 //row.Cells[1].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("###");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row2.Cells[b].AddParagraph("#");
+                row2.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row2.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                b++;
+                b++;
+                row2.Cells[b].AddParagraph("□");
+                row2.Cells[b].Format.Font.Bold = true;
+                row2.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row2.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                //row.Cells[0].MergeDown = 1;
+                b++;
+                row2.Cells[b].AddParagraph("Item Name");
+                row2.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                //row.Cells[1].MergeRight = 0;
+                //row.Cells[1].MergeDown = 1;
+                b++;
+                row2.Cells[b].AddParagraph("#");
+                row2.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row2.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 i++;
             }
 
             //adds an invisible row to space out the two tables 
-            row = table.AddRow();
-            row.Borders.Visible = false;
+            row2 = table.AddRow();
+            row2.Borders.Visible = false;
 
-            // Makes the new rows for the Tie Downs 
-            row = table.AddRow();
-            row.HeadingFormat = true;
-            row.Format.Alignment = ParagraphAlignment.Center;
-            row.Format.Font.Bold = true;
-            row.Shading.Color = Colors.Cornsilk;
-            row.Cells[0].AddParagraph("Tie Downs");
-            row.Cells[0].Format.Font.Bold = true;
-            row.Cells[0].Format.Alignment = ParagraphAlignment.Center;
-            row.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-            row.Cells[0].MergeRight = 6;
+            // Create the item table
+            this.table = section.AddTable();
+            table.Rows.Alignment = RowAlignment.Center;
+            this.table.Style = "Table";
+            this.table.Borders.Color = Colors.Black;
+            this.table.Borders.Width = 1;
+            this.table.Borders.Left.Width = 1;
+            this.table.Borders.Right.Width = 1;
+            this.table.Rows.LeftIndent = 0;
+
+            //----------------------------------------------------------------------------
+
+            // Before you can add a row, you must define the columns
+            Column column3 = this.table.AddColumn("0.5cm");
+            column3.Format.Alignment = ParagraphAlignment.Center;
+
+            column3 = this.table.AddColumn("3cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.5cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.75cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.5cm");
+            column3.Format.Alignment = ParagraphAlignment.Center;
+
+            column3 = this.table.AddColumn("3cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.5cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.75cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.5cm");
+            column3.Format.Alignment = ParagraphAlignment.Center;
+
+            column3 = this.table.AddColumn("3cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.5cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            //----------------------------------------------------------------------------
+
+            // Create the header of the table
+            Row row3 = table.AddRow();
+            row3.HeadingFormat = true;
+            row3.Format.Alignment = ParagraphAlignment.Center;
+            row3.Format.Font.Bold = true;
+            row3.Shading.Color = TableGray;
+
+            row3.Cells[0].AddParagraph("Tie Downs");
+            row3.Cells[0].Format.Font.Bold = true;
+            row3.Cells[0].Format.Alignment = ParagraphAlignment.Center;
+            row3.Cells[0].VerticalAlignment = VerticalAlignment.Center;
+            row3.Cells[0].MergeRight = 10;
 
             i = 0;
-
             while (i < 3) //max number of columns for one page before cutting into other tings is 33 (or 32 for i)
             {
                 int b = 0;
 
-                row = table.AddRow();
-                row.HeadingFormat = true;
-                row.Format.Alignment = ParagraphAlignment.Center;
-                row.Format.Font.Bold = true;
-                row.Shading.Color = Colors.Beige;
-                row.Cells[b].AddParagraph("□");
-                row.Cells[b].Format.Font.Bold = true;
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row3 = table.AddRow();
+                row3.HeadingFormat = true;
+                row3.Format.Alignment = ParagraphAlignment.Center;
+                row3.Format.Font.Bold = true;
+                row3.Shading.Color = Colors.Beige;
+                row3.Cells[b].AddParagraph("□");
+                row3.Cells[b].Format.Font.Bold = true;
+                row3.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row3.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[0].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("Item Name");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row3.Cells[b].AddParagraph("Item Name");
+                row3.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 //row.Cells[1].MergeRight = 0;
                 //row.Cells[1].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("###");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row3.Cells[b].AddParagraph("#");
+                row3.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row3.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[2].MergeDown = 1;
                 b++;
                 b++;
-                row.Cells[b].AddParagraph("□");
-                row.Cells[b].Format.Font.Bold = true;
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row3.Cells[b].AddParagraph("□");
+                row3.Cells[b].Format.Font.Bold = true;
+                row3.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row3.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[0].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("Item Name");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row3.Cells[b].AddParagraph("Item Name");
+                row3.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 //row.Cells[1].MergeRight = 0;
                 //row.Cells[1].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("###");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row3.Cells[b].AddParagraph("#");
+                row3.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row3.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                b++;
+                b++;
+                row3.Cells[b].AddParagraph("□");
+                row3.Cells[b].Format.Font.Bold = true;
+                row3.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row3.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                //row.Cells[0].MergeDown = 1;
+                b++;
+                row3.Cells[b].AddParagraph("Item Name");
+                row3.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                //row.Cells[1].MergeRight = 0;
+                //row.Cells[1].MergeDown = 1;
+                b++;
+                row3.Cells[b].AddParagraph("#");
+                row3.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row3.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 i++;
             }
 
             //adds an invisible row to space out the two tables 
-            row = table.AddRow();
-            row.Borders.Visible = false;
+            row3 = table.AddRow();
+            row3.Borders.Visible = false;
 
-            // Makes the new rows for the Walls 
-            row = table.AddRow();
-            row.HeadingFormat = true;
-            row.Format.Alignment = ParagraphAlignment.Center;
-            row.Format.Font.Bold = true;
-            row.Shading.Color = Colors.Cornsilk;
-            row.Cells[0].AddParagraph("Walls");
-            row.Cells[0].Format.Font.Bold = true;
-            row.Cells[0].Format.Alignment = ParagraphAlignment.Center;
-            row.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-            row.Cells[0].MergeRight = 6;
+            //--------------------------------------------------------------------------//
+            //------//-----------//----  Tie Downs Table     -----//----------//--------//
+            //--------------------------------------------------------------------------//
+            
+            // Create the item table
+            this.table = section.AddTable();
+            table.Rows.Alignment = RowAlignment.Center;
+            this.table.Style = "Table";
+            this.table.Borders.Color = Colors.Black;
+            this.table.Borders.Width = 1;
+            this.table.Borders.Left.Width = 1;
+            this.table.Borders.Right.Width = 1;
+            this.table.Rows.LeftIndent = 0;
+
+            //----------------------------------------------------------------------------
+
+            // Before you can add a row, you must define the columns
+            Column column4 = this.table.AddColumn("0.5cm");
+            column4.Format.Alignment = ParagraphAlignment.Center;
+
+            column4 = this.table.AddColumn("3cm");
+            column4.Format.Alignment = ParagraphAlignment.Right;
+
+            column4 = this.table.AddColumn("0.5cm");
+            column4.Format.Alignment = ParagraphAlignment.Right;
+
+            column4 = this.table.AddColumn("0.75cm");
+            column4.Format.Alignment = ParagraphAlignment.Right;
+
+            column4 = this.table.AddColumn("0.5cm");
+            column4.Format.Alignment = ParagraphAlignment.Center;
+
+            column4 = this.table.AddColumn("3cm");
+            column4.Format.Alignment = ParagraphAlignment.Right;
+
+            column4 = this.table.AddColumn("0.5cm");
+            column4.Format.Alignment = ParagraphAlignment.Right;
+
+            column4 = this.table.AddColumn("0.75cm");
+            column4.Format.Alignment = ParagraphAlignment.Right;
+
+            column4 = this.table.AddColumn("0.5cm");
+            column4.Format.Alignment = ParagraphAlignment.Center;
+
+            column4 = this.table.AddColumn("3cm");
+            column4.Format.Alignment = ParagraphAlignment.Right;
+
+            column4 = this.table.AddColumn("0.5cm");
+            column4.Format.Alignment = ParagraphAlignment.Right;
+
+            //----------------------------------------------------------------------------
+
+            // Create the header of the table
+            Row row4 = table.AddRow();
+            row4.HeadingFormat = true;
+            row4.Format.Alignment = ParagraphAlignment.Center;
+            row4.Format.Font.Bold = true;
+            row4.Shading.Color = TableGray;
+
+            row4.Cells[0].AddParagraph("Walls");
+            row4.Cells[0].Format.Font.Bold = true;
+            row4.Cells[0].Format.Alignment = ParagraphAlignment.Center;
+            row4.Cells[0].VerticalAlignment = VerticalAlignment.Center;
+            row4.Cells[0].MergeRight = 10;
 
             i = 0;
-
             while (i < 3) //max number of columns for one page before cutting into other tings is 33 (or 32 for i)
             {
                 int b = 0;
 
-                row = table.AddRow();
-                row.HeadingFormat = true;
-                row.Format.Alignment = ParagraphAlignment.Center;
-                row.Format.Font.Bold = true;
-                row.Shading.Color = Colors.Beige;
-                row.Cells[b].AddParagraph("□");
-                row.Cells[b].Format.Font.Bold = true;
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row4 = table.AddRow();
+                row4.HeadingFormat = true;
+                row4.Format.Alignment = ParagraphAlignment.Center;
+                row4.Format.Font.Bold = true;
+                row4.Shading.Color = Colors.Beige;
+                row4.Cells[b].AddParagraph("□");
+                row4.Cells[b].Format.Font.Bold = true;
+                row4.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row4.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[0].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("Item Name");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row4.Cells[b].AddParagraph("Item Name");
+                row4.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 //row.Cells[1].MergeRight = 0;
                 //row.Cells[1].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("###");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row4.Cells[b].AddParagraph("#");
+                row4.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row4.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[2].MergeDown = 1;
                 b++;
                 b++;
-                row.Cells[b].AddParagraph("□");
-                row.Cells[b].Format.Font.Bold = true;
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row4.Cells[b].AddParagraph("□");
+                row4.Cells[b].Format.Font.Bold = true;
+                row4.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row4.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[0].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("Item Name");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row4.Cells[b].AddParagraph("Item Name");
+                row4.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 //row.Cells[1].MergeRight = 0;
                 //row.Cells[1].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("###");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row4.Cells[b].AddParagraph("#");
+                row4.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row4.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                b++;
+                b++;
+                row4.Cells[b].AddParagraph("□");
+                row4.Cells[b].Format.Font.Bold = true;
+                row4.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row4.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                //row.Cells[0].MergeDown = 1;
+                b++;
+                row4.Cells[b].AddParagraph("Item Name");
+                row4.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                //row.Cells[1].MergeRight = 0;
+                //row.Cells[1].MergeDown = 1;
+                b++;
+                row4.Cells[b].AddParagraph("#");
+                row4.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row4.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 i++;
             }
 
             //adds an invisible row to space out the two tables 
-            row = table.AddRow();
-            row.Borders.Visible = false;
+            row4 = table.AddRow();
+            row4.Borders.Visible = false;
 
-            // Makes the new rows for the accessories 
-            row = table.AddRow();
-            row.HeadingFormat = true;
-            row.Format.Alignment = ParagraphAlignment.Center;
-            row.Format.Font.Bold = true;
-            row.Shading.Color = Colors.Cornsilk;
-            row.Cells[0].AddParagraph("Accessories");
-            row.Cells[0].Format.Font.Bold = true;
-            row.Cells[0].Format.Alignment = ParagraphAlignment.Center;
-            row.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-            row.Cells[0].MergeRight = 6;
+            //--------------------------------------------------------------------------//
+            //------//-----------//----   Accessories Table  -----//----------//--------//
+            //--------------------------------------------------------------------------//
+            // Create the item table
+            this.table = section.AddTable();
+            table.Rows.Alignment = RowAlignment.Center;
+            this.table.Style = "Table";
+            this.table.Borders.Color = Colors.Black;
+            this.table.Borders.Width = 1;
+            this.table.Borders.Left.Width = 1;
+            this.table.Borders.Right.Width = 1;
+            this.table.Rows.LeftIndent = 0;
+
+            //----------------------------------------------------------------------------
+
+            // Before you can add a row, you must define the columns
+            Column column5 = this.table.AddColumn("0.5cm");
+            column5.Format.Alignment = ParagraphAlignment.Center;
+
+            column5 = this.table.AddColumn("3cm");
+            column5.Format.Alignment = ParagraphAlignment.Right;
+
+            column5 = this.table.AddColumn("0.5cm");
+            column5.Format.Alignment = ParagraphAlignment.Right;
+
+            column5 = this.table.AddColumn("0.75cm");
+            column5.Format.Alignment = ParagraphAlignment.Right;
+
+            column5 = this.table.AddColumn("0.5cm");
+            column5.Format.Alignment = ParagraphAlignment.Center;
+
+            column5 = this.table.AddColumn("3cm");
+            column5.Format.Alignment = ParagraphAlignment.Right;
+
+            column5 = this.table.AddColumn("0.5cm");
+            column5.Format.Alignment = ParagraphAlignment.Right;
+
+            column5 = this.table.AddColumn("0.75cm");
+            column5.Format.Alignment = ParagraphAlignment.Right;
+
+            column5 = this.table.AddColumn("0.5cm");
+            column5.Format.Alignment = ParagraphAlignment.Center;
+
+            column5 = this.table.AddColumn("3cm");
+            column5.Format.Alignment = ParagraphAlignment.Right;
+
+            column5 = this.table.AddColumn("0.5cm");
+            column5.Format.Alignment = ParagraphAlignment.Right;
+
+            //----------------------------------------------------------------------------
+
+            // Create the header of the table
+            Row row5 = table.AddRow();
+            row5.HeadingFormat = true;
+            row5.Format.Alignment = ParagraphAlignment.Center;
+            row5.Format.Font.Bold = true;
+            row5.Shading.Color = TableGray;
+
+            row5.Cells[0].AddParagraph("Accessories");
+            row5.Cells[0].Format.Font.Bold = true;
+            row5.Cells[0].Format.Alignment = ParagraphAlignment.Center;
+            row5.Cells[0].VerticalAlignment = VerticalAlignment.Center;
+            row5.Cells[0].MergeRight = 10;
 
             i = 0;
-
             while (i < 3) //max number of columns for one page before cutting into other tings is 33 (or 32 for i)
             {
                 int b = 0;
 
-                row = table.AddRow();
-                row.HeadingFormat = true;
-                row.Format.Alignment = ParagraphAlignment.Center;
-                row.Format.Font.Bold = true;
-                row.Shading.Color = Colors.Beige;
-                row.Cells[b].AddParagraph("□");
-                row.Cells[b].Format.Font.Bold = true;
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row5 = table.AddRow();
+                row5.HeadingFormat = true;
+                row5.Format.Alignment = ParagraphAlignment.Center;
+                row5.Format.Font.Bold = true;
+                row5.Shading.Color = Colors.Beige;
+                row5.Cells[b].AddParagraph("□");
+                row5.Cells[b].Format.Font.Bold = true;
+                row5.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row5.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[0].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("Item Name");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row5.Cells[b].AddParagraph("Item Name");
+                row5.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 //row.Cells[1].MergeRight = 0;
                 //row.Cells[1].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("###");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row5.Cells[b].AddParagraph("#");
+                row5.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row5.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[2].MergeDown = 1;
                 b++;
                 b++;
-                row.Cells[b].AddParagraph("□");
-                row.Cells[b].Format.Font.Bold = true;
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row5.Cells[b].AddParagraph("□");
+                row5.Cells[b].Format.Font.Bold = true;
+                row5.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row5.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[0].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("Item Name");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row5.Cells[b].AddParagraph("Item Name");
+                row5.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 //row.Cells[1].MergeRight = 0;
                 //row.Cells[1].MergeDown = 1;
                 b++;
-                row.Cells[b].AddParagraph("###");
-                row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
-                row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                row5.Cells[b].AddParagraph("#");
+                row5.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row5.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                b++;
+                b++;
+                row5.Cells[b].AddParagraph("□");
+                row5.Cells[b].Format.Font.Bold = true;
+                row5.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row5.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                //row.Cells[0].MergeDown = 1;
+                b++;
+                row5.Cells[b].AddParagraph("Item Name");
+                row5.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                //row.Cells[1].MergeRight = 0;
+                //row.Cells[1].MergeDown = 1;
+                b++;
+                row5.Cells[b].AddParagraph("#");
+                row5.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                row5.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 i++;
             }
 
             //adds an invisible row to space out the two tables 
-            row = table.AddRow();
-            row.Borders.Visible = false;
+            row5 = table.AddRow();
+            row5.Borders.Visible = false;
 
             // not sure what this does yet but pretty sure it makes an edge that surrounds the table kind of like thick borders
             this.table.SetEdge(0, 0, 3, 1, Edge.Box, BorderStyle.Single, 1, Color.Empty);
 
             //--------------------------------------------------------------------------//
-            //------//-----------//----      Table 1        ------//----------//--------//
+            //------//-----------//---- Stuff After Tables  ------//----------//--------//
+            //--------------------------------------------------------------------------//
+
+            //section.AddPageBreak();
+
+            //document.AddSection();
+
+            MigraDoc.DocumentObjectModel.Paragraph paragraph1 = section.AddParagraph();
+            paragraph1.Format.LineSpacingRule = MigraDoc.DocumentObjectModel.LineSpacingRule.Exactly;
+            paragraph1.Format.LineSpacing = MigraDoc.DocumentObjectModel.Unit.FromMillimeter(40);
+
+            //--------------------------------------------------------------------------//
+            //------//-----------//---  Unforgetables Table  -----//----------//--------//
             //--------------------------------------------------------------------------//
 
             // Create the item table
@@ -516,112 +825,114 @@ namespace PitchATent
             //----------------------------------------------------------------------------
 
             // Before you can add a row, you must define the columns
-            Column column1 = this.table1.AddColumn("0.75cm");
+            Column column6 = this.table1.AddColumn("0.75cm");
             column.Format.Alignment = ParagraphAlignment.Center;
 
-            column1 = this.table1.AddColumn("4cm");
-            column1.Format.Alignment = ParagraphAlignment.Right;
+            column6 = this.table1.AddColumn("4cm");
+            column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column1 = this.table1.AddColumn("0.75cm");
-            column1.Format.Alignment = ParagraphAlignment.Right;
+            column6 = this.table1.AddColumn("0.75cm");
+            column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column1 = this.table1.AddColumn("4cm");
-            column1.Format.Alignment = ParagraphAlignment.Right;
+            column6 = this.table1.AddColumn("4cm");
+            column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column1 = this.table1.AddColumn("0.75cm");
-            column1.Format.Alignment = ParagraphAlignment.Right;
+            column6 = this.table1.AddColumn("0.75cm");
+            column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column1 = this.table1.AddColumn("4cm");
-            column1.Format.Alignment = ParagraphAlignment.Right;
+            column6 = this.table1.AddColumn("4cm");
+            column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column1 = this.table1.AddColumn("0.75cm");
-            column1.Format.Alignment = ParagraphAlignment.Right;
+            column6 = this.table1.AddColumn("0.75cm");
+            column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column1 = this.table1.AddColumn("4cm");
-            column1.Format.Alignment = ParagraphAlignment.Right;
+            column6 = this.table1.AddColumn("4cm");
+            column6.Format.Alignment = ParagraphAlignment.Right;
 
             //----------------------------------------------------------------------------
 
             // Create the header of the table
-            Row row1 = table1.AddRow();
-            row1.HeadingFormat = true;
-            row1.Format.Alignment = ParagraphAlignment.Center;
-            row1.Format.Font.Bold = true;
-            row1.Shading.Color = Colors.Cornsilk;
 
-            row1.Cells[0].AddParagraph("□");
-            row1.Cells[0].Format.Font.Bold = true;
-            row1.Cells[0].Format.Alignment = ParagraphAlignment.Center;
+            Row row6 = table1.AddRow();
+            row6.HeadingFormat = true;
+            row6.Format.Alignment = ParagraphAlignment.Center;
+            row6.Format.Font.Bold = true;
+            row6.Shading.Color = Colors.Cornsilk;
 
-            row1.Cells[1].AddParagraph("Tarp");
-            row1.Cells[1].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[0].AddParagraph("□");
+            row6.Cells[0].Format.Font.Bold = true;
+            row6.Cells[0].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[2].AddParagraph("□");
-            row1.Cells[2].Format.Font.Bold = true;
-            row1.Cells[2].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[1].AddParagraph("Tarp");
+            row6.Cells[1].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[3].AddParagraph("Arrache Pin");
-            row1.Cells[3].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[2].AddParagraph("□");
+            row6.Cells[2].Format.Font.Bold = true;
+            row6.Cells[2].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[4].AddParagraph("□");
-            row1.Cells[4].Format.Font.Bold = true;
-            row1.Cells[4].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[3].AddParagraph("Arrache Pin");
+            row6.Cells[3].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[5].AddParagraph("Masse");
-            row1.Cells[5].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[4].AddParagraph("□");
+            row6.Cells[4].Format.Font.Bold = true;
+            row6.Cells[4].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[6].AddParagraph("□");
-            row1.Cells[6].Format.Font.Bold = true;
-            row1.Cells[6].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[5].AddParagraph("Masse");
+            row6.Cells[5].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[7].AddParagraph("Patching Tape");
-            row1.Cells[7].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[6].AddParagraph("□");
+            row6.Cells[6].Format.Font.Bold = true;
+            row6.Cells[6].Format.Alignment = ParagraphAlignment.Center;
 
-            row1 = table1.AddRow();
-            row1.HeadingFormat = true;
-            row1.Format.Alignment = ParagraphAlignment.Center;
-            row1.Format.Font.Bold = true;
-            row1.Shading.Color = Colors.Cornsilk;
+            row6.Cells[7].AddParagraph("Patching Tape");
+            row6.Cells[7].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[0].AddParagraph("□");
-            row1.Cells[0].Format.Font.Bold = true;
-            row1.Cells[0].Format.Alignment = ParagraphAlignment.Center;
+            row6 = table1.AddRow();
+            row6.HeadingFormat = true;
+            row6.Format.Alignment = ParagraphAlignment.Center;
+            row6.Format.Font.Bold = true;
+            row6.Shading.Color = Colors.Cornsilk;
 
-            row1.Cells[1].AddParagraph("Tarp");
-            row1.Cells[1].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[0].AddParagraph("□");
+            row6.Cells[0].Format.Font.Bold = true;
+            row6.Cells[0].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[2].AddParagraph("□");
-            row1.Cells[2].Format.Font.Bold = true;
-            row1.Cells[2].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[1].AddParagraph("Tarp");
+            row6.Cells[1].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[3].AddParagraph("Arrache Pin");
-            row1.Cells[3].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[2].AddParagraph("□");
+            row6.Cells[2].Format.Font.Bold = true;
+            row6.Cells[2].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[4].AddParagraph("□");
-            row1.Cells[4].Format.Font.Bold = true;
-            row1.Cells[4].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[3].AddParagraph("Arrache Pin");
+            row6.Cells[3].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[5].AddParagraph("Masse");
-            row1.Cells[5].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[4].AddParagraph("□");
+            row6.Cells[4].Format.Font.Bold = true;
+            row6.Cells[4].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[6].AddParagraph("□");
-            row1.Cells[6].Format.Font.Bold = true;
-            row1.Cells[6].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[5].AddParagraph("Masse");
+            row6.Cells[5].Format.Alignment = ParagraphAlignment.Center;
 
-            row1.Cells[7].AddParagraph("Patching Tape");
-            row1.Cells[7].Format.Alignment = ParagraphAlignment.Center;
+            row6.Cells[6].AddParagraph("□");
+            row6.Cells[6].Format.Font.Bold = true;
+            row6.Cells[6].Format.Alignment = ParagraphAlignment.Center;
+
+            row6.Cells[7].AddParagraph("Patching Tape");
+            row6.Cells[7].Format.Alignment = ParagraphAlignment.Center;
 
 
             this.table.SetEdge(0, 0, 3, 1, Edge.Box, BorderStyle.Single, 1, Color.Empty);
 
             // Add the notes paragraph
-            paragraph = this.document.LastSection.AddParagraph();
+            paragraph = section.AddParagraph();
+            //this.document.LastSection.AddParagraph();
             paragraph.Format.SpaceBefore = "0.5cm";
             paragraph.Format.Borders.Width = 0.75;
             paragraph.Format.Borders.Distance = 3;
             paragraph.Format.Borders.Color = TableBorder;
             paragraph.Format.Shading.Color = TableGray;
-            paragraph.AddText("notes \n \n");
+            paragraph.AddText("notes \n \n \n \n");
 
         }
 
