@@ -11,6 +11,22 @@ using System.IO;
 
 namespace PitchATent
 {
+    /// <summary>
+    /// Class to hold properties of an accessory: the accessory name and the quantity
+    /// </summary>
+    public class Accessory
+    {
+        // Constructor
+        public Accessory(string Item, int Qty)
+        {
+            this.Item = Item;
+            this.Qty = Qty;
+        }
+
+        // Properties
+        public string Item { get; set; }
+        public int Qty { get; set; }
+    }
 
     public partial class AccessoryDlg : Form
     {
@@ -21,22 +37,7 @@ namespace PitchATent
 
         #region Properties
         
-        /// <summary>
-        /// Class to hold properties of an accessory: the accessory name and the quantity
-        /// </summary>
-        public class Accessory
-        {
-            // Constructor
-            public Accessory(string Item, int Qty)
-            {
-                this.Item = Item;
-                this.Qty = Qty;
-            }
-
-            // Properties
-            public string Item { get; set; }
-            public int Qty { get; set; }
-        }
+        
 
         // List of accessories
         public List<Accessory> AccList = new List<Accessory>();

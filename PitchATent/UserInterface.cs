@@ -149,6 +149,8 @@ namespace PitchATent
             TentDLG.UpdateFields();
 
             // Show the Dialog
+            TentDLG.StartPosition = FormStartPosition.Manual;
+            TentDLG.Location = new Point(100, 100);
             TentDLG.ShowDialog();
 
             // Update Main Dialog with new values
@@ -204,7 +206,7 @@ namespace PitchATent
 
         #endregion
 
-        private void UpdateList()
+        private ItemCounts UpdateList()
         {
 
             // Declare lists
@@ -215,6 +217,8 @@ namespace PitchATent
             List<string> tentHoldDowns = new List<string>();
             List<string> tentWalls = new List<string>();
             List<string> tentLegs = new List<string>();
+
+            ItemCounts counts = new ItemCounts();
 
             // Loop through tentDGV and store data in lists
             if (tentDGV.Rows.Count != 0)
@@ -233,11 +237,13 @@ namespace PitchATent
                 // Create object with the lists and send for processing
                 var ListOfLists = new ListNames(tentTypes, tentSizes, tentQties, tentCoverTypes, tentHoldDowns, tentWalls, tentLegs);
                 DataHandler handler = new DataHandler();
-                var counts = handler.CountTents(ref ListOfLists);
+                counts = handler.CountTents(ref ListOfLists);
                 PopulatePreview(counts);
                 
             }
-            
+
+            return counts;
+
         }
 
         private void PopulatePreview(ItemCounts counts)
@@ -253,16 +259,13 @@ namespace PitchATent
             var covers = counts.Covers;
             var tiedowns = counts.TieDowns;
 
+            metals = metals.OrderBy(o => o.Type).ToList();
+            walls = walls.OrderBy(o => o.Type).ToList();
+            covers = covers.OrderBy(o => o.Type).ToList();
+            tiedowns = tiedowns.OrderBy(o => o.Type).ToList();
+
             int i = 0;
 
-            // Loop through all items in covers list
-            foreach (var cover in covers)
-            {
-                this.previewDGV.Rows.Add();
-                this.previewDGV.Rows[i].Cells[0].Value = cover.Type;
-                this.previewDGV.Rows[i].Cells[1].Value = cover.Qty.ToString();
-                i++;
-            }
 
             // Loop through all items in metal list
             foreach (var metal in metals)
@@ -273,6 +276,15 @@ namespace PitchATent
                 i++;
             }
 
+            // Loop through all items in covers list
+            foreach (var cover in covers)
+            {
+                this.previewDGV.Rows.Add();
+                this.previewDGV.Rows[i].Cells[0].Value = cover.Type;
+                this.previewDGV.Rows[i].Cells[1].Value = cover.Qty.ToString();
+                i++;
+            }
+            
             // Loop through all items in wall list
             foreach (var wall in walls)
             {
@@ -313,8 +325,58 @@ namespace PitchATent
 
         private void btn_GeneratePDF_Click(object sender, EventArgs e)
         {
-            // Generate the PDF
+
+            // Get information about the truck, trailer, driver
+            string truck = tb_truck.Text;
+            string trailer = tb_trailer.Text;
+            string driver = tb_driver.Text;
+
+            // Test for null or empty strings
+            if (String.IsNullOrEmpty(truck))
+            {
+                truck = "TRUCK";
+            }
+            if (String.IsNullOrEmpty(trailer))
+            {
+                trailer = "TRAILER";
+            }
+            if (String.IsNullOrEmpty(driver))
+            {
+                driver = "MIKAYLA";
+            }
+
+            // Get today's date
+            string date = DateTime.Now.ToString("yyyy/MM/dd");
+
+            // Get the final count of items
+            ItemCounts counts = UpdateList();
+
+            // Get items from accessory list
+            List<Accessory> AccList = new List<Accessory>();
+            int qty = 0;
+            string item = "";
+
+            // Call default constructor
             Createpdf pdf = new Createpdf();
+
+            if (accDGV.Rows.Count != 0)
+            {
+                foreach (DataGridViewRow row in accDGV.Rows)
+                {
+                    item = row.Cells[0].Value.ToString();
+                    qty = Convert.ToInt32(row.Cells[1].Value);
+                    Accessory acc = new Accessory(item, qty);
+                    AccList.Add(acc);
+                }
+                // Generate the PDF
+                pdf = new Createpdf(truck, trailer, driver, counts, AccList);
+            }
+            else
+            {
+                // Generate the PDF
+                pdf = new Createpdf(truck, trailer, driver, counts);
+            }
+ 
             // Create a MigraDoc document
             Document document = pdf.CreateDocument();
             document.UseCmykColor = true;
@@ -329,7 +391,9 @@ namespace PitchATent
             pdfRenderer.RenderDocument();
 
             // Save the PDF document...
-            string filename = "Invoice.pdf";
+            // TODO: Check if file already exists
+            string filename = string.Format("MaterialList_truck{0}_{1}.pdf",truck,date);
+            Console.WriteLine(filename);
 
             pdfRenderer.Save(filename);
             // ...and start a viewer.

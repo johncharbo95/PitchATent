@@ -191,9 +191,15 @@ namespace PitchATent
             string legTentType = null;
             DatabaseInterface db = new SmallTentDB();
 
+            IEnumerable<SmallTentDB> SmallDB = ReadTentDatabase<SmallTentDB>(UserInterface.Tent.Small);
+            IEnumerable<LargeTentDB> LargeDB = ReadTentDatabase<LargeTentDB>(UserInterface.Tent.Large);
+            IEnumerable<FrameDB> FrameDB = ReadTentDatabase<FrameDB>(UserInterface.Tent.Frame);
+            IEnumerable<ClearSpanDB> ClearSpanDB = ReadTentDatabase<ClearSpanDB>(UserInterface.Tent.ClearSpan);
+
             // Loop through all tents
             for (int i = 0; i < ListOfLists.tentType.Count; ++i)
             {
+
                 // Get the quantity of that particular tent
                 int qty = ListOfLists.tentQties[i];
 
@@ -201,17 +207,12 @@ namespace PitchATent
                 string size = ListOfLists.tentSizes[i];
                 UserInterface.Tent typeOfTent = ListOfLists.tentType[i];
 
-                IEnumerable<SmallTentDB> SmallDB = ReadTentDatabase<SmallTentDB>(UserInterface.Tent.Small);
-                IEnumerable<LargeTentDB> LargeDB = ReadTentDatabase<LargeTentDB>(UserInterface.Tent.Large);
-                IEnumerable<FrameDB> FrameDB = ReadTentDatabase<FrameDB>(UserInterface.Tent.Frame);
-                IEnumerable<ClearSpanDB> ClearSpanDB = ReadTentDatabase<ClearSpanDB>(UserInterface.Tent.ClearSpan);
-
                 // Depending on the type and size of tent, get the appropriate row in the database.
                 switch (ListOfLists.tentType[i])
                 {
                     case UserInterface.Tent.Small:
                         {
-                            legTentType = "pour petites tentes";
+                            legTentType = "ST";
 
                             // Get the appropriate row from the small tent database, depending on the size of the tent.
                             SmallTentDB SmallRow = GetDataBaseRow<SmallTentDB>(SmallDB, size);
@@ -222,19 +223,26 @@ namespace PitchATent
                                 // TODO: string builder for legs, cable, poteau de milieu
                                 HandleList("Pipe", SmallRow.Pipe * qty, MetalItemList);
                                 HandleList("Pipe 5ft", SmallRow.Pipe5 * qty, MetalItemList);
-                                HandleList("T - 20x30/20x40", SmallRow.SmallTee * qty, MetalItemList);
-                                HandleList("T - 30x30", SmallRow.LargeTee * qty, MetalItemList);
+                                HandleList("T - 20", SmallRow.SmallTee * qty, MetalItemList);
+                                HandleList("T - 30", SmallRow.LargeTee * qty, MetalItemList);
                                 HandleList("Entures", SmallRow.Enture * qty, MetalItemList);
-                                HandleList("Coins", SmallRow.Corner * qty, MetalItemList);
+                                if (size == "Hexagon")
+                                {
+                                    HandleList("Coins Hex", SmallRow.Corner * qty, MetalItemList);
+                                }
+                                else
+                                {
+                                    HandleList("Coins", SmallRow.Corner * qty, MetalItemList);
+                                }
                                 HandleList("Brace", SmallRow.Brace * qty, MetalItemList);
-                                HandleList(string.Format("Poteau de milieu {0}", size), SmallRow.MiddlePost * qty, MetalItemList);
+                                HandleList(string.Format("PM {0}", size), SmallRow.MiddlePost * qty, MetalItemList);
                                 HandleList(string.Format("Cables {0}", size), SmallRow.Cable * qty, WallList);
                             }
                         }
                         break;
 
                     case UserInterface.Tent.Large:
-                        legTentType = "pour grosses tentes";
+                        legTentType = "BT";
 
                         // Get the appropriate row from the large tent database, depending on the size of the tent.
                         LargeTentDB LargeRow = GetDataBaseRow<LargeTentDB>(LargeDB, size);
@@ -242,7 +250,7 @@ namespace PitchATent
 
                         if (LargeRow != null)
                         {
-                            HandleList(string.Format("Poteau de milieu {0}", size), LargeRow.MiddlePost * qty, MetalItemList);
+                            HandleList(string.Format("PM {0}", size), LargeRow.MiddlePost * qty, MetalItemList);
                             HandleList("Plates", LargeRow.Plates * qty, MetalItemList);
                             HandleList("Mid 20 pieds", LargeRow.Mid20 * qty, CoverList);
                             HandleList("Mid 30 pieds", LargeRow.Mid30 * qty, CoverList);
@@ -257,8 +265,8 @@ namespace PitchATent
 
                         if (FrameRow != null)
                         {
-                            HandleList("Cover Frame 10'", FrameRow.Cover10 * qty, CoverList);
-                            HandleList("Cover Frame 15'", FrameRow.Cover15 * qty, CoverList);
+                            HandleList("Frame 10'", FrameRow.Cover10 * qty, CoverList);
+                            HandleList("Frame 15'", FrameRow.Cover15 * qty, CoverList);
                         }
 
                         break;
@@ -273,8 +281,8 @@ namespace PitchATent
 
                         if (ClearSpanRow != null)
                         {
-                            HandleList("Cover ClearSpan 10'", ClearSpanRow.Cover10 * qty, CoverList);
-                            HandleList("Cover ClearSpan 15'", ClearSpanRow.Cover15 * qty, CoverList);
+                            HandleList("ClearSpan 10'", ClearSpanRow.Cover10 * qty, CoverList);
+                            HandleList("ClearSpan 15'", ClearSpanRow.Cover15 * qty, CoverList);
                             
                             switch(ClearSpanWidth)
                             {
@@ -331,11 +339,11 @@ namespace PitchATent
                     HandleList(LegsForList, db.Legs * qty, MetalItemList);
 
                     // Assign enum depending on leg type
-                    if (tentLegs == "8 ft" || tentLegs == "8 ft Adjustable")
+                    if (tentLegs == "8 ft" || tentLegs == "8 ft Adj")
                     {
                         leg = Legs.shortLegs;
                     }
-                    else if (tentLegs == "10 ft" || tentLegs == "10 ft Adjustable")
+                    else if (tentLegs == "10 ft" || tentLegs == "10 ft Adj")
                     {
                         leg = Legs.longLegs;
                     }
@@ -349,7 +357,7 @@ namespace PitchATent
                     }
                     else
                     {
-                        HandleList("Pattes Hexagone", db.Legs * qty, MetalItemList);
+                        HandleList("Pattes Hex", db.Legs * qty, MetalItemList);
                     }
                 }
 
@@ -414,8 +422,16 @@ namespace PitchATent
 
                 if (typeOfTent != UserInterface.Tent.Frame && typeOfTent != UserInterface.Tent.ClearSpan)
                 {
-                    string covers = string.Format("Cover {0} {1}", ListOfLists.tentSizes[i], ListOfLists.tentCoverTypes[i]);
-                    HandleList(covers, qty, CoverList);
+                    if (ListOfLists.tentSizes[i] != "Hexagon")
+                    {
+                        string covers = string.Format("{0} {1}", ListOfLists.tentSizes[i], ListOfLists.tentCoverTypes[i]);
+                        HandleList(covers, qty, CoverList);
+                    }
+                    else
+                    {
+                        HandleList(string.Format("Hex {0}", ListOfLists.tentCoverTypes[i]),qty,CoverList);
+                    }
+                    
                 }
                 
             }
@@ -445,16 +461,16 @@ namespace PitchATent
             switch (typeOfTent)
             {
                 case UserInterface.Tent.Small:
-                    filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\SmallTents.csv";
+                    filename = @"../../SmallTents.csv";
                     break;
                 case UserInterface.Tent.Large:
-                    filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\LargeTents.csv";
+                    filename = @"../../LargeTents.csv";
                     break;
                 case UserInterface.Tent.Frame:
-                    filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\Frames.csv";
+                    filename = @"../../Frames.csv";
                     break;
                 case UserInterface.Tent.ClearSpan:
-                    filename = @"C:\Users\OFFICE19\source\repos\PitchATent\PitchATent\ClearSpans.csv";
+                    filename = @"../../ClearSpans.csv";
                     break;
             }
 
