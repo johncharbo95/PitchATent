@@ -45,20 +45,21 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cb_legs = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_qty)).BeginInit();
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.addTentDlg_FormClosing);
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 13);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(2, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.Size = new System.Drawing.Size(39, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Size:";
             // 
             // cb_size
             // 
+            this.cb_size.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.cb_size.FormattingEnabled = true;
             this.cb_size.Location = new System.Drawing.Point(84, 10);
             this.cb_size.Name = "cb_size";
@@ -68,50 +69,54 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 113);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(2, 111);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.Size = new System.Drawing.Size(84, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Hold Down: ";
             // 
             // cb_holddown
             // 
+            this.cb_holddown.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.cb_holddown.FormattingEnabled = true;
             this.cb_holddown.Location = new System.Drawing.Point(84, 110);
             this.cb_holddown.Name = "cb_holddown";
             this.cb_holddown.Size = new System.Drawing.Size(121, 21);
             this.cb_holddown.TabIndex = 3;
-            
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 74);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(2, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.Size = new System.Drawing.Size(85, 17);
             this.label3.TabIndex = 4;
             this.label3.Text = "Cover Type:";
             // 
             // cb_coverType
             // 
+            this.cb_coverType.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.cb_coverType.FormattingEnabled = true;
             this.cb_coverType.Location = new System.Drawing.Point(85, 74);
             this.cb_coverType.Name = "cb_coverType";
             this.cb_coverType.Size = new System.Drawing.Size(121, 21);
             this.cb_coverType.TabIndex = 5;
-            
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 146);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(2, 144);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 13);
+            this.label4.Size = new System.Drawing.Size(46, 17);
             this.label4.TabIndex = 6;
             this.label4.Text = "Walls:";
             // 
             // cb_walls
             // 
+            this.cb_walls.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.cb_walls.FormattingEnabled = true;
             this.cb_walls.Location = new System.Drawing.Point(84, 143);
             this.cb_walls.Name = "cb_walls";
@@ -122,7 +127,7 @@
             // btn_add
             // 
             this.btn_add.Location = new System.Drawing.Point(12, 266);
-            this.btn_add.Name = "btn_done";
+            this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(75, 23);
             this.btn_add.TabIndex = 10;
             this.btn_add.Text = "Done";
@@ -142,56 +147,58 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 45);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(2, 45);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.Size = new System.Drawing.Size(69, 17);
             this.label6.TabIndex = 12;
             this.label6.Text = "Quantity: ";
             // 
             // nud_qty
             // 
+            this.nud_qty.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.nud_qty.Location = new System.Drawing.Point(85, 45);
             this.nud_qty.Name = "nud_qty";
             this.nud_qty.Size = new System.Drawing.Size(120, 20);
             this.nud_qty.TabIndex = 13;
-            this.nud_qty.Value = 1;
-            /*
             this.nud_qty.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            */
-
             // 
             // label7
-            //  
+            // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 208);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(2, 208);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(38, 13);
+            this.label7.Size = new System.Drawing.Size(49, 17);
             this.label7.TabIndex = 14;
             this.label7.Text = "Notes:";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(85, 208);
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.richTextBox1.Location = new System.Drawing.Point(57, 208);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(121, 38);
+            this.richTextBox1.Size = new System.Drawing.Size(149, 38);
             this.richTextBox1.TabIndex = 15;
             this.richTextBox1.Text = "";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 173);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 171);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(33, 13);
+            this.label5.Size = new System.Drawing.Size(43, 17);
             this.label5.TabIndex = 16;
             this.label5.Text = "Legs:";
             // 
             // cb_legs
             // 
+            this.cb_legs.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.cb_legs.FormattingEnabled = true;
             this.cb_legs.Location = new System.Drawing.Point(84, 170);
             this.cb_legs.Name = "cb_legs";
@@ -199,10 +206,11 @@
             this.cb_legs.TabIndex = 17;
             this.cb_legs.Text = "8 ft";
             // 
-            // addTentDlg
+            // AddTentDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(223, 301);
             this.Controls.Add(this.cb_legs);
             this.Controls.Add(this.label5);
@@ -220,8 +228,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cb_size);
             this.Controls.Add(this.label1);
-            this.Name = "addTentDlg";
+            this.Name = "AddTentDlg";
             this.ShowIcon = false;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.addTentDlg_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nud_qty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

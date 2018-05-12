@@ -19,6 +19,7 @@ namespace PitchATent
         {
             InitializeComponent();
             dateTime.Value = DateTime.Now;
+            ResizeRedraw = true;
         }
 
         public enum Tent { Small, Large, Frame, ClearSpan};

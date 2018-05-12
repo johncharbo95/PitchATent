@@ -48,14 +48,16 @@
             // lbl_Plain
             // 
             this.lbl_Plain.AutoSize = true;
-            this.lbl_Plain.Location = new System.Drawing.Point(13, 13);
+            this.lbl_Plain.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Plain.Location = new System.Drawing.Point(10, 11);
             this.lbl_Plain.Name = "lbl_Plain";
-            this.lbl_Plain.Size = new System.Drawing.Size(57, 13);
+            this.lbl_Plain.Size = new System.Drawing.Size(74, 17);
             this.lbl_Plain.TabIndex = 0;
             this.lbl_Plain.Text = "Plain Wall:";
             // 
             // nud_Plain
             // 
+            this.nud_Plain.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.nud_Plain.Location = new System.Drawing.Point(152, 11);
             this.nud_Plain.Name = "nud_Plain";
             this.nud_Plain.Size = new System.Drawing.Size(120, 20);
@@ -64,14 +66,16 @@
             // lbl_Window
             // 
             this.lbl_Window.AutoSize = true;
-            this.lbl_Window.Location = new System.Drawing.Point(12, 44);
+            this.lbl_Window.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Window.Location = new System.Drawing.Point(10, 44);
             this.lbl_Window.Name = "lbl_Window";
-            this.lbl_Window.Size = new System.Drawing.Size(49, 13);
+            this.lbl_Window.Size = new System.Drawing.Size(61, 17);
             this.lbl_Window.TabIndex = 2;
             this.lbl_Window.Text = "Window:";
             // 
             // nud_Window
             // 
+            this.nud_Window.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.nud_Window.Location = new System.Drawing.Point(152, 44);
             this.nud_Window.Name = "nud_Window";
             this.nud_Window.Size = new System.Drawing.Size(120, 20);
@@ -100,14 +104,16 @@
             // lbl_FPlain
             // 
             this.lbl_FPlain.AutoSize = true;
-            this.lbl_FPlain.Location = new System.Drawing.Point(12, 78);
+            this.lbl_FPlain.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_FPlain.Location = new System.Drawing.Point(10, 76);
             this.lbl_FPlain.Name = "lbl_FPlain";
-            this.lbl_FPlain.Size = new System.Drawing.Size(88, 13);
+            this.lbl_FPlain.Size = new System.Drawing.Size(116, 17);
             this.lbl_FPlain.TabIndex = 6;
             this.lbl_FPlain.Text = "Plain Fiesta Wall:";
             // 
             // nud_FPlain
             // 
+            this.nud_FPlain.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.nud_FPlain.Location = new System.Drawing.Point(152, 76);
             this.nud_FPlain.Name = "nud_FPlain";
             this.nud_FPlain.Size = new System.Drawing.Size(120, 20);
@@ -116,14 +122,16 @@
             // lbl_FWindow
             // 
             this.lbl_FWindow.AutoSize = true;
-            this.lbl_FWindow.Location = new System.Drawing.Point(13, 116);
+            this.lbl_FWindow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_FWindow.Location = new System.Drawing.Point(10, 109);
             this.lbl_FWindow.Name = "lbl_FWindow";
-            this.lbl_FWindow.Size = new System.Drawing.Size(104, 13);
+            this.lbl_FWindow.Size = new System.Drawing.Size(134, 17);
             this.lbl_FWindow.TabIndex = 8;
             this.lbl_FWindow.Text = "Window Fiesta Wall:";
             // 
             // nud_FWindow
             // 
+            this.nud_FWindow.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.nud_FWindow.Location = new System.Drawing.Point(152, 109);
             this.nud_FWindow.Name = "nud_FWindow";
             this.nud_FWindow.Size = new System.Drawing.Size(120, 20);
@@ -143,6 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(284, 185);
             this.Controls.Add(this.btn_AllToZero);
             this.Controls.Add(this.nud_FWindow);
