@@ -216,17 +216,19 @@ namespace PitchATent
             column.Format.Alignment = ParagraphAlignment.Right;
 
             column = this.table.AddColumn("0.75cm");
-            column.Format.Borders.Right.Width = 3;
+            column.Format.Borders.Right.Width = 1;
             column.Format.Alignment = ParagraphAlignment.Right;
 
             column = this.table.AddColumn("0.5cm");
+            column.Format.Borders.Left.Width = 1;
             column.Format.Alignment = ParagraphAlignment.Center;
+
 
             column = this.table.AddColumn("3cm");
             column.Format.Alignment = ParagraphAlignment.Right;
 
             column = this.table.AddColumn("0.75cm");
-            column.Format.Borders.Right.Width = 3;
+            //column.Format.Borders.Right.Width = 2;
             column.Format.Alignment = ParagraphAlignment.Right;
             
             column = this.table.AddColumn("0.5cm");
@@ -419,6 +421,121 @@ namespace PitchATent
             row2 = table.AddRow();
             row2.Borders.Visible = false;
 }
+
+            //--------------------------------------------------------------------------//
+            //------//-----------//----     Walls  Table     -----//----------//--------//
+            //--------------------------------------------------------------------------//
+
+            // Create the item table
+            this.table = section.AddTable();
+            table.Rows.Alignment = RowAlignment.Center;
+            this.table.Style = "Table";
+            this.table.Borders.Color = Colors.Black;
+            this.table.Borders.Width = 1;
+            this.table.Borders.Left.Width = 1;
+            this.table.Borders.Right.Width = 1;
+            this.table.Rows.LeftIndent = 0;
+
+            //----------------------------------------------------------------------------
+
+            // Before you can add a row, you must define the columns
+            Column column3 = this.table.AddColumn("0.5cm");
+            column3.Format.Alignment = ParagraphAlignment.Center;
+
+            column3 = this.table.AddColumn("3cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.75cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.75cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.5cm");
+            column3.Format.Alignment = ParagraphAlignment.Center;
+
+            column3 = this.table.AddColumn("3cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.75cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.75cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.5cm");
+            column3.Format.Alignment = ParagraphAlignment.Center;
+
+            column3 = this.table.AddColumn("3cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            column3 = this.table.AddColumn("0.75cm");
+            column3.Format.Alignment = ParagraphAlignment.Right;
+
+            //----------------------------------------------------------------------------
+
+            // Create the header of the table
+            Row row3 = table.AddRow();
+            row3.HeadingFormat = true;
+            row3.Format.Alignment = ParagraphAlignment.Center;
+            row3.Format.Font.Bold = true;
+            row3.Shading.Color = Colors.LightGray;
+
+            row3.Cells[0].AddParagraph("Walls");
+            row3.Cells[0].Format.Font.Bold = true;
+            row3.Cells[0].Format.Alignment = ParagraphAlignment.Center;
+            row3.Cells[0].VerticalAlignment = VerticalAlignment.Center;
+            row3.Cells[0].MergeRight = 10;
+
+            // Extract to smaller variable name
+            List<TentItems> walls = Counts.Walls;
+
+            // Get the size
+            int WallsTableSize = walls.Count;
+
+            // Reset b to zero
+            b = 0;
+
+            if (cover != null)
+            {
+                for (int i = 0; i < WallsTableSize; ++i)  //max number of rows for one page before cutting into other tings is 33 (or 32 for i)
+                {
+
+                    if (i == 0 || i % 3 == 0)
+                    {
+                        row = table.AddRow();
+                        row.HeadingFormat = true;
+                        row.Format.Alignment = ParagraphAlignment.Center;
+                        row.Format.Font.Bold = true;
+                        row.Shading.Color = Colors.White;
+                        b = 0;
+                    }
+
+
+                    row.Cells[b].AddParagraph("□");
+                    row.Cells[b].Format.Font.Bold = true;
+                    row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                    row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                    //row.Cells[0].MergeDown = 1;
+                    b++;
+                    row.Cells[b].AddParagraph(walls[i].Type);
+                    row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                    //row.Cells[1].MergeRight = 0;
+                    //row.Cells[1].MergeDown = 1;
+                    b++;
+                    row.Cells[b].AddParagraph(walls[i].Qty.ToString());
+                    row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
+                    row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
+                    //row.Cells[2].MergeDown = 1;
+                    b++;
+                    b++;
+                }
+
+
+                //adds an invisible row to space out the two tables 
+                row3 = table.AddRow();
+                row3.Borders.Visible = false;
+            }
             //--------------------------------------------------------------------------//
             //------//-----------//----  Tie Downs Table     -----//----------//--------//
             //--------------------------------------------------------------------------//

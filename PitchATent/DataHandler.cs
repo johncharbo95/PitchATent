@@ -234,7 +234,7 @@ namespace PitchATent
                                 {
                                     HandleList("Coins", SmallRow.Corner * qty, MetalItemList);
                                 }
-                                HandleList("Brace", SmallRow.Brace * qty, MetalItemList);
+                                HandleList("Brace - 30", SmallRow.Brace * qty, MetalItemList);
                                 HandleList(string.Format("PM {0}", size), SmallRow.MiddlePost * qty, MetalItemList);
                                 HandleList(string.Format("Cables {0}", size), SmallRow.Cable * qty, WallList);
                             }
@@ -287,13 +287,13 @@ namespace PitchATent
                             switch(ClearSpanWidth)
                             {
                                 case 30:
-                                    HandleList("Triangle ClearSpan 30 pieds", ClearSpanRow.Triangle * qty, CoverList);
+                                    HandleList("Triangle 30'", ClearSpanRow.Triangle * qty, CoverList);
                                     break;
                                 case 40:
-                                    HandleList("Triangle ClearSpan 40 pieds", ClearSpanRow.Triangle * qty, CoverList);
+                                    HandleList("Triangle 40'", ClearSpanRow.Triangle * qty, CoverList);
                                     break;
                                 case 50:
-                                    HandleList("Triangle ClearSpan 50 pieds", ClearSpanRow.Triangle * qty, CoverList);
+                                    HandleList("Triangle 50'", ClearSpanRow.Triangle * qty, CoverList);
                                     break;
                             }
                         }
@@ -311,19 +311,19 @@ namespace PitchATent
                         HandleList("Water Barrels", db.Barrels * qty, HoldDownList);
                         break;
                     case "250 lb Concrete Block":
-                        HandleList("250 lb Concrete Block", db.Concrete250 * qty, HoldDownList);
+                        HandleList("250 lb Block", db.Concrete250 * qty, HoldDownList);
                         break;
                     case "400 lb Concrete Block":
-                        HandleList("400 lb Concrete Block", db.Concrete400 * qty, HoldDownList);
+                        HandleList("400 lb Block", db.Concrete400 * qty, HoldDownList);
                         break;
                     case "600 lb Concrete Block":
-                        HandleList("600 lb Concrete Block", db.Concrete600 * qty, HoldDownList);
+                        HandleList("600 lb Block", db.Concrete600 * qty, HoldDownList);
                         break;
                     case "1/2 ton Concrete Block":
-                        HandleList("1/2 ton Concrete Block", db.ConcreteHalfTon * qty, HoldDownList);
+                        HandleList("1/2 ton Block", db.ConcreteHalfTon * qty, HoldDownList);
                         break;
                     case "1 ton Concrete Block":
-                        HandleList("1 ton Concrete Block", db.ConcreteTon * qty, HoldDownList);
+                        HandleList("1 ton Block", db.ConcreteTon * qty, HoldDownList);
                         break;
                 }
 
