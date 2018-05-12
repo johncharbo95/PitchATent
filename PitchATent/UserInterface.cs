@@ -346,7 +346,7 @@ namespace PitchATent
             }
 
             // Get today's date
-            string date = DateTime.Now.ToString("yyyy/MM/dd");
+            string date = DateTime.Now.ToString("yyyy-MM-dd");
 
             // Get the final count of items
             ItemCounts counts = UpdateList();

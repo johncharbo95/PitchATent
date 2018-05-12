@@ -339,11 +339,11 @@ namespace PitchATent
                     HandleList(LegsForList, db.Legs * qty, MetalItemList);
 
                     // Assign enum depending on leg type
-                    if (tentLegs == "8 ft" || tentLegs == "8 ft Adj")
+                    if (tentLegs == "8 ft" || tentLegs == "8 ft Adjustable")
                     {
                         leg = Legs.shortLegs;
                     }
-                    else if (tentLegs == "10 ft" || tentLegs == "10 ft Adj")
+                    else if (tentLegs == "10 ft" || tentLegs == "10 ft Adjustable")
                     {
                         leg = Legs.longLegs;
                     }
