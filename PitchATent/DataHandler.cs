@@ -192,9 +192,13 @@ namespace PitchATent
             DatabaseInterface db = new SmallTentDB();
 
             IEnumerable<SmallTentDB> SmallDB = ReadTentDatabase<SmallTentDB>(UserInterface.Tent.Small);
+            List<SmallTentDB> Small = SmallDB.ToList();
             IEnumerable<LargeTentDB> LargeDB = ReadTentDatabase<LargeTentDB>(UserInterface.Tent.Large);
+            List<LargeTentDB> Large = LargeDB.ToList();
             IEnumerable<FrameDB> FrameDB = ReadTentDatabase<FrameDB>(UserInterface.Tent.Frame);
+            List<FrameDB> Frame = FrameDB.ToList();
             IEnumerable<ClearSpanDB> ClearSpanDB = ReadTentDatabase<ClearSpanDB>(UserInterface.Tent.ClearSpan);
+            List<ClearSpanDB> ClearSpan = ClearSpanDB.ToList();
 
             // Loop through all tents
             for (int i = 0; i < ListOfLists.tentType.Count; ++i)
@@ -215,8 +219,9 @@ namespace PitchATent
                             legTentType = "ST";
 
                             // Get the appropriate row from the small tent database, depending on the size of the tent.
-                            SmallTentDB SmallRow = GetDataBaseRow<SmallTentDB>(SmallDB, size);
+                            SmallTentDB SmallRow = Small.Find(b => b.Size == size);
                             db = SmallRow;
+
                             if (SmallRow != null)
                             {
                                 // Metal list
@@ -245,7 +250,7 @@ namespace PitchATent
                         legTentType = "BT";
 
                         // Get the appropriate row from the large tent database, depending on the size of the tent.
-                        LargeTentDB LargeRow = GetDataBaseRow<LargeTentDB>(LargeDB, size);
+                        LargeTentDB LargeRow = Large.Find(b => b.Size == size);
                         db = LargeRow;
 
                         if (LargeRow != null)
@@ -260,7 +265,7 @@ namespace PitchATent
 
                     case UserInterface.Tent.Frame:
                         // Get the appropriate row from the frame database, depending on the size of the tent.
-                        FrameDB FrameRow = GetDataBaseRow<FrameDB>(FrameDB, size);
+                        FrameDB FrameRow = Frame.Find(b => b.Size == size);
                         db = FrameRow;
 
                         if (FrameRow != null)
@@ -273,7 +278,7 @@ namespace PitchATent
 
                     case UserInterface.Tent.ClearSpan:
                         // Get the appropriate row from the ClearSpan database, depending on the size of the tent.
-                        ClearSpanDB ClearSpanRow = GetDataBaseRow<ClearSpanDB>(ClearSpanDB, size);
+                        ClearSpanDB ClearSpanRow = ClearSpan.Find(b => b.Size == size);
                         db = ClearSpanRow;
 
                         // Get the width of the ClearSpan
@@ -501,20 +506,6 @@ namespace PitchATent
             Console.WriteLine("------------HOLDDOWNS---------");
             HoldDowns.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
             Console.WriteLine("///////////////////////////////////////////////////////////////////////");
-        }
-        
-        private static Database GetDataBaseRow<Database>(IEnumerable<Database> db, string size)
-            where Database : DatabaseInterface
-        {
-            foreach (var row in db)
-            {
-                if (row.Size == size)
-                {
-                    return row;
-                }
-            }
-
-            return default(Database);
         }
         
         private static void HandleList(string item, int quantity, List<TentItems> list)
