@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -389,6 +391,16 @@ namespace PitchATent
             // Get today's date
             string date = InstallDate.ToString("yyyy-MM-dd");
 
+            // Get the My Documents path
+            string MyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            // Check if output folder already exists
+            string OutputPath = MyDocumentsPath + @"\Truck Loads\";
+            if (!File.Exists(OutputPath))
+            {
+                Directory.CreateDirectory(OutputPath);
+            }
+            
             // Get the final count of items
             ItemCounts counts = UpdateList();
 
@@ -433,7 +445,7 @@ namespace PitchATent
 
             // Save the PDF document...
             // TODO: Check if file already exists
-            string filename = string.Format("MaterialList_truck{0}_{1}.pdf",truck,date);
+            string filename = string.Format("{0}MaterialList_truck{1}_{2}.pdf",OutputPath,truck,date);
             Console.WriteLine(filename);
 
             pdfRenderer.Save(filename);
