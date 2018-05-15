@@ -18,7 +18,8 @@ namespace PitchATent
         public UserInterface()
         {
             InitializeComponent();
-            dateTime.Value = DateTime.Now;
+            InstallDate = DateTime.Now;
+            dateTime.Value = InstallDate;
             ResizeRedraw = true;
         }
 
@@ -26,6 +27,7 @@ namespace PitchATent
 
         private int TentCtr { get; set; }
         private bool NewAccessory { get; set; } = true;
+        public DateTime InstallDate { get; set; }
 
         #region Add Tent Buttons
         private void btn_addSmallTent_Click(object sender, EventArgs e)
@@ -121,6 +123,12 @@ namespace PitchATent
             {
                 accDGV.Rows.Add(n.Item, n.Qty.ToString());
             }
+        }
+
+        private void dateTime_ValueChanged(object sender, EventArgs e)
+        {
+            // Update the property
+            InstallDate = dateTime.Value;
         }
 
         #region Tent DataGridView Context Menu Strip
@@ -379,7 +387,7 @@ namespace PitchATent
             }
 
             // Get today's date
-            string date = DateTime.Now.ToString("yyyy-MM-dd");
+            string date = InstallDate.ToString("yyyy-MM-dd");
 
             // Get the final count of items
             ItemCounts counts = UpdateList();

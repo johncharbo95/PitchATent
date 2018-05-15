@@ -234,10 +234,12 @@ namespace PitchATent
                                 if (size == "Hexagon")
                                 {
                                     HandleList("Coins Hex", SmallRow.Corner * qty, MetalItemList);
+                                    HandleList("Hexagone", qty, CoverList);
                                 }
                                 else
                                 {
                                     HandleList("Coins", SmallRow.Corner * qty, MetalItemList);
+                                    HandleList(SmallRow.Size + " " + ListOfLists.tentType[i], qty, CoverList);
                                 }
                                 HandleList("Brace - 30", SmallRow.Brace * qty, MetalItemList);
                                 HandleList(string.Format("PM {0}", size), SmallRow.MiddlePost * qty, MetalItemList);
@@ -255,11 +257,11 @@ namespace PitchATent
 
                         if (LargeRow != null)
                         {
-                            HandleList(string.Format("PM {0}", size), LargeRow.MiddlePost * qty, MetalItemList);
+                            HandleList(string.Format("PM {0}", size.Substring(0, 2)), LargeRow.MiddlePost * qty, MetalItemList);
                             HandleList("Plates", LargeRow.Plates * qty, MetalItemList);
-                            HandleList("Mid 20 pieds", LargeRow.Mid20 * qty, CoverList);
-                            HandleList("Mid 30 pieds", LargeRow.Mid30 * qty, CoverList);
-                            HandleList(string.Format("End {0}", size), 2 * qty, CoverList);
+                            HandleList("Mid 20'", LargeRow.Mid20 * qty, CoverList);
+                            HandleList("Mid 30'", LargeRow.Mid30 * qty, CoverList);
+                            HandleList(string.Format("End {0}'", size.Substring(0,2)), 2 * qty, CoverList);
                         }
                         break;
 
@@ -422,22 +424,6 @@ namespace PitchATent
                 else
                 {
                     throw new Exception("Leg enum assigned null value");
-                }
-
-                //HandleList(string.Format("Cables {0}", ListOfLists.tentSizes[i]), qty, WallList);
-
-                if (typeOfTent != UserInterface.Tent.Frame && typeOfTent != UserInterface.Tent.ClearSpan)
-                {
-                    if (ListOfLists.tentSizes[i] != "Hexagon")
-                    {
-                        string covers = string.Format("{0} {1}", ListOfLists.tentSizes[i], ListOfLists.tentCoverTypes[i]);
-                        HandleList(covers, qty, CoverList);
-                    }
-                    else
-                    {
-                        HandleList(string.Format("Hex {0}", ListOfLists.tentCoverTypes[i]),qty,CoverList);
-                    }
-                    
                 }
                 
             }
