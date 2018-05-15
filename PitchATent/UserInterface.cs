@@ -324,6 +324,38 @@ namespace PitchATent
             }
         }
 
+        #region ClearButtons
+        private void btn_ClearTents_Click(object sender, EventArgs e)
+        {
+            int tentCount = this.tentDGV.Rows.Count;
+            if (tentCount > 0)
+            {
+                if (MessageBox.Show("Are you sure you want to clear current tents? Your changes will not be saved.", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    this.tentDGV.Rows.Clear();
+                    UpdateList();
+                    this.previewDGV.Rows.Clear();
+                    TentCtr = 0;
+                }
+            }
+        }
+
+        private void btn_ClearAcc_Click(object sender, EventArgs e)
+        {
+            int accCount = this.accDGV.Rows.Count;
+            if (accCount > 0)
+            {
+                if (MessageBox.Show("Are you sure you want to clear current accessories? Your changes will not be saved.", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    this.accDGV.Rows.Clear();
+                    NewAccessory = true;
+                    
+                }
+            }
+        }
+        #endregion
+
+
         private void btn_GeneratePDF_Click(object sender, EventArgs e)
         {
 
@@ -400,5 +432,7 @@ namespace PitchATent
             // ...and start a viewer.
             Process.Start(filename);
         }
+
+        
     }
 }
