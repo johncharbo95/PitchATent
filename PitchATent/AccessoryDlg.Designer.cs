@@ -33,6 +33,10 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nud_VarnishFloor = new System.Windows.Forms.NumericUpDown();
+            this.nud_BlackFloor = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.nud_100CL = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -63,12 +67,20 @@
             this.label10 = new System.Windows.Forms.Label();
             this.btn_Done = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.nud_BlackFloor = new System.Windows.Forms.NumericUpDown();
-            this.nud_VarnishFloor = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.nud_BlockCovers = new System.Windows.Forms.NumericUpDown();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.nud_Gutter20 = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.nud_Gutter15 = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.nud_Gutter10 = new System.Windows.Forms.NumericUpDown();
+            this.btn_Reset = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_VarnishFloor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_BlackFloor)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_100CL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_50CL)).BeginInit();
@@ -84,8 +96,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_Extension50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Extension100)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Extinguisher)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_BlackFloor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_VarnishFloor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_BlockCovers)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Gutter20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Gutter15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Gutter10)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -125,12 +140,44 @@
             this.groupBox1.Controls.Add(this.nud_BlackFloor);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Location = new System.Drawing.Point(13, 27);
+            this.groupBox1.Location = new System.Drawing.Point(12, 257);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 73);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Floors";
+            // 
+            // nud_VarnishFloor
+            // 
+            this.nud_VarnishFloor.Location = new System.Drawing.Point(97, 42);
+            this.nud_VarnishFloor.Name = "nud_VarnishFloor";
+            this.nud_VarnishFloor.Size = new System.Drawing.Size(91, 20);
+            this.nud_VarnishFloor.TabIndex = 3;
+            // 
+            // nud_BlackFloor
+            // 
+            this.nud_BlackFloor.Location = new System.Drawing.Point(97, 18);
+            this.nud_BlackFloor.Name = "nud_BlackFloor";
+            this.nud_BlackFloor.Size = new System.Drawing.Size(91, 20);
+            this.nud_BlackFloor.TabIndex = 2;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(8, 44);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(71, 13);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "Varnish Floor:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 20);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(63, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Black Floor:";
             // 
             // groupBox2
             // 
@@ -144,7 +191,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.nud_SpotLight);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(219, 27);
+            this.groupBox2.Location = new System.Drawing.Point(12, 27);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 227);
             this.groupBox2.TabIndex = 2;
@@ -209,7 +256,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 60);
+            this.label2.Location = new System.Drawing.Point(10, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 2;
@@ -217,7 +264,7 @@
             // 
             // nud_SpotLight
             // 
-            this.nud_SpotLight.Location = new System.Drawing.Point(10, 37);
+            this.nud_SpotLight.Location = new System.Drawing.Point(10, 32);
             this.nud_SpotLight.Name = "nud_SpotLight";
             this.nud_SpotLight.Size = new System.Drawing.Size(184, 20);
             this.nud_SpotLight.TabIndex = 1;
@@ -225,7 +272,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Location = new System.Drawing.Point(9, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
@@ -271,9 +318,9 @@
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.nud_SingleDoor);
-            this.groupBox3.Location = new System.Drawing.Point(7, 114);
+            this.groupBox3.Location = new System.Drawing.Point(424, 27);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 140);
+            this.groupBox3.Size = new System.Drawing.Size(200, 150);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Doors";
@@ -312,6 +359,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.nud_BlockCovers);
+            this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.nud_Extension50);
@@ -321,9 +370,9 @@
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.nud_Extension25);
-            this.groupBox4.Location = new System.Drawing.Point(425, 27);
+            this.groupBox4.Location = new System.Drawing.Point(218, 27);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 198);
+            this.groupBox4.Size = new System.Drawing.Size(200, 249);
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Miscellaneous";
@@ -363,7 +412,7 @@
             // checkbox_TarFiller
             // 
             this.checkbox_TarFiller.AutoSize = true;
-            this.checkbox_TarFiller.Location = new System.Drawing.Point(13, 177);
+            this.checkbox_TarFiller.Location = new System.Drawing.Point(13, 226);
             this.checkbox_TarFiller.Name = "checkbox_TarFiller";
             this.checkbox_TarFiller.Size = new System.Drawing.Size(66, 17);
             this.checkbox_TarFiller.TabIndex = 14;
@@ -372,7 +421,7 @@
             // 
             // nud_Extinguisher
             // 
-            this.nud_Extinguisher.Location = new System.Drawing.Point(12, 153);
+            this.nud_Extinguisher.Location = new System.Drawing.Point(10, 153);
             this.nud_Extinguisher.Name = "nud_Extinguisher";
             this.nud_Extinguisher.Size = new System.Drawing.Size(184, 20);
             this.nud_Extinguisher.TabIndex = 13;
@@ -388,7 +437,7 @@
             // 
             // btn_Done
             // 
-            this.btn_Done.Location = new System.Drawing.Point(431, 231);
+            this.btn_Done.Location = new System.Drawing.Point(218, 310);
             this.btn_Done.Name = "btn_Done";
             this.btn_Done.Size = new System.Drawing.Size(91, 23);
             this.btn_Done.TabIndex = 16;
@@ -398,7 +447,7 @@
             // 
             // btn_Cancel
             // 
-            this.btn_Cancel.Location = new System.Drawing.Point(534, 231);
+            this.btn_Cancel.Location = new System.Drawing.Point(321, 310);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(91, 23);
             this.btn_Cancel.TabIndex = 17;
@@ -406,44 +455,103 @@
             this.btn_Cancel.UseVisualStyleBackColor = true;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
-            // label13
+            // label15
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 20);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(63, 13);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Black Floor:";
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(12, 177);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(73, 13);
+            this.label15.TabIndex = 19;
+            this.label15.Text = "Block Covers:";
             // 
-            // label14
+            // nud_BlockCovers
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(8, 44);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(71, 13);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "Varnish Floor:";
+            this.nud_BlockCovers.Location = new System.Drawing.Point(10, 193);
+            this.nud_BlockCovers.Name = "nud_BlockCovers";
+            this.nud_BlockCovers.Size = new System.Drawing.Size(184, 20);
+            this.nud_BlockCovers.TabIndex = 20;
             // 
-            // nud_BlackFloor
+            // groupBox5
             // 
-            this.nud_BlackFloor.Location = new System.Drawing.Point(97, 18);
-            this.nud_BlackFloor.Name = "nud_BlackFloor";
-            this.nud_BlackFloor.Size = new System.Drawing.Size(91, 20);
-            this.nud_BlackFloor.TabIndex = 2;
+            this.groupBox5.Controls.Add(this.nud_Gutter20);
+            this.groupBox5.Controls.Add(this.label16);
+            this.groupBox5.Controls.Add(this.nud_Gutter15);
+            this.groupBox5.Controls.Add(this.label17);
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this.nud_Gutter10);
+            this.groupBox5.Location = new System.Drawing.Point(424, 183);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(200, 150);
+            this.groupBox5.TabIndex = 18;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Gutters";
             // 
-            // nud_VarnishFloor
+            // nud_Gutter20
             // 
-            this.nud_VarnishFloor.Location = new System.Drawing.Point(97, 42);
-            this.nud_VarnishFloor.Name = "nud_VarnishFloor";
-            this.nud_VarnishFloor.Size = new System.Drawing.Size(91, 20);
-            this.nud_VarnishFloor.TabIndex = 3;
+            this.nud_Gutter20.Location = new System.Drawing.Point(10, 114);
+            this.nud_Gutter20.Name = "nud_Gutter20";
+            this.nud_Gutter20.Size = new System.Drawing.Size(184, 20);
+            this.nud_Gutter20.TabIndex = 17;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(10, 98);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(40, 13);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "20 feet";
+            // 
+            // nud_Gutter15
+            // 
+            this.nud_Gutter15.Location = new System.Drawing.Point(10, 75);
+            this.nud_Gutter15.Name = "nud_Gutter15";
+            this.nud_Gutter15.Size = new System.Drawing.Size(184, 20);
+            this.nud_Gutter15.TabIndex = 15;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(10, 59);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(40, 13);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "15 feet";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(7, 16);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(40, 13);
+            this.label18.TabIndex = 12;
+            this.label18.Text = "10 feet";
+            // 
+            // nud_Gutter10
+            // 
+            this.nud_Gutter10.Location = new System.Drawing.Point(10, 32);
+            this.nud_Gutter10.Name = "nud_Gutter10";
+            this.nud_Gutter10.Size = new System.Drawing.Size(184, 20);
+            this.nud_Gutter10.TabIndex = 13;
+            // 
+            // btn_Reset
+            // 
+            this.btn_Reset.Location = new System.Drawing.Point(321, 282);
+            this.btn_Reset.Name = "btn_Reset";
+            this.btn_Reset.Size = new System.Drawing.Size(91, 23);
+            this.btn_Reset.TabIndex = 19;
+            this.btn_Reset.Text = "Reset";
+            this.btn_Reset.UseVisualStyleBackColor = true;
+            this.btn_Reset.Click += new System.EventHandler(this.btn_Reset_Click);
             // 
             // AccessoryDlg
             // 
             this.AcceptButton = this.btn_Done;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 264);
+            this.ClientSize = new System.Drawing.Size(639, 342);
+            this.Controls.Add(this.btn_Reset);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Done);
             this.Controls.Add(this.groupBox4);
@@ -458,6 +566,8 @@
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_VarnishFloor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_BlackFloor)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_100CL)).EndInit();
@@ -476,8 +586,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_Extension50)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Extension100)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Extinguisher)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_BlackFloor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_VarnishFloor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_BlockCovers)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Gutter20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Gutter15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Gutter10)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -524,5 +638,15 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown nud_VarnishFloor;
         private System.Windows.Forms.NumericUpDown nud_BlackFloor;
+        private System.Windows.Forms.NumericUpDown nud_BlockCovers;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.NumericUpDown nud_Gutter20;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.NumericUpDown nud_Gutter15;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.NumericUpDown nud_Gutter10;
+        private System.Windows.Forms.Button btn_Reset;
     }
 }

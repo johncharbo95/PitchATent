@@ -426,9 +426,22 @@ namespace PitchATent
             this.Code = false;
             this.Close();
         }
-        #endregion
+        private void btn_Reset_Click(object sender, EventArgs e)
+        {
+            // Reset all GUI items to default (first) items
+            cb_size.SelectedIndex = 0;
+            nud_qty.Value = 1;
+            cb_coverType.SelectedIndex = 0;
+            cb_holddown.SelectedIndex = 0;
+            cb_walls.SelectedIndex = 0;
+            cb_legs.SelectedIndex = 0;
 
-        private void addTentDlg_FormClosing(object sender, FormClosingEventArgs e)
+            // Update the properties of the object, just in case...
+            UpdateProperties();
+        }
+            #endregion
+
+            private void addTentDlg_FormClosing(object sender, FormClosingEventArgs e)
         {
 #if DEBUG
             e.Cancel = false;
@@ -454,5 +467,7 @@ namespace PitchATent
             
 #endif
         }
+
+        
     }
 }

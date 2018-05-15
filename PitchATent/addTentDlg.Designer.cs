@@ -40,10 +40,9 @@
             this.btn_cancel = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.nud_qty = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cb_legs = new System.Windows.Forms.ComboBox();
+            this.btn_Reset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_qty)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,9 +125,9 @@
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(12, 266);
+            this.btn_add.Location = new System.Drawing.Point(6, 241);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(75, 23);
+            this.btn_add.Size = new System.Drawing.Size(205, 48);
             this.btn_add.TabIndex = 10;
             this.btn_add.Text = "Done";
             this.btn_add.UseVisualStyleBackColor = true;
@@ -136,9 +135,9 @@
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(118, 266);
+            this.btn_cancel.Location = new System.Drawing.Point(5, 210);
             this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(75, 23);
+            this.btn_cancel.Size = new System.Drawing.Size(100, 25);
             this.btn_cancel.TabIndex = 11;
             this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
@@ -167,25 +166,6 @@
             0,
             0});
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(2, 208);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 17);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Notes:";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.richTextBox1.Location = new System.Drawing.Point(57, 208);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(149, 38);
-            this.richTextBox1.TabIndex = 15;
-            this.richTextBox1.Text = "";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -206,16 +186,25 @@
             this.cb_legs.TabIndex = 17;
             this.cb_legs.Text = "8 ft";
             // 
+            // btn_Reset
+            // 
+            this.btn_Reset.Location = new System.Drawing.Point(111, 210);
+            this.btn_Reset.Name = "btn_Reset";
+            this.btn_Reset.Size = new System.Drawing.Size(100, 25);
+            this.btn_Reset.TabIndex = 18;
+            this.btn_Reset.Text = "Reset";
+            this.btn_Reset.UseVisualStyleBackColor = true;
+            this.btn_Reset.Click += new System.EventHandler(this.btn_Reset_Click);
+            // 
             // AddTentDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(223, 301);
+            this.Controls.Add(this.btn_Reset);
             this.Controls.Add(this.cb_legs);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.nud_qty);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btn_cancel);
@@ -251,9 +240,8 @@
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown nud_qty;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cb_legs;
+        private System.Windows.Forms.Button btn_Reset;
     }
 }
