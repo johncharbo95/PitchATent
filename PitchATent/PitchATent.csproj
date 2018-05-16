@@ -86,6 +86,14 @@
     </Compile>
     <Compile Include="Createpdf.cs" />
     <Compile Include="DataHandler.cs" />
+    <Compile Include="TentDatabaseClasses\ClearSpanDB.cs" />
+    <Compile Include="TentDatabaseClasses\FrameDB.cs" />
+    <Compile Include="TentDatabaseClasses\IDatabase.cs" />
+    <Compile Include="TentDatabaseClasses\LargeTentDB.cs" />
+    <Compile Include="TentDatabaseClasses\SmallTentDB.cs" />
+    <Compile Include="TypeDefinitions\ItemCounts.cs" />
+    <Compile Include="TypeDefinitions\ListNames.cs" />
+    <Compile Include="TypeDefinitions\TentItems.cs" />
     <Compile Include="UserInterface.cs">
       <SubType>Form</SubType>
     </Compile>

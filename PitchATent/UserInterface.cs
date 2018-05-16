@@ -172,7 +172,10 @@ namespace PitchATent
             this.tentDGV.Rows[selectedRowIndex].Cells[4].Value = TentDLG.TieDown;
             this.tentDGV.Rows[selectedRowIndex].Cells[5].Value = TentDLG.Walls;
             this.tentDGV.Rows[selectedRowIndex].Cells[6].Value = TentDLG.Legs;
-            }
+
+            // Update the list of items
+            UpdateList();
+        }
 
         private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -368,7 +371,6 @@ namespace PitchATent
 
         private void btn_GeneratePDF_Click(object sender, EventArgs e)
         {
-
             // Get information about the truck, trailer, driver
             string truck = tb_truck.Text;
             string trailer = tb_trailer.Text;
@@ -404,53 +406,64 @@ namespace PitchATent
             // Get the final count of items
             ItemCounts counts = UpdateList();
 
-            // Get items from accessory list
-            List<Accessory> AccList = new List<Accessory>();
-            int qty = 0;
-            string item = "";
-
-            // Call default constructor
-            Createpdf pdf = new Createpdf();
-
-            if (accDGV.Rows.Count != 0)
+            // If the counts list is null, show a warning to the user and do not generate a PDF
+            if (counts.Covers != null)
             {
-                foreach (DataGridViewRow row in accDGV.Rows)
+                // Get items from accessory list
+                List<Accessory> AccList = new List<Accessory>();
+                int qty = 0;
+                string item = "";
+
+                // Call default constructor
+                Createpdf pdf = new Createpdf();
+
+                if (accDGV.Rows.Count != 0)
                 {
-                    item = row.Cells[0].Value.ToString();
-                    qty = Convert.ToInt32(row.Cells[1].Value);
-                    Accessory acc = new Accessory(item, qty);
-                    AccList.Add(acc);
+                    foreach (DataGridViewRow row in accDGV.Rows)
+                    {
+                        item = row.Cells[0].Value.ToString();
+                        qty = Convert.ToInt32(row.Cells[1].Value);
+                        Accessory acc = new Accessory(item, qty);
+                        AccList.Add(acc);
+                    }
+                    // Generate the PDF
+                    pdf = new Createpdf(truck, trailer, driver, counts, AccList);
                 }
-                // Generate the PDF
-                pdf = new Createpdf(truck, trailer, driver, counts, AccList);
+                else
+                {
+                    // Generate the PDF
+                    pdf = new Createpdf(truck, trailer, driver, counts);
+                }
+
+                // Create a MigraDoc document
+                Document document = pdf.CreateDocument();
+                document.UseCmykColor = true;
+
+                // Create a renderer for PDF that uses Unicode font encoding
+                PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true);
+
+                // Set the MigraDoc document
+                pdfRenderer.Document = document;
+
+                // Create the PDF document
+                pdfRenderer.RenderDocument();
+
+                // Save the PDF document...
+                // TODO: Check if file already exists
+                string filename = string.Format("{0}MaterialList_{2}_truck{1}.pdf", OutputPath, truck, date);
+                Console.WriteLine(filename);
+
+                pdfRenderer.Save(filename);
+                // ...and start a viewer.
+                Process.Start(filename);
             }
             else
             {
-                // Generate the PDF
-                pdf = new Createpdf(truck, trailer, driver, counts);
+                MessageBox.Show("You can not generate a list at this point, because you have no tents listed. Please add tents to this load.",
+                    "Empty List", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
- 
-            // Create a MigraDoc document
-            Document document = pdf.CreateDocument();
-            document.UseCmykColor = true;
 
-            // Create a renderer for PDF that uses Unicode font encoding
-            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true);
-
-            // Set the MigraDoc document
-            pdfRenderer.Document = document;
-
-            // Create the PDF document
-            pdfRenderer.RenderDocument();
-
-            // Save the PDF document...
-            // TODO: Check if file already exists
-            string filename = string.Format("{0}MaterialList_truck{1}_{2}.pdf",OutputPath,truck,date);
-            Console.WriteLine(filename);
-
-            pdfRenderer.Save(filename);
-            // ...and start a viewer.
-            Process.Start(filename);
+            
         }
 
         
