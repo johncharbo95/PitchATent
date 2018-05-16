@@ -201,9 +201,9 @@ namespace PitchATent
             table.Rows.Alignment = RowAlignment.Center;
             this.table.Style = "Table";
             this.table.Borders.Color = Colors.Black;
-            this.table.Borders.Width = 1;
-            this.table.Borders.Left.Width = 1;
-            this.table.Borders.Right.Width = 1;
+            this.table.Borders.Width = 0.5;
+            this.table.Borders.Left.Width = 0.5;
+            this.table.Borders.Right.Width = 0.5;
             this.table.Rows.LeftIndent = 0;
 
             //----------------------------------------------------------------------------
@@ -216,11 +216,11 @@ namespace PitchATent
             column.Format.Alignment = ParagraphAlignment.Right;
 
             column = this.table.AddColumn("0.75cm");
-            column.Format.Borders.Right.Width = 1;
+            //column.Format.Borders.Right.Width = 1;
             column.Format.Alignment = ParagraphAlignment.Right;
 
             column = this.table.AddColumn("0.5cm");
-            column.Format.Borders.Left.Width = 1;
+            //column.Format.Borders.Left.Width = 1;
             column.Format.Alignment = ParagraphAlignment.Center;
 
 
@@ -263,6 +263,7 @@ namespace PitchATent
             List<TentItems> metal = Counts.Metal;
 
             int b = 0;
+            int r = 0;
 
             if (metal != null)
             {
@@ -277,6 +278,7 @@ namespace PitchATent
                         row.Format.Font.Bold = true;
                         row.Shading.Color = Colors.White;
                         b = 0;
+                        r++;
                     }
 
 
@@ -295,10 +297,12 @@ namespace PitchATent
                     row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                     row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                     //row.Cells[2].MergeDown = 1;
+                    //row.Cells[b].Format.Borders.Right.Width = 2;
                     b++;
                 }
             }
-            
+            this.table.SetEdge(0, 1, 3, r,Edge.Right, BorderStyle.Single, 1, Colors.Black);
+            this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
 
             row = table.AddRow();
             row.Borders.Visible = false;
@@ -316,9 +320,9 @@ namespace PitchATent
             table.Rows.Alignment = RowAlignment.Center;
             this.table.Style = "Table";
             this.table.Borders.Color = Colors.Black;
-            this.table.Borders.Width = 1;
-            this.table.Borders.Left.Width = 1;
-            this.table.Borders.Right.Width = 1;
+            this.table.Borders.Width = 0.5;
+            this.table.Borders.Left.Width = 0.5;
+            this.table.Borders.Right.Width = 0.5;
             this.table.Rows.LeftIndent = 0;
 
             //----------------------------------------------------------------------------
@@ -333,16 +337,10 @@ namespace PitchATent
             column2 = this.table.AddColumn("0.75cm");
             column2.Format.Alignment = ParagraphAlignment.Right;
 
-            column2 = this.table.AddColumn("0.75cm");
-            column2.Format.Alignment = ParagraphAlignment.Right;
-
             column2 = this.table.AddColumn("0.5cm");
             column2.Format.Alignment = ParagraphAlignment.Center;
 
             column2 = this.table.AddColumn("3cm");
-            column2.Format.Alignment = ParagraphAlignment.Right;
-
-            column2 = this.table.AddColumn("0.75cm");
             column2.Format.Alignment = ParagraphAlignment.Right;
 
             column2 = this.table.AddColumn("0.75cm");
@@ -370,7 +368,7 @@ namespace PitchATent
             row2.Cells[0].Format.Font.Bold = true;
             row2.Cells[0].Format.Alignment = ParagraphAlignment.Center;
             row2.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-            row2.Cells[0].MergeRight = 10;
+            row2.Cells[0].MergeRight = 8;
 
             // Extract to smaller variable name
             List<TentItems> cover = Counts.Covers;
@@ -380,6 +378,7 @@ namespace PitchATent
 
             // Reset b to zero
             b = 0;
+            r = 0;
 
             if (cover != null)
             {
@@ -394,6 +393,7 @@ namespace PitchATent
                         row.Format.Font.Bold = true;
                         row.Shading.Color = Colors.White;
                         b = 0;
+                        r++;
                     }
 
 
@@ -413,12 +413,12 @@ namespace PitchATent
                     row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                     //row.Cells[2].MergeDown = 1;
                     b++;
-                    b++;
                 }
-            
+                this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
+                this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
 
-            //adds an invisible row to space out the two tables 
-            row2 = table.AddRow();
+                //adds an invisible row to space out the two tables 
+                row2 = table.AddRow();
             row2.Borders.Visible = false;
 }
 
@@ -431,9 +431,9 @@ namespace PitchATent
             table.Rows.Alignment = RowAlignment.Center;
             this.table.Style = "Table";
             this.table.Borders.Color = Colors.Black;
-            this.table.Borders.Width = 1;
-            this.table.Borders.Left.Width = 1;
-            this.table.Borders.Right.Width = 1;
+            this.table.Borders.Width = 0.5;
+            this.table.Borders.Left.Width = 0.5;
+            this.table.Borders.Right.Width = 0.5;
             this.table.Rows.LeftIndent = 0;
 
             //----------------------------------------------------------------------------
@@ -448,16 +448,10 @@ namespace PitchATent
             column3 = this.table.AddColumn("0.75cm");
             column3.Format.Alignment = ParagraphAlignment.Right;
 
-            column3 = this.table.AddColumn("0.75cm");
-            column3.Format.Alignment = ParagraphAlignment.Right;
-
             column3 = this.table.AddColumn("0.5cm");
             column3.Format.Alignment = ParagraphAlignment.Center;
 
             column3 = this.table.AddColumn("3cm");
-            column3.Format.Alignment = ParagraphAlignment.Right;
-
-            column3 = this.table.AddColumn("0.75cm");
             column3.Format.Alignment = ParagraphAlignment.Right;
 
             column3 = this.table.AddColumn("0.75cm");
@@ -485,7 +479,7 @@ namespace PitchATent
             row3.Cells[0].Format.Font.Bold = true;
             row3.Cells[0].Format.Alignment = ParagraphAlignment.Center;
             row3.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-            row3.Cells[0].MergeRight = 10;
+            row3.Cells[0].MergeRight = 8;
 
             // Extract to smaller variable name
             List<TentItems> walls = Counts.Walls;
@@ -495,6 +489,7 @@ namespace PitchATent
 
             // Reset b to zero
             b = 0;
+            r = 0;
 
             if (cover != null)
             {
@@ -509,6 +504,7 @@ namespace PitchATent
                         row.Format.Font.Bold = true;
                         row.Shading.Color = Colors.White;
                         b = 0;
+                        r++;
                     }
 
 
@@ -528,9 +524,9 @@ namespace PitchATent
                     row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                     //row.Cells[2].MergeDown = 1;
                     b++;
-                    b++;
                 }
-
+                this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
+                this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
 
                 //adds an invisible row to space out the two tables 
                 row3 = table.AddRow();
@@ -545,9 +541,9 @@ namespace PitchATent
             table.Rows.Alignment = RowAlignment.Center;
             this.table.Style = "Table";
             this.table.Borders.Color = Colors.Black;
-            this.table.Borders.Width = 1;
-            this.table.Borders.Left.Width = 1;
-            this.table.Borders.Right.Width = 1;
+            this.table.Borders.Width = 0.5;
+            this.table.Borders.Left.Width = 0.5;
+            this.table.Borders.Right.Width = 0.5;
             this.table.Rows.LeftIndent = 0;
 
             //----------------------------------------------------------------------------
@@ -559,7 +555,13 @@ namespace PitchATent
             column4 = this.table.AddColumn("3cm");
             column4.Format.Alignment = ParagraphAlignment.Right;
 
+            column4 = this.table.AddColumn("0.75cm");
+            column4.Format.Alignment = ParagraphAlignment.Right;
+
             column4 = this.table.AddColumn("0.5cm");
+            column4.Format.Alignment = ParagraphAlignment.Center;
+
+            column4 = this.table.AddColumn("3cm");
             column4.Format.Alignment = ParagraphAlignment.Right;
 
             column4 = this.table.AddColumn("0.75cm");
@@ -571,19 +573,7 @@ namespace PitchATent
             column4 = this.table.AddColumn("3cm");
             column4.Format.Alignment = ParagraphAlignment.Right;
 
-            column4 = this.table.AddColumn("0.5cm");
-            column4.Format.Alignment = ParagraphAlignment.Right;
-
             column4 = this.table.AddColumn("0.75cm");
-            column4.Format.Alignment = ParagraphAlignment.Right;
-
-            column4 = this.table.AddColumn("0.5cm");
-            column4.Format.Alignment = ParagraphAlignment.Center;
-
-            column4 = this.table.AddColumn("3cm");
-            column4.Format.Alignment = ParagraphAlignment.Right;
-
-            column4 = this.table.AddColumn("0.5cm");
             column4.Format.Alignment = ParagraphAlignment.Right;
 
             //----------------------------------------------------------------------------
@@ -593,13 +583,13 @@ namespace PitchATent
             row.HeadingFormat = true;
             row.Format.Alignment = ParagraphAlignment.Center;
             row.Format.Font.Bold = true;
-            row.Shading.Color = Colors.Gray;
+            row.Shading.Color = Colors.LightGray;
 
             row.Cells[0].AddParagraph("Tie-Downs");
             row.Cells[0].Format.Font.Bold = true;
             row.Cells[0].Format.Alignment = ParagraphAlignment.Center;
             row.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-            row.Cells[0].MergeRight = 10;
+            row.Cells[0].MergeRight = 8;
 
             // Get count of tie down items
             int TieDownTableSize = Counts.TieDowns.Count;
@@ -608,6 +598,7 @@ namespace PitchATent
             List<TentItems> TieDown = Counts.TieDowns;
 
             b = 0;
+            r = 0;
 
             for (int i = 0; i < TieDownTableSize; ++i)
             {
@@ -618,6 +609,7 @@ namespace PitchATent
                     row.Format.Alignment = ParagraphAlignment.Center;
                     row.Format.Font.Bold = true;
                     row.Shading.Color = Colors.White;
+                    r++;
                 }
                 
                 row.Cells[b].AddParagraph("□");
@@ -635,11 +627,10 @@ namespace PitchATent
                 row.Cells[b].Format.Alignment = ParagraphAlignment.Center;
                 row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                 //row.Cells[2].MergeDown = 1;
-                b++;
-                b++;
-                
+                b++;                
             }
-
+            this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
+            this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
             //adds an invisible row to space out the two tables 
             row = table.AddRow();
             row.Borders.Visible = false;
@@ -654,9 +645,9 @@ namespace PitchATent
                 table.Rows.Alignment = RowAlignment.Center;
                 this.table.Style = "Table";
                 this.table.Borders.Color = Colors.Black;
-                this.table.Borders.Width = 1;
-                this.table.Borders.Left.Width = 1;
-                this.table.Borders.Right.Width = 1;
+                this.table.Borders.Width = 0.5;
+                this.table.Borders.Left.Width = 0.5;
+                this.table.Borders.Right.Width = 0.5;
                 this.table.Rows.LeftIndent = 0;
 
                 //----------------------------------------------------------------------------
@@ -671,16 +662,10 @@ namespace PitchATent
                 column5 = this.table.AddColumn("0.75cm");
                 column5.Format.Alignment = ParagraphAlignment.Right;
 
-                column5 = this.table.AddColumn("0.75cm");
-                column5.Format.Alignment = ParagraphAlignment.Right;
-
                 column5 = this.table.AddColumn("0.5cm");
                 column5.Format.Alignment = ParagraphAlignment.Center;
 
                 column5 = this.table.AddColumn("3cm");
-                column5.Format.Alignment = ParagraphAlignment.Right;
-
-                column5 = this.table.AddColumn("0.75cm");
                 column5.Format.Alignment = ParagraphAlignment.Right;
 
                 column5 = this.table.AddColumn("0.75cm");
@@ -702,19 +687,19 @@ namespace PitchATent
                 row.HeadingFormat = true;
                 row.Format.Alignment = ParagraphAlignment.Center;
                 row.Format.Font.Bold = true;
-                row.Shading.Color = Colors.Gray;
+                row.Shading.Color = Colors.LightGray;
 
                 row.Cells[0].AddParagraph("Accessories");
                 row.Cells[0].Format.Font.Bold = true;
                 row.Cells[0].Format.Alignment = ParagraphAlignment.Center;
                 row.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-                row.Cells[0].MergeRight = 10;
+                row.Cells[0].MergeRight = 8;
 
                 // Get count of accessories
                 int AccTableSize = Acc.Count;
 
                 b = 0;
-
+                r = 0;
                 for (int i = 0; i < AccTableSize; ++i)
                 {
                     if (i == 0 || i % 3 == 0)
@@ -725,6 +710,7 @@ namespace PitchATent
                         row.Format.Font.Bold = true;
                         row.Shading.Color = Colors.White;
                         b = 0;
+                        r++;
                     }
                     row.Cells[b].AddParagraph("□");
                     row.Cells[b].Format.Font.Bold = true;
@@ -742,17 +728,17 @@ namespace PitchATent
                     row.Cells[b].VerticalAlignment = VerticalAlignment.Center;
                     //row.Cells[2].MergeDown = 1;
                     b++;
-                    b++;
-
                 }
             }
+            this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
+            this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
             //adds an invisible row to space out the two tables 
             row = table.AddRow();
             row.Borders.Visible = false;
             
 
             // not sure what this does yet but pretty sure it makes an edge that surrounds the table kind of like thick borders
-            this.table.SetEdge(0, 0, 3, 1, Edge.Box, BorderStyle.Single, 1, Color.Empty);
+            //this.table.SetEdge(0, 0, 3, 1, Edge.Box, BorderStyle.Single, 1, Color.Empty);
 
             //--------------------------------------------------------------------------//
             //------//-----------//---- Stuff After Tables  ------//----------//--------//
@@ -776,9 +762,9 @@ namespace PitchATent
             //table1.Rows.Alignment = VerticalAlignment.Bottom;
             this.table1.Style = "Table";
             this.table1.Borders.Color = Colors.Black;
-            this.table1.Borders.Width = 1;
-            this.table1.Borders.Left.Width = 1;
-            this.table1.Borders.Right.Width = 1;
+            this.table1.Borders.Width = 0.5;
+            this.table1.Borders.Left.Width = 0.5;
+            this.table1.Borders.Right.Width = 0.5;
             this.table1.Rows.LeftIndent = 0;
 
             //----------------------------------------------------------------------------
@@ -887,7 +873,7 @@ namespace PitchATent
             paragraph.Format.Borders.Width = 0.75;
             paragraph.Format.Borders.Distance = 3;
             paragraph.Format.Borders.Color = Colors.Black;
-            paragraph.Format.Shading.Color = Colors.Gray;
+            paragraph.Format.Shading.Color = Colors.LightGray;
             paragraph.AddText("notes \n \n \n \n");
 
         }
