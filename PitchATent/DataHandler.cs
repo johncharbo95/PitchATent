@@ -10,7 +10,8 @@ using System.Xml.Serialization;
 namespace PitchATent
 {
     public class DataHandler
-    {     
+    {
+     
         public enum Legs { shortLegs, longLegs, none};
 
         public ItemCounts CountTents(ref ListNames ListOfLists)
@@ -110,6 +111,7 @@ namespace PitchATent
 
                         if (FrameRow != null)
                         {
+                            // TODO: Handle mids and ends after database is fixed
                             HandleList("Frame 10'", FrameRow.Cover10 * qty, CoverList);
                             HandleList("Frame 15'", FrameRow.Cover15 * qty, CoverList);
                         }
@@ -126,8 +128,8 @@ namespace PitchATent
 
                         if (ClearSpanRow != null)
                         {
-                            HandleList("ClearSpan 10'", ClearSpanRow.Cover10 * qty, CoverList);
-                            HandleList("ClearSpan 15'", ClearSpanRow.Cover15 * qty, CoverList);
+                            HandleList(string.Format("ClearSpan {0}' x 10'", ClearSpanWidth.ToString()), ClearSpanRow.Cover10 * qty, CoverList);
+                            HandleList(string.Format("ClearSpan {0}' x 15'", ClearSpanWidth.ToString()), ClearSpanRow.Cover15 * qty, CoverList);
                             
                             switch(ClearSpanWidth)
                             {
@@ -209,7 +211,7 @@ namespace PitchATent
 
                 // This can definitely be optimized but it works...
                 // Insert walls in list.
-                if (leg != Legs.none)
+                if (leg != Legs.none && ListOfLists.tentWalls[i] != "None")
                 {
 
                     string leg_length = null;
@@ -259,11 +261,7 @@ namespace PitchATent
                     }
 
                 }
-                else
-                {
-                    throw new Exception("Leg enum assigned null value");
-                }
-                
+
             }
 
             DataHandler.printAllLists(MetalItemList,WallList,CoverList,HoldDownList);

@@ -30,6 +30,7 @@ namespace PitchATent
         private int TentCtr { get; set; }
         private bool NewAccessory { get; set; } = true;
         public DateTime InstallDate { get; set; }
+        public bool ShowPDF { get; set; } = true;
 
         #region Add Tent Buttons
         private void btn_addSmallTent_Click(object sender, EventArgs e)
@@ -67,9 +68,19 @@ namespace PitchATent
         
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // This seemed too easy, we might get screwed later?
-            PrintDialog print = new PrintDialog();
-            print.ShowDialog();
+            // Set the ShowPDF property to false to not show the PDF
+            ShowPDF = false;
+
+            // Generate the document
+            string fname = GenerateReport();
+
+            PrintDialog pDialog = new PrintDialog();
+            pDialog.ShowDialog();
+
+            // https://stackoverflow.com/questions/6103705/how-can-i-send-a-file-document-to-the-printer-and-have-it-print?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+
+
+
         }
         
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -165,14 +176,14 @@ namespace PitchATent
             TentDLG.ShowDialog();
 
             // Update Main Dialog with new values
-            this.tentDGV.Rows[selectedRowIndex].Cells[0].Value = TentDLG.TentSize;
-            this.tentDGV.Rows[selectedRowIndex].Cells[1].Value = typeOfTent;
+            this.tentDGV.Rows[selectedRowIndex].Cells[0].Value = typeOfTent;
+            this.tentDGV.Rows[selectedRowIndex].Cells[1].Value = TentDLG.TentSize;
             this.tentDGV.Rows[selectedRowIndex].Cells[2].Value = TentDLG.Qty.ToString();
             this.tentDGV.Rows[selectedRowIndex].Cells[3].Value = TentDLG.CoverType;
             this.tentDGV.Rows[selectedRowIndex].Cells[4].Value = TentDLG.TieDown;
             this.tentDGV.Rows[selectedRowIndex].Cells[5].Value = TentDLG.Walls;
             this.tentDGV.Rows[selectedRowIndex].Cells[6].Value = TentDLG.Legs;
-
+            
             // Update the list of items
             UpdateList();
         }
@@ -369,12 +380,13 @@ namespace PitchATent
         #endregion
 
 
-        private void btn_GeneratePDF_Click(object sender, EventArgs e)
+        private string GenerateReport()
         {
             // Get information about the truck, trailer, driver
             string truck = tb_truck.Text;
             string trailer = tb_trailer.Text;
             string driver = tb_driver.Text;
+            string filename = String.Empty;
 
             // Test for null or empty strings
             if (String.IsNullOrEmpty(truck))
@@ -402,7 +414,7 @@ namespace PitchATent
             {
                 Directory.CreateDirectory(OutputPath);
             }
-            
+
             // Get the final count of items
             ItemCounts counts = UpdateList();
 
@@ -450,12 +462,17 @@ namespace PitchATent
 
                 // Save the PDF document...
                 // TODO: Check if file already exists
-                string filename = string.Format("{0}MaterialList_{2}_truck{1}.pdf", OutputPath, truck, date);
+                filename = string.Format("{0}MaterialList_{2}_truck{1}.pdf", OutputPath, truck, date);
                 Console.WriteLine(filename);
 
                 pdfRenderer.Save(filename);
-                // ...and start a viewer.
-                Process.Start(filename);
+
+                // ...and start a viewer if desired
+                if (ShowPDF == true)
+                {
+                    Process.Start(filename);
+                }
+                
             }
             else
             {
@@ -463,9 +480,15 @@ namespace PitchATent
                     "Empty List", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            
+            return filename;
+
         }
 
+        private void btn_GeneratePDF_Click(object sender, EventArgs e)
+        {
+            ShowPDF = true;
+            GenerateReport();
+        }
         
     }
 }
