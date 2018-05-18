@@ -73,15 +73,42 @@ namespace PitchATent
 
             // Generate the document
             string fname = GenerateReport();
-
-            PrintDialog pDialog = new PrintDialog();
-            pDialog.ShowDialog();
-
+            
             // https://stackoverflow.com/questions/6103705/how-can-i-send-a-file-document-to-the-printer-and-have-it-print?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
+            if (!string.IsNullOrEmpty(fname))
+            {
+                PrintDialog pdialog = new PrintDialog();
 
+                if (pdialog.ShowDialog() == DialogResult.OK)
+                {
 
+                    
+
+                    ProcessStartInfo info = new ProcessStartInfo
+                    {
+                        Verb = "PrintTo",
+                        FileName = fname,
+                        CreateNoWindow = true,
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        Arguments = "\"" + pdialog.PrinterSettings.PrinterName + "\"",
+                        UseShellExecute = true
+                    };
+
+                    Console.WriteLine(fname);
+
+                    Process p = new Process
+                    {
+                        StartInfo = info
+                    };
+                    p.Start();
+
+                    p.WaitForExit();
+                    
+                }
+            }
         }
+
         
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -157,15 +184,17 @@ namespace PitchATent
             Tent typeOfTent = (UserInterface.Tent)tentDGV.Rows[selectedRowIndex].Cells[0].Value;
 
             // Create new object of AddTentDlg class
-            var TentDLG = new AddTentDlg(typeOfTent);
+            var TentDLG = new AddTentDlg(typeOfTent)
+            {
 
-            // Set properties of object according to values in selected row
-            TentDLG.TentSize = this.tentDGV.Rows[selectedRowIndex].Cells[1].Value.ToString();
-            TentDLG.Qty = Convert.ToDecimal(this.tentDGV.Rows[selectedRowIndex].Cells[2].Value);
-            TentDLG.CoverType = this.tentDGV.Rows[selectedRowIndex].Cells[3].Value.ToString();
-            TentDLG.TieDown = this.tentDGV.Rows[selectedRowIndex].Cells[4].Value.ToString();
-            TentDLG.Walls = this.tentDGV.Rows[selectedRowIndex].Cells[5].Value.ToString();
-            TentDLG.Legs = this.tentDGV.Rows[selectedRowIndex].Cells[6].Value.ToString();
+                // Set properties of object according to values in selected row
+                TentSize = this.tentDGV.Rows[selectedRowIndex].Cells[1].Value.ToString(),
+                Qty = Convert.ToDecimal(this.tentDGV.Rows[selectedRowIndex].Cells[2].Value),
+                CoverType = this.tentDGV.Rows[selectedRowIndex].Cells[3].Value.ToString(),
+                TieDown = this.tentDGV.Rows[selectedRowIndex].Cells[4].Value.ToString(),
+                Walls = this.tentDGV.Rows[selectedRowIndex].Cells[5].Value.ToString(),
+                Legs = this.tentDGV.Rows[selectedRowIndex].Cells[6].Value.ToString()
+            };
 
             // Update the Dialog with these values
             TentDLG.UpdateFields();
@@ -262,10 +291,12 @@ namespace PitchATent
                 // Create object with the lists and send for processing
                 var ListOfLists = new ListNames(tentTypes, tentSizes, tentQties, tentCoverTypes, tentHoldDowns, tentWalls, tentLegs);
                 DataHandler handler = new DataHandler();
-                counts = handler.CountTents(ref ListOfLists);
-                PopulatePreview(counts);
+                counts = handler.CountTents(ref ListOfLists); 
                 
             }
+
+            if (counts != null)
+                PopulatePreview(counts);
 
             return counts;
 
@@ -409,7 +440,8 @@ namespace PitchATent
             string MyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             // Check if output folder already exists
-            string OutputPath = MyDocumentsPath + @"\Truck Loads\";
+            string OutputPath = @MyDocumentsPath + @"\Truck Loads\";
+            Console.WriteLine(OutputPath);
             if (!File.Exists(OutputPath))
             {
                 Directory.CreateDirectory(OutputPath);
@@ -452,18 +484,19 @@ namespace PitchATent
                 document.UseCmykColor = true;
 
                 // Create a renderer for PDF that uses Unicode font encoding
-                PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true);
+                PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true)
+                {
 
-                // Set the MigraDoc document
-                pdfRenderer.Document = document;
+                    // Set the MigraDoc document
+                    Document = document
+                };
 
                 // Create the PDF document
                 pdfRenderer.RenderDocument();
 
                 // Save the PDF document...
                 // TODO: Check if file already exists
-                filename = string.Format("{0}MaterialList_{2}_truck{1}.pdf", OutputPath, truck, date);
-                Console.WriteLine(filename);
+                filename = string.Format(@"{0}MaterialList_{2}_truck{1}.pdf", OutputPath, truck, date);
 
                 pdfRenderer.Save(filename);
 
@@ -478,6 +511,7 @@ namespace PitchATent
             {
                 MessageBox.Show("You can not generate a list at this point, because you have no tents listed. Please add tents to this load.",
                     "Empty List", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                filename = string.Empty;
             }
 
             return filename;
