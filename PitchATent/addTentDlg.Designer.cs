@@ -222,6 +222,7 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(100, 100);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Name = "AddTentDlg";
             this.ShowIcon = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.addTentDlg_FormClosing);
