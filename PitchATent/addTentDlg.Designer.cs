@@ -65,6 +65,7 @@
             this.cb_size.Name = "cb_size";
             this.cb_size.Size = new System.Drawing.Size(121, 21);
             this.cb_size.TabIndex = 1;
+            this.cb_size.SelectedIndexChanged += new System.EventHandler(this.cb_size_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -199,6 +200,7 @@
             // 
             // AddTentDlg
             // 
+            this.AcceptButton = this.btn_add;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
