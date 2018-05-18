@@ -137,10 +137,6 @@ namespace PitchATent
             UpdateList();
         }
 
-        /// <summary>
-        /// On the click of the "Accessories" button, determines if this is the first time adding accessories. 
-        /// If it is, the dialog shows 0 values everywhere. If not, it is considered "Edit mode" and shows the existing accessories.
-        /// </summary>
         private void btn_AddAcc_Click(object sender, EventArgs e)
         {
             var AccessoryDialog = new AccessoryDlg();
@@ -171,70 +167,6 @@ namespace PitchATent
             InstallDate = dateTime.Value;
         }
 
-        #region Tent DataGridView Context Menu Strip
-        /// <summary>
-        /// Allows the user to edit the contents of a specific row from the ContextMenuStrip of the DataGridView.
-        /// </summary>
-        private void editRowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Get index of selected row
-            int selectedRowIndex = tentDGV.SelectedCells[0].RowIndex;
-
-            // Get the type of tent (enum)
-            Tent typeOfTent = (UserInterface.Tent)tentDGV.Rows[selectedRowIndex].Cells[0].Value;
-
-            // Create new object of AddTentDlg class
-            var TentDLG = new AddTentDlg(typeOfTent)
-            {
-
-                // Set properties of object according to values in selected row
-                TentSize = this.tentDGV.Rows[selectedRowIndex].Cells[1].Value.ToString(),
-                Qty = Convert.ToDecimal(this.tentDGV.Rows[selectedRowIndex].Cells[2].Value),
-                CoverType = this.tentDGV.Rows[selectedRowIndex].Cells[3].Value.ToString(),
-                TieDown = this.tentDGV.Rows[selectedRowIndex].Cells[4].Value.ToString(),
-                Walls = this.tentDGV.Rows[selectedRowIndex].Cells[5].Value.ToString(),
-                Legs = this.tentDGV.Rows[selectedRowIndex].Cells[6].Value.ToString()
-            };
-
-            // Update the Dialog with these values
-            TentDLG.UpdateFields();
-
-            // Show the Dialog
-            TentDLG.StartPosition = FormStartPosition.Manual;
-            TentDLG.Location = new Point(100, 100);
-            TentDLG.ShowDialog();
-
-            // Update Main Dialog with new values
-            this.tentDGV.Rows[selectedRowIndex].Cells[0].Value = typeOfTent;
-            this.tentDGV.Rows[selectedRowIndex].Cells[1].Value = TentDLG.TentSize;
-            this.tentDGV.Rows[selectedRowIndex].Cells[2].Value = TentDLG.Qty.ToString();
-            this.tentDGV.Rows[selectedRowIndex].Cells[3].Value = TentDLG.CoverType;
-            this.tentDGV.Rows[selectedRowIndex].Cells[4].Value = TentDLG.TieDown;
-            this.tentDGV.Rows[selectedRowIndex].Cells[5].Value = TentDLG.Walls;
-            this.tentDGV.Rows[selectedRowIndex].Cells[6].Value = TentDLG.Legs;
-            
-            // Update the list of items
-            UpdateList();
-        }
-
-        private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in tentDGV.SelectedRows)
-            {
-                // Remove the row
-                tentDGV.Rows.Remove(row);
-
-                // Decrease row count by one
-                --TentCtr;
-            }
-
-            // Update the list
-            UpdateList();
-
-            // Clear selected rows
-            tentDGV.ClearSelection();
-        }
-
         private void tentDGV_KeyDown(object sender, KeyEventArgs e)
         {
             
@@ -257,8 +189,6 @@ namespace PitchATent
                 e.Handled = true;
             }
         }
-
-        #endregion
 
         private ItemCounts UpdateList()
         {
@@ -315,49 +245,54 @@ namespace PitchATent
             var covers = counts.Covers;
             var tiedowns = counts.TieDowns;
 
-            metals = metals.OrderBy(o => o.Type).ToList();
-            walls = walls.OrderBy(o => o.Type).ToList();
-            covers = covers.OrderBy(o => o.Type).ToList();
-            tiedowns = tiedowns.OrderBy(o => o.Type).ToList();
-
-            int i = 0;
-
-
-            // Loop through all items in metal list
-            foreach (var metal in metals)
+            if (covers != null)
             {
-                this.previewDGV.Rows.Add();
-                this.previewDGV.Rows[i].Cells[0].Value = metal.Type;
-                this.previewDGV.Rows[i].Cells[1].Value = metal.Qty.ToString();
-                i++;
+                metals = metals.OrderBy(o => o.Type).ToList();
+                walls = walls.OrderBy(o => o.Type).ToList();
+                covers = covers.OrderBy(o => o.Type).ToList();
+                tiedowns = tiedowns.OrderBy(o => o.Type).ToList();
+
+                int i = 0;
+
+
+                // Loop through all items in metal list
+                foreach (var metal in metals)
+                {
+                    this.previewDGV.Rows.Add();
+                    this.previewDGV.Rows[i].Cells[0].Value = metal.Type;
+                    this.previewDGV.Rows[i].Cells[1].Value = metal.Qty.ToString();
+                    i++;
+                }
+
+                // Loop through all items in covers list
+                foreach (var cover in covers)
+                {
+                    this.previewDGV.Rows.Add();
+                    this.previewDGV.Rows[i].Cells[0].Value = cover.Type;
+                    this.previewDGV.Rows[i].Cells[1].Value = cover.Qty.ToString();
+                    i++;
+                }
+
+                // Loop through all items in wall list
+                foreach (var wall in walls)
+                {
+                    this.previewDGV.Rows.Add();
+                    this.previewDGV.Rows[i].Cells[0].Value = wall.Type;
+                    this.previewDGV.Rows[i].Cells[1].Value = wall.Qty.ToString();
+                    i++;
+                }
+
+                // Loop through all items in tie down list
+                foreach (var tiedown in tiedowns)
+                {
+                    this.previewDGV.Rows.Add();
+                    this.previewDGV.Rows[i].Cells[0].Value = tiedown.Type;
+                    this.previewDGV.Rows[i].Cells[1].Value = tiedown.Qty.ToString();
+                    i++;
+                }
             }
 
-            // Loop through all items in covers list
-            foreach (var cover in covers)
-            {
-                this.previewDGV.Rows.Add();
-                this.previewDGV.Rows[i].Cells[0].Value = cover.Type;
-                this.previewDGV.Rows[i].Cells[1].Value = cover.Qty.ToString();
-                i++;
-            }
             
-            // Loop through all items in wall list
-            foreach (var wall in walls)
-            {
-                this.previewDGV.Rows.Add();
-                this.previewDGV.Rows[i].Cells[0].Value = wall.Type;
-                this.previewDGV.Rows[i].Cells[1].Value = wall.Qty.ToString();
-                i++;
-            }
-
-            // Loop through all items in tie down list
-            foreach (var tiedown in tiedowns)
-            {
-                this.previewDGV.Rows.Add();
-                this.previewDGV.Rows[i].Cells[0].Value = tiedown.Type;
-                this.previewDGV.Rows[i].Cells[1].Value = tiedown.Qty.ToString();
-                i++;
-            }
         }
 
         
@@ -379,38 +314,6 @@ namespace PitchATent
             }
         }
 
-        #region ClearButtons
-        private void btn_ClearTents_Click(object sender, EventArgs e)
-        {
-            int tentCount = this.tentDGV.Rows.Count;
-            if (tentCount > 0)
-            {
-                if (MessageBox.Show("Are you sure you want to clear current tents? Your changes will not be saved.", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    this.tentDGV.Rows.Clear();
-                    UpdateList();
-                    this.previewDGV.Rows.Clear();
-                    TentCtr = 0;
-                }
-            }
-        }
-
-        private void btn_ClearAcc_Click(object sender, EventArgs e)
-        {
-            int accCount = this.accDGV.Rows.Count;
-            if (accCount > 0)
-            {
-                if (MessageBox.Show("Are you sure you want to clear current accessories? Your changes will not be saved.", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    this.accDGV.Rows.Clear();
-                    NewAccessory = true;
-                    
-                }
-            }
-        }
-        #endregion
-
-
         private string GenerateReport()
         {
             // Get information about the truck, trailer, driver
@@ -430,7 +333,7 @@ namespace PitchATent
             }
             if (String.IsNullOrEmpty(driver))
             {
-                driver = "MIKAYLA";
+                driver = "MICHAYLA";
             }
 
             // Get today's date
@@ -523,6 +426,121 @@ namespace PitchATent
             ShowPDF = true;
             GenerateReport();
         }
-        
+
+        #region ClearButtons
+        private void btn_ClearTents_Click(object sender, EventArgs e)
+        {
+            int tentCount = this.tentDGV.Rows.Count;
+            if (tentCount > 0)
+            {
+                if (MessageBox.Show("Are you sure you want to clear current tents? Your changes will not be saved.", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    this.tentDGV.Rows.Clear();
+                    UpdateList();
+                    this.previewDGV.Rows.Clear();
+                    TentCtr = 0;
+                }
+            }
+        }
+
+        private void btn_ClearAcc_Click(object sender, EventArgs e)
+        {
+            int accCount = this.accDGV.Rows.Count;
+            if (accCount > 0)
+            {
+                if (MessageBox.Show("Are you sure you want to clear current accessories? Your changes will not be saved.", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    this.accDGV.Rows.Clear();
+                    NewAccessory = true;
+
+                }
+            }
+        }
+        #endregion
+
+        #region AddTentDlg ContextMenuStrip
+        private void addSmallTentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openTentDialog(UserInterface.Tent.Small);
+        }
+
+        private void addLargeTentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openTentDialog(UserInterface.Tent.Large);
+        }
+
+        private void addFrameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openTentDialog(UserInterface.Tent.Frame);
+        }
+
+        private void addClearSpanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openTentDialog(UserInterface.Tent.ClearSpan);
+        }
+
+        private void editRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Get index of selected row
+            int selectedRowIndex = tentDGV.SelectedCells[0].RowIndex;
+
+            // Get the type of tent (enum)
+            Tent typeOfTent = (UserInterface.Tent)tentDGV.Rows[selectedRowIndex].Cells[0].Value;
+
+            // Create new object of AddTentDlg class
+            var TentDLG = new AddTentDlg(typeOfTent)
+            {
+
+                // Set properties of object according to values in selected row
+                TentSize = this.tentDGV.Rows[selectedRowIndex].Cells[1].Value.ToString(),
+                Qty = Convert.ToDecimal(this.tentDGV.Rows[selectedRowIndex].Cells[2].Value),
+                CoverType = this.tentDGV.Rows[selectedRowIndex].Cells[3].Value.ToString(),
+                TieDown = this.tentDGV.Rows[selectedRowIndex].Cells[4].Value.ToString(),
+                Walls = this.tentDGV.Rows[selectedRowIndex].Cells[5].Value.ToString(),
+                Legs = this.tentDGV.Rows[selectedRowIndex].Cells[6].Value.ToString()
+            };
+
+            // Update the Dialog with these values
+            TentDLG.UpdateFields();
+
+            // Show the Dialog
+            TentDLG.StartPosition = FormStartPosition.Manual;
+            TentDLG.Location = new Point(100, 100);
+
+            if (TentDLG.ShowDialog() == DialogResult.OK)
+            {
+                // Update Main Dialog with new values
+                this.tentDGV.Rows[selectedRowIndex].Cells[0].Value = typeOfTent;
+                this.tentDGV.Rows[selectedRowIndex].Cells[1].Value = TentDLG.TentSize;
+                this.tentDGV.Rows[selectedRowIndex].Cells[2].Value = TentDLG.Qty.ToString();
+                this.tentDGV.Rows[selectedRowIndex].Cells[3].Value = TentDLG.CoverType;
+                this.tentDGV.Rows[selectedRowIndex].Cells[4].Value = TentDLG.TieDown;
+                this.tentDGV.Rows[selectedRowIndex].Cells[5].Value = TentDLG.Walls;
+                this.tentDGV.Rows[selectedRowIndex].Cells[6].Value = TentDLG.Legs;
+
+                // Update the list of items
+                UpdateList();
+            }
+
+        }
+
+        private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in tentDGV.SelectedRows)
+            {
+                // Remove the row
+                tentDGV.Rows.Remove(row);
+
+                // Decrease row count by one
+                --TentCtr;
+            }
+
+            // Update the list
+            UpdateList();
+
+            // Clear selected rows
+            tentDGV.ClearSelection();
+        }
+        #endregion
     }
 }
