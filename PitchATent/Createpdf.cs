@@ -160,8 +160,9 @@ namespace PitchATent
             paragraph = this.addressFrame.AddParagraph("     Tents For All Events");
             paragraph.Format.Font.Name = "Calibri";
             paragraph.Format.Font.Bold = true;
-            paragraph.Format.Font.Color = Colors.DarkOrange;
-            paragraph.Format.Font.Size = 14;
+            paragraph.Format.Font.Color = Colors.Black;
+            paragraph.Format.Font.Size = 13;
+            paragraph.Format.SpaceBefore = "0.075cm";
             paragraph.Format.SpaceAfter = 3;
 
             //----------------------------------------------------------------------------
