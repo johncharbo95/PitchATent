@@ -90,8 +90,7 @@ namespace PitchATent
                     "Full Plain Fiesta",
                     "Full Window Fiesta",
                     "Half Plain Half Window Fiesta",
-                    "None",
-                    "Custom..."});
+                    "None"});
                     this.cb_walls.SelectedIndex = 0;
                     break;
                 case UserInterface.Tent.Small:
@@ -141,8 +140,7 @@ namespace PitchATent
                     "Full Plain Fiesta",
                     "Full Window Fiesta",
                     "Half Plain Half Window Fiesta",
-                    "None",
-                    "Custom..."});
+                    "None"});
                     this.cb_walls.SelectedIndex = 0;
                     // TODO: Can't have 10 foot fiesta walls (if 10 ft legs is selected)
                     this.cb_legs.Items.AddRange(new object[] {
@@ -215,8 +213,7 @@ namespace PitchATent
                     "Full Plain",
                     "Full Window",
                     "Half Plain Half Window",
-                    "None",
-                    "Custom..."});
+                    "None"});
                     this.cb_walls.SelectedIndex = 0;
                     this.cb_legs.Items.AddRange(new object[] {
                     "8 ft",
@@ -366,8 +363,7 @@ namespace PitchATent
                     "Full Bay Window",
                     "Full French Window",
                     "Half Plain Half Bay Window",
-                    "None",
-                    "Custom..."});
+                    "None"});
                     this.cb_walls.SelectedIndex = 0;
                     this.cb_legs.Items.AddRange(new object[] {
                     "8 ft",
