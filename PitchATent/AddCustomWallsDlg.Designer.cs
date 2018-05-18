@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddCustomWallsDlg));
             this.lbl_Plain = new System.Windows.Forms.Label();
             this.nud_Plain = new System.Windows.Forms.NumericUpDown();
             this.lbl_Window = new System.Windows.Forms.Label();
@@ -164,6 +165,9 @@
             this.Controls.Add(this.lbl_Window);
             this.Controls.Add(this.nud_Plain);
             this.Controls.Add(this.lbl_Plain);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::PitchATent.Properties.Settings.Default, "mine", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = global::PitchATent.Properties.Settings.Default.mine;
             this.Name = "AddCustomWallsDlg";
             this.ShowIcon = false;
             this.Text = "Add Custom Walls";
