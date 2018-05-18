@@ -250,28 +250,28 @@ namespace PitchATent
                     string leg_length = null;
                     if (leg == Legs.longLegs)
                     {
-                        leg_length = "10'";
+                        leg_length = ", 10'";
                     }
 
                     switch (ListOfLists.tentWalls[i])
                     {
                         case "Full Plain":
-                            HandleList(string.Format("Murs 10' P, {0}",leg_length), db.Walls10 * qty, WallList);
-                            HandleList(string.Format("Murs 15' P, {0}", leg_length), db.Walls15 * qty, WallList);
-                            HandleList(string.Format("Murs 20' P, {0}", leg_length), db.Walls20 * qty, WallList);
+                            HandleList(string.Format("Murs 10' P{0}", leg_length), db.Walls10 * qty, WallList);
+                            HandleList(string.Format("Murs 15' P{0}", leg_length), db.Walls15 * qty, WallList);
+                            HandleList(string.Format("Murs 20' P{0}", leg_length), db.Walls20 * qty, WallList);
                             break;                           
                         case "Full Window":                  
-                            HandleList(string.Format("Murs 10' W, {0}", leg_length), db.Walls10 * qty, WallList);
-                            HandleList(string.Format("Murs 15' W, {0}", leg_length), db.Walls15 * qty, WallList);
-                            HandleList(string.Format("Murs 20' W, {0}", leg_length), db.Walls20 * qty, WallList);
+                            HandleList(string.Format("Murs 10' W{0}", leg_length), db.Walls10 * qty, WallList);
+                            HandleList(string.Format("Murs 15' W{0}", leg_length), db.Walls15 * qty, WallList);
+                            HandleList(string.Format("Murs 20' W{0}", leg_length), db.Walls20 * qty, WallList);
                             break;                           
                         case "Half Plain Half Window":       
-                            HandleList(string.Format("Murs 10' P, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
-                            HandleList(string.Format("Murs 15' P, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
-                            HandleList(string.Format("Murs 20' P, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
-                            HandleList(string.Format("Murs 10' W, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
-                            HandleList(string.Format("Murs 15' W, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
-                            HandleList(string.Format("Murs 20' W, {0}", leg_length), (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 10' P{0}", leg_length), (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 15' P{0}", leg_length), (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 20' P{0}", leg_length), (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 10' W{0}", leg_length), (int)System.Math.Ceiling((double)db.Walls10 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 15' W{0}", leg_length), (int)System.Math.Ceiling((double)db.Walls15 / 2) * qty, WallList);
+                            HandleList(string.Format("Murs 20' W{0}", leg_length), (int)System.Math.Ceiling((double)db.Walls20 / 2) * qty, WallList);
                             break;                           
                         case "Full Plain Fiesta":            
                             HandleList(string.Format("Murs 10' PF, {0}", leg_length), db.Walls10 * qty, WallList);
