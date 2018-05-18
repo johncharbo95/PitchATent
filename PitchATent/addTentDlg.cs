@@ -437,7 +437,6 @@ namespace PitchATent
             this.Walls = cb_walls.Text;
             this.Legs = cb_legs.Text;
             this.TypeOfTent = tent;
-
         }
 
         #region Buttons
@@ -495,6 +494,17 @@ namespace PitchATent
 #endif
         }
 
-        
+        private void cb_size_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.TypeOfTent == UserInterface.Tent.Small)
+            {
+                if(cb_size.Text == "Hexagon")
+                {
+                    // Set the legs combobox to Hexagon
+                    cb_legs.SelectedIndex = 4;
+                    this.Legs = "Hexagon";
+                }
+            }
+        }
     }
 }
