@@ -22,6 +22,9 @@ namespace PitchATent
         public int Walls10 { get; set; }
         public int Walls15 { get; set; }
         public int Walls20 { get; set; }
+        public int CSPWalls10 { get; set; }
+        public int CSPWalls15 { get; set; }
+        public int CSPWalls20 { get; set; }
         public int ComeAlong { get; set; }
         public int Cover15 { get; set; }
         public int Cover10 { get; set; }

@@ -46,9 +46,10 @@ namespace PitchATent
                 // Get the quantity of that particular tent
                 int qty = ListOfLists.tentQties[i];
 
-                // Get the cover size and type of tent
+                // Get the cover size, type of cover and type of tent
                 string size = ListOfLists.tentSizes[i];
                 UserInterface.Tent typeOfTent = ListOfLists.tentType[i];
+                string coverType = ListOfLists.tentCoverTypes[i];
 
                 // Depending on the type and size of tent, get the appropriate row in the database.
                 switch (ListOfLists.tentType[i])
@@ -78,7 +79,7 @@ namespace PitchATent
                                 else
                                 {
                                     HandleList("Coins", SmallRow.Corner * qty, MetalItemList);
-                                    HandleList(SmallRow.Size + " " + ListOfLists.tentType[i], qty, CoverList);
+                                    HandleList(SmallRow.Size + " " + coverType, qty, CoverList);
                                 }
                                 HandleList("Brace - 30", SmallRow.Brace * qty, MetalItemList);
                                 HandleList(string.Format("PM {0}", size), SmallRow.MiddlePost * qty, MetalItemList);
@@ -98,9 +99,9 @@ namespace PitchATent
                         {
                             HandleList(string.Format("PM {0}", size.Substring(0, 2)), LargeRow.MiddlePost * qty, MetalItemList);
                             HandleList("Plates", LargeRow.Plates * qty, MetalItemList);
-                            HandleList("Mid 20'", LargeRow.Mid20 * qty, CoverList);
-                            HandleList("Mid 30'", LargeRow.Mid30 * qty, CoverList);
-                            HandleList(string.Format("End {0}'", size.Substring(0,2)), 2 * qty, CoverList);
+                            HandleList(string.Format("Mid {0}' x 20' {1}",size.Substring(0,2), coverType), LargeRow.Mid20 * qty, CoverList);
+                            HandleList(string.Format("Mid {0}' x 30' {1}", size.Substring(0,2), coverType), LargeRow.Mid30 * qty, CoverList);
+                            HandleList(string.Format("End {0}' {1}", size.Substring(0,2), coverType), 2 * qty, CoverList);
                         }
                         break;
 
@@ -112,8 +113,9 @@ namespace PitchATent
                         if (FrameRow != null)
                         {
                             // TODO: Handle mids and ends after database is fixed
-                            HandleList("Frame 10'", FrameRow.Cover10 * qty, CoverList);
-                            HandleList("Frame 15'", FrameRow.Cover15 * qty, CoverList);
+                            HandleList("Mid 10' " + coverType, FrameRow.Cover10 * qty, CoverList);
+                            HandleList("Mid 15' " + coverType, FrameRow.Cover15 * qty, CoverList);
+                            HandleList("End Frame " + coverType, qty, CoverList);
                         }
 
                         break;
@@ -128,8 +130,8 @@ namespace PitchATent
 
                         if (ClearSpanRow != null)
                         {
-                            HandleList(string.Format("ClearSpan {0}' x 10'", ClearSpanWidth.ToString()), ClearSpanRow.Cover10 * qty, CoverList);
-                            HandleList(string.Format("ClearSpan {0}' x 15'", ClearSpanWidth.ToString()), ClearSpanRow.Cover15 * qty, CoverList);
+                            HandleList(string.Format("ClearSpan {0}' x 10' {1}", ClearSpanWidth.ToString(), coverType), ClearSpanRow.Cover10 * qty, CoverList);
+                            HandleList(string.Format("ClearSpan {0}' x 15' {1}", ClearSpanWidth.ToString(), coverType), ClearSpanRow.Cover15 * qty, CoverList);
                             
                             switch(ClearSpanWidth)
                             {
@@ -143,6 +145,37 @@ namespace PitchATent
                                     HandleList("Triangle 50'", ClearSpanRow.Triangle * qty, CoverList);
                                     break;
                             }
+
+                            if (ListOfLists.tentWalls[i] != "None")
+                            {
+                                switch (ListOfLists.tentWalls[i])
+                                {
+                                    case "Full Plain":
+                                        HandleList("Mur CSP 10'", ClearSpanRow.CSPWalls10 * qty, WallList);
+                                        HandleList("Mur CSP 15'", ClearSpanRow.CSPWalls15 * qty, WallList);
+                                        HandleList("Mur CSP 20'", ClearSpanRow.CSPWalls20 * qty, WallList);
+                                        break;
+                                    case "Full Bay Window":
+                                        HandleList("Mur CSP 10' Bay", ClearSpanRow.CSPWalls10 * qty, WallList);
+                                        HandleList("Mur CSP 15' Bay", ClearSpanRow.CSPWalls15 * qty, WallList);
+                                        HandleList("Mur CSP 20' Bay", ClearSpanRow.CSPWalls20 * qty, WallList);
+                                        break;
+                                    case "Full French Window":
+                                        HandleList("Mur CSP 10' FW", ClearSpanRow.CSPWalls10 * qty, WallList);
+                                        HandleList("Mur CSP 15' FW", ClearSpanRow.CSPWalls15 * qty, WallList);
+                                        HandleList("Mur CSP 20' FW", ClearSpanRow.CSPWalls20 * qty, WallList);
+                                        break;
+                                    case "Half Plain Half Bay Window":
+                                        HandleList("Mur CSP 10'", (int)System.Math.Ceiling((double)ClearSpanRow.CSPWalls10 / 2) * qty, WallList);
+                                        HandleList("Mur CSP 15'", (int)System.Math.Ceiling((double)ClearSpanRow.CSPWalls15 / 2) * qty, WallList);
+                                        HandleList("Mur CSP 20'", (int)System.Math.Ceiling((double)ClearSpanRow.CSPWalls20 / 2) * qty, WallList);
+                                        HandleList("Mur CSP 10' Bay", (int)System.Math.Ceiling((double)ClearSpanRow.CSPWalls10 / 2) * qty, WallList);
+                                        HandleList("Mur CSP 15' Bay", (int)System.Math.Ceiling((double)ClearSpanRow.CSPWalls15 / 2) * qty, WallList);
+                                        HandleList("Mur CSP 20' Bay", (int)System.Math.Ceiling((double)ClearSpanRow.CSPWalls20 / 2) * qty, WallList);
+                                        break;
+                                }
+                            }
+                                                       
                         }
                         break;
                 }
@@ -179,6 +212,7 @@ namespace PitchATent
 
                 // If the tent is not hexagon, build the string for type of legs and handle it
                 string tentLegs = ListOfLists.tentLegs[i];
+
                 if (tentLegs != "Hexagon")
                 {
 
@@ -204,7 +238,8 @@ namespace PitchATent
                     }
                     else
                     {
-                        leg = Legs.longLegs;
+                        // Assign shortLegs enum to leg variable because hex tents have 8' high walls...
+                        leg = Legs.shortLegs;
                         HandleList("Pattes Hex", db.Legs * qty, MetalItemList);
                     }
                 }
@@ -217,7 +252,7 @@ namespace PitchATent
                     string leg_length = null;
                     if (leg == Legs.longLegs)
                     {
-                        leg_length = "10;";
+                        leg_length = "10'";
                     }
 
                     switch (ListOfLists.tentWalls[i])
@@ -264,19 +299,12 @@ namespace PitchATent
 
             }
 
-            DataHandler.printAllLists(MetalItemList,WallList,CoverList,HoldDownList);
+            // Collect all the lists into the "counts" object to be returned.
             counts.Covers = CoverList;
             counts.Metal = MetalItemList;
             counts.TieDowns = HoldDownList;
             counts.Walls = WallList;
-
-            //// Serialize the list
-            //var serializer = new XmlSerializer(counts.GetType());
-            //using (var writer = XmlWriter.Create("list.xml"))
-            //{
-            //    serializer.Serialize(writer, counts);
-            //}
-
+            
             return counts;
 
         }
@@ -313,21 +341,6 @@ namespace PitchATent
 
             return records;
 
-        }
-
-        // Temporary function to print lists to command line for debugging instead of generating a PDF
-        public static void printAllLists(List<TentItems> Metal, List<TentItems> Walls, List<TentItems> Covers, List<TentItems> HoldDowns)
-        {
-            Console.WriteLine("///////////////////////////////////////////////////////////////////////");
-            Console.WriteLine("-------------METAL------------");
-            Metal.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
-            Console.WriteLine("-------------WALLS------------");
-            Walls.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
-            Console.WriteLine("------------COVERS------------");
-            Covers.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
-            Console.WriteLine("------------HOLDDOWNS---------");
-            HoldDowns.ForEach(l => Console.WriteLine(string.Format("{0} --> Quantity {1}", l.Type, l.Qty)));
-            Console.WriteLine("///////////////////////////////////////////////////////////////////////");
         }
         
         private static void HandleList(string item, int quantity, List<TentItems> list)
