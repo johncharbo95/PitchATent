@@ -148,7 +148,7 @@ namespace PitchATent
             set
             {
                 _Extension25 = value;
-                CheckList("Extension Cord, 25 ft.", _Extension25);
+                CheckList("Extension 25'", _Extension25);
             }
         }
 
@@ -162,7 +162,7 @@ namespace PitchATent
             set
             {
                 _Extension50 = value;
-                CheckList("Extension Cord, 50 ft.", _Extension50);
+                CheckList("Extension 50'", _Extension50);
             }
         }
 
@@ -176,7 +176,7 @@ namespace PitchATent
             set
             {
                 _Extension100 = value;
-                CheckList("Extension Cord, 100 ft.", _Extension100);
+                CheckList("Extension 100'", _Extension100);
             }
         }
 
@@ -507,7 +507,7 @@ namespace PitchATent
                     }
                 }
             }
-            catch (FileNotFoundException e)
+            catch
             {
 #if DEBUG
                 Console.WriteLine("File {0} could not be found", filename);
