@@ -212,29 +212,25 @@ namespace PitchATent
             Column column = this.table.AddColumn("0.5cm");
             column.Format.Alignment = ParagraphAlignment.Center;
 
-            column = this.table.AddColumn("3cm");
+            column = this.table.AddColumn("4.08cm");
             column.Format.Alignment = ParagraphAlignment.Right;
 
             column = this.table.AddColumn("0.75cm");
-            //column.Format.Borders.Right.Width = 1;
             column.Format.Alignment = ParagraphAlignment.Right;
 
             column = this.table.AddColumn("0.5cm");
-            //column.Format.Borders.Left.Width = 1;
             column.Format.Alignment = ParagraphAlignment.Center;
-
-
-            column = this.table.AddColumn("3cm");
+            
+            column = this.table.AddColumn("4.08cm");
             column.Format.Alignment = ParagraphAlignment.Right;
 
             column = this.table.AddColumn("0.75cm");
-            //column.Format.Borders.Right.Width = 2;
             column.Format.Alignment = ParagraphAlignment.Right;
             
             column = this.table.AddColumn("0.5cm");
             column.Format.Alignment = ParagraphAlignment.Center;
 
-            column = this.table.AddColumn("3cm");
+            column = this.table.AddColumn("4.08cm");
             column.Format.Alignment = ParagraphAlignment.Right;
 
             column = this.table.AddColumn("0.75cm");
@@ -303,9 +299,10 @@ namespace PitchATent
             }
             this.table.SetEdge(0, 1, 3, r,Edge.Right, BorderStyle.Single, 1, Colors.Black);
             this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
+            this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single, 1, Colors.Black);
 
-            row = table.AddRow();
-            row.Borders.Visible = false;
+            //row = table.AddRow();
+            //row.Borders.Visible = false;
 
             //--------------------------------------------------------------------------//
             //------//-----------//--    End Metal Table      ----//----------//--------//
@@ -331,29 +328,29 @@ namespace PitchATent
             Column column2 = this.table.AddColumn("0.5cm");
             column2.Format.Alignment = ParagraphAlignment.Center;
 
-            column2 = this.table.AddColumn("3cm");
+            column2 = this.table.AddColumn("4.08cm");
             column2.Format.Alignment = ParagraphAlignment.Right;
 
-            column2 = this.table.AddColumn("0.75cm");
-            column2.Format.Alignment = ParagraphAlignment.Right;
+            column2= this.table.AddColumn("0.75cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
-            column2 = this.table.AddColumn("0.5cm");
-            column2.Format.Alignment = ParagraphAlignment.Center;
+            column2= this.table.AddColumn("0.5cm");
+            column.Format.Alignment = ParagraphAlignment.Center;
 
-            column2 = this.table.AddColumn("3cm");
-            column2.Format.Alignment = ParagraphAlignment.Right;
+            column2= this.table.AddColumn("4.08cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
-            column2 = this.table.AddColumn("0.75cm");
-            column2.Format.Alignment = ParagraphAlignment.Right;
+            column2= this.table.AddColumn("0.75cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
-            column2 = this.table.AddColumn("0.5cm");
-            column2.Format.Alignment = ParagraphAlignment.Center;
+            column2= this.table.AddColumn("0.5cm");
+            column.Format.Alignment = ParagraphAlignment.Center;
 
-            column2 = this.table.AddColumn("3cm");
-            column2.Format.Alignment = ParagraphAlignment.Right;
+            column2= this.table.AddColumn("4.08cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
-            column2 = this.table.AddColumn("0.75cm");
-            column2.Format.Alignment = ParagraphAlignment.Right;
+            column2= this.table.AddColumn("0.75cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
             //----------------------------------------------------------------------------
 
@@ -416,11 +413,12 @@ namespace PitchATent
                 }
                 this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
                 this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
+                this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single, 1, Colors.Black);
 
                 //adds an invisible row to space out the two tables 
-                row2 = table.AddRow();
-            row2.Borders.Visible = false;
-}
+                //row2 = table.AddRow();
+                //row2.Borders.Visible = false;
+            }
 
             //--------------------------------------------------------------------------//
             //------//-----------//----     Walls  Table     -----//----------//--------//
@@ -440,31 +438,31 @@ namespace PitchATent
 
             // Before you can add a row, you must define the columns
             Column column3 = this.table.AddColumn("0.5cm");
-            column3.Format.Alignment = ParagraphAlignment.Center;
+            column.Format.Alignment = ParagraphAlignment.Center;
 
-            column3 = this.table.AddColumn("3cm");
-            column3.Format.Alignment = ParagraphAlignment.Right;
+            column3= this.table.AddColumn("4.08cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+
+            column3= this.table.AddColumn("0.75cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+
+            column3= this.table.AddColumn("0.5cm");
+            column.Format.Alignment = ParagraphAlignment.Center;
+
+            column3 = this.table.AddColumn("4.08cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
             column3 = this.table.AddColumn("0.75cm");
-            column3.Format.Alignment = ParagraphAlignment.Right;
+            column.Format.Alignment = ParagraphAlignment.Right;
 
             column3 = this.table.AddColumn("0.5cm");
-            column3.Format.Alignment = ParagraphAlignment.Center;
+            column.Format.Alignment = ParagraphAlignment.Center;
 
-            column3 = this.table.AddColumn("3cm");
-            column3.Format.Alignment = ParagraphAlignment.Right;
-
-            column3 = this.table.AddColumn("0.75cm");
-            column3.Format.Alignment = ParagraphAlignment.Right;
-
-            column3 = this.table.AddColumn("0.5cm");
-            column3.Format.Alignment = ParagraphAlignment.Center;
-
-            column3 = this.table.AddColumn("3cm");
-            column3.Format.Alignment = ParagraphAlignment.Right;
+            column3 = this.table.AddColumn("4.08cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
             column3 = this.table.AddColumn("0.75cm");
-            column3.Format.Alignment = ParagraphAlignment.Right;
+            column.Format.Alignment = ParagraphAlignment.Right;
 
             //----------------------------------------------------------------------------
 
@@ -527,10 +525,10 @@ namespace PitchATent
                 }
                 this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
                 this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
-
+                this.table.SetEdge(0, 0, 9, r+1, Edge.Box, BorderStyle.Single, 1, Colors.Black);
                 //adds an invisible row to space out the two tables 
-                row3 = table.AddRow();
-                row3.Borders.Visible = false;
+                //row3 = table.AddRow();
+                //row3.Borders.Visible = false;
             }
             //--------------------------------------------------------------------------//
             //------//-----------//----  Tie Downs Table     -----//----------//--------//
@@ -549,32 +547,32 @@ namespace PitchATent
             //----------------------------------------------------------------------------
 
             // Before you can add a row, you must define the columns
-            Column column4 = this.table.AddColumn("0.5cm");
-            column4.Format.Alignment = ParagraphAlignment.Center;
+           Column column4 = this.table.AddColumn("0.5cm");
+            column.Format.Alignment = ParagraphAlignment.Center;
 
-            column4 = this.table.AddColumn("3cm");
-            column4.Format.Alignment = ParagraphAlignment.Right;
+           column4 = this.table.AddColumn("4.08cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
-            column4 = this.table.AddColumn("0.75cm");
-            column4.Format.Alignment = ParagraphAlignment.Right;
+           column4 = this.table.AddColumn("0.75cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
-            column4 = this.table.AddColumn("0.5cm");
-            column4.Format.Alignment = ParagraphAlignment.Center;
+           column4 = this.table.AddColumn("0.5cm");
+            column.Format.Alignment = ParagraphAlignment.Center;
 
-            column4 = this.table.AddColumn("3cm");
-            column4.Format.Alignment = ParagraphAlignment.Right;
+           column4 = this.table.AddColumn("4.08cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
-            column4 = this.table.AddColumn("0.75cm");
-            column4.Format.Alignment = ParagraphAlignment.Right;
+           column4 = this.table.AddColumn("0.75cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
-            column4 = this.table.AddColumn("0.5cm");
-            column4.Format.Alignment = ParagraphAlignment.Center;
+           column4 = this.table.AddColumn("0.5cm");
+            column.Format.Alignment = ParagraphAlignment.Center;
 
-            column4 = this.table.AddColumn("3cm");
-            column4.Format.Alignment = ParagraphAlignment.Right;
+           column4 = this.table.AddColumn("4.08cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
-            column4 = this.table.AddColumn("0.75cm");
-            column4.Format.Alignment = ParagraphAlignment.Right;
+           column4 = this.table.AddColumn("0.75cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
 
             //----------------------------------------------------------------------------
 
@@ -631,9 +629,10 @@ namespace PitchATent
             }
             this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
             this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
+            this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single, 1, Colors.Black);
             //adds an invisible row to space out the two tables 
-            row = table.AddRow();
-            row.Borders.Visible = false;
+            //row = table.AddRow();
+            //row.Borders.Visible = false;
 
             //--------------------------------------------------------------------------//
             //------//-----------//----   Accessories Table  -----//----------//--------//
@@ -654,31 +653,31 @@ namespace PitchATent
 
                 // Before you can add a row, you must define the columns
                 Column column5 = this.table.AddColumn("0.5cm");
-                column5.Format.Alignment = ParagraphAlignment.Center;
+                column.Format.Alignment = ParagraphAlignment.Center;
 
-                column5 = this.table.AddColumn("3cm");
-                column5.Format.Alignment = ParagraphAlignment.Right;
+                column5 = this.table.AddColumn("4.08cm");
+                column.Format.Alignment = ParagraphAlignment.Right;
 
                 column5 = this.table.AddColumn("0.75cm");
-                column5.Format.Alignment = ParagraphAlignment.Right;
+                column.Format.Alignment = ParagraphAlignment.Right;
 
                 column5 = this.table.AddColumn("0.5cm");
-                column5.Format.Alignment = ParagraphAlignment.Center;
+                column.Format.Alignment = ParagraphAlignment.Center;
 
-                column5 = this.table.AddColumn("3cm");
-                column5.Format.Alignment = ParagraphAlignment.Right;
+                column5 = this.table.AddColumn("4.08cm");
+                column.Format.Alignment = ParagraphAlignment.Right;
 
                 column5 = this.table.AddColumn("0.75cm");
-                column5.Format.Alignment = ParagraphAlignment.Right;
+                column.Format.Alignment = ParagraphAlignment.Right;
 
                 column5 = this.table.AddColumn("0.5cm");
-                column5.Format.Alignment = ParagraphAlignment.Center;
+                column.Format.Alignment = ParagraphAlignment.Center;
 
-                column5 = this.table.AddColumn("3cm");
-                column5.Format.Alignment = ParagraphAlignment.Right;
+                column5 = this.table.AddColumn("4.08cm");
+                column.Format.Alignment = ParagraphAlignment.Right;
 
                 column5 = this.table.AddColumn("0.75cm");
-                column5.Format.Alignment = ParagraphAlignment.Right;
+                column.Format.Alignment = ParagraphAlignment.Right;
 
                 //----------------------------------------------------------------------------
 
@@ -732,10 +731,11 @@ namespace PitchATent
             }
             this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
             this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
+            this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single, 1, Colors.Black);
             //adds an invisible row to space out the two tables 
-            row = table.AddRow();
-            row.Borders.Visible = false;
-            
+            //row = table.AddRow();
+            //row.Borders.Visible = false;
+
 
             // not sure what this does yet but pretty sure it makes an edge that surrounds the table kind of like thick borders
             //this.table.SetEdge(0, 0, 3, 1, Edge.Box, BorderStyle.Single, 1, Color.Empty);
@@ -770,28 +770,28 @@ namespace PitchATent
             //----------------------------------------------------------------------------
 
             // Before you can add a row, you must define the columns
-            Column column6 = this.table1.AddColumn("0.75cm");
+            Column column6 = this.table1.AddColumn("0.5cm");
             column.Format.Alignment = ParagraphAlignment.Center;
 
             column6 = this.table1.AddColumn("3cm");
             column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column6 = this.table1.AddColumn("0.75cm");
+            column6 = this.table1.AddColumn("0.5cm");
             column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column6 = this.table1.AddColumn("3.8cm");
+            column6 = this.table1.AddColumn("4cm");
             column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column6 = this.table1.AddColumn("0.75cm");
+            column6 = this.table1.AddColumn("0.5cm");
             column6.Format.Alignment = ParagraphAlignment.Right;
 
             column6 = this.table1.AddColumn("3cm");
             column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column6 = this.table1.AddColumn("0.75cm");
+            column6 = this.table1.AddColumn("0.5cm");
             column6.Format.Alignment = ParagraphAlignment.Right;
 
-            column6 = this.table1.AddColumn("3.8cm");
+            column6 = this.table1.AddColumn("4cm");
             column6.Format.Alignment = ParagraphAlignment.Right;
 
             //----------------------------------------------------------------------------
@@ -863,8 +863,9 @@ namespace PitchATent
             row6.Cells[6].Format.Font.Bold = true;
             row6.Cells[6].Format.Alignment = ParagraphAlignment.Center;
 
-            row6.Cells[7].AddParagraph("Impact Screws");
+            row6.Cells[7].AddParagraph("Impact/Screws");
             row6.Cells[7].Format.Alignment = ParagraphAlignment.Center;
+            this.table1.SetEdge(0, 0, 8, 2, Edge.Box, BorderStyle.Single, 1, Colors.Black);
 
             // Add the notes paragraph
             paragraph = section.AddParagraph();

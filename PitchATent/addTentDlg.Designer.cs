@@ -218,9 +218,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cb_size);
             this.Controls.Add(this.label1);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::PitchATent.Properties.Settings.Default, "mine", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Location = global::PitchATent.Properties.Settings.Default.mine;
+            this.Location = new System.Drawing.Point(100, 100);
             this.Name = "AddTentDlg";
             this.ShowIcon = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.addTentDlg_FormClosing);

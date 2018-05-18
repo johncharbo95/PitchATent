@@ -165,9 +165,8 @@
             this.Controls.Add(this.lbl_Window);
             this.Controls.Add(this.nud_Plain);
             this.Controls.Add(this.lbl_Plain);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::PitchATent.Properties.Settings.Default, "mine", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Location = global::PitchATent.Properties.Settings.Default.mine;
+            this.Location = new System.Drawing.Point(100, 100);
             this.Name = "AddCustomWallsDlg";
             this.ShowIcon = false;
             this.Text = "Add Custom Walls";
