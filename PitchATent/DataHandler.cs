@@ -311,7 +311,8 @@ namespace PitchATent
         {
 
             string filename = null;
-           
+
+#if DEBUG
             switch (typeOfTent)
             {
                 case UserInterface.Tent.Small:
@@ -327,6 +328,23 @@ namespace PitchATent
                     filename = @"../../ClearSpans.csv";
                     break;
             }
+#else
+            switch (typeOfTent)
+            {
+                case UserInterface.Tent.Small:
+                    filename = @"SmallTents.csv";
+                    break;
+                case UserInterface.Tent.Large:
+                    filename = @"LargeTents.csv";
+                    break;
+                case UserInterface.Tent.Frame:
+                    filename = @"Frames.csv";
+                    break;
+                case UserInterface.Tent.ClearSpan:
+                    filename = @"ClearSpans.csv";
+                    break;
+            }
+#endif
 
             // Initiate a reader
             System.IO.StreamReader reader = new System.IO.StreamReader(filename);

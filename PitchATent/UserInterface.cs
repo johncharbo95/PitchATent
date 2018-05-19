@@ -338,12 +338,12 @@ namespace PitchATent
 
             // Get today's date
             string date = InstallDate.ToString("yyyy-MM-dd");
-
+            
             // Get the My Documents path
             string MyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             // Check if output folder already exists
-            string OutputPath = @MyDocumentsPath + @"\Truck Loads\";
+            string OutputPath = @MyDocumentsPath + @"\Truck Loads\" + @"\" + date.Substring(0, 7) + @"\";
             Console.WriteLine(OutputPath);
             if (!File.Exists(OutputPath))
             {

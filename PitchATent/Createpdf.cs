@@ -125,7 +125,11 @@ namespace PitchATent
             //----------------------------------------------------------------------------
 
             // Put a logo in the header
-            Image image = section.Headers.Primary.AddImage("../../logo2.png");
+#if DEBUG
+            Image image = section.Headers.Primary.AddImage("../../logo2.PNG");
+#else
+            Image image = section.Headers.Primary.AddImage("logo2.PNG");
+#endif
             image.Width = "18cm";
             image.LockAspectRatio = false;
             //image.Height = "2.5cm";
