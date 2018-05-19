@@ -325,15 +325,15 @@ namespace PitchATent
             // Test for null or empty strings
             if (String.IsNullOrEmpty(truck))
             {
-                truck = "TRUCK";
+                truck = "not assigned";
             }
             if (String.IsNullOrEmpty(trailer))
             {
-                trailer = "TRAILER";
+                trailer = "not assigned";
             }
             if (String.IsNullOrEmpty(driver))
             {
-                driver = "MICHAYLA";
+                driver = "_______________";
             }
 
             // Get today's date
