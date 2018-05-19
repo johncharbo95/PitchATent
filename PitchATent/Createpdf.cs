@@ -600,6 +600,7 @@ namespace PitchATent
                     row.Format.Alignment = ParagraphAlignment.Center;
                     row.Format.Font.Bold = true;
                     row.Shading.Color = Colors.White;
+                    b = 0;
                     r++;
                 }
                 
@@ -620,6 +621,7 @@ namespace PitchATent
                 //row.Cells[2].MergeDown = 1;
                 b++;                
             }
+
             this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
             this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
             this.table.SetEdge(0, 0, 9, r + 1, Edge.Left, BorderStyle.Single, 1, Colors.Black);

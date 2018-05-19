@@ -91,6 +91,9 @@ namespace PitchATent
                     "Full Window Fiesta",
                     "Half Plain Half Window Fiesta",
                     "None"});
+                    this.cb_legs.Items.AddRange(new object[] {
+                    "8 ft",
+                    "10 ft"});
                     this.cb_walls.SelectedIndex = 0;
                     break;
                 case UserInterface.Tent.Small:
