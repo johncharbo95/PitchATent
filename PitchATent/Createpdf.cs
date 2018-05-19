@@ -69,9 +69,9 @@ namespace PitchATent
         {
             // Create a new MigraDoc document
             this.document = new Document();
-            this.document.Info.Title = "test sheet alex";
-            this.document.Info.Subject = "Demonstrates how to create an invoice.";
-            this.document.Info.Author = "Alexandre Vendette";
+            this.document.Info.Title = "Material List - Labelle Tents";
+            this.document.Info.Subject = "Creates A List of Materials To Load For The Day";
+            this.document.Info.Author = "Alexandre Vendette - Jonathan Charbonneau";
 
             DefineStyles();
 
@@ -180,16 +180,16 @@ namespace PitchATent
             
             paragraph.AddTab();
             // TODO: Revisit exceptions (like not having a trailer)
-            paragraph.AddText(string.Format("Truck {0}, Trailer {1}, ", Truck, Trailer));
+            paragraph.AddText(string.Format("Vehicle: {0}, Trailer: {1}, ", Truck, Trailer));
             paragraph.AddDateField("dd.MM.yyyy");
             paragraph.Format.Font.Size = 14;
 
             // Add the print date field
-            paragraph = section.AddParagraph();
-            paragraph.Format.SpaceBefore = "0.5cm";
-            paragraph.Style = "Reference";
-            paragraph.AddFormattedText("List Of Materials", TextFormat.Bold);
-            paragraph.Format.Font.Size = 14;
+            //paragraph = section.AddParagraph();
+            //paragraph.Format.SpaceBefore = "0.5cm";
+            //paragraph.Style = "Reference";
+            //paragraph.AddFormattedText("List Of Materials", TextFormat.Bold);
+            //paragraph.Format.Font.Size = 14;
             //paragraph.AddTab();
             
 
@@ -298,12 +298,10 @@ namespace PitchATent
                     b++;
                 }
             }
-            this.table.SetEdge(0, 1, 3, r,Edge.Right, BorderStyle.Single, 1, Colors.Black);
-            this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
-            this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single, 1, Colors.Black);
-
-            //row = table.AddRow();
-            //row.Borders.Visible = false;
+            this.table.SetEdge(0, 1, 3, r,Edge.Right, BorderStyle.Single, 2, Colors.Black);
+            this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
+            this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single,1, Colors.Black);
+            //this.table.SetEdge(0, 0, 9, r + 1, Edge.Top, BorderStyle.Single, 1, Colors.Black);
 
             //--------------------------------------------------------------------------//
             //------//-----------//--    End Metal Table      ----//----------//--------//
@@ -412,13 +410,10 @@ namespace PitchATent
                     //row.Cells[2].MergeDown = 1;
                     b++;
                 }
-                this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
-                this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
-                this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single, 1, Colors.Black);
-
-                //adds an invisible row to space out the two tables 
-                //row2 = table.AddRow();
-                //row2.Borders.Visible = false;
+                this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
+                this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
+                this.table.SetEdge(0, 0, 9, r + 1, Edge.Left, BorderStyle.Single, 1, Colors.Black);
+                this.table.SetEdge(0, 0, 9, r + 1, Edge.Right, BorderStyle.Single, 1, Colors.Black);
             }
 
             //--------------------------------------------------------------------------//
@@ -524,12 +519,9 @@ namespace PitchATent
                     //row.Cells[2].MergeDown = 1;
                     b++;
                 }
-                this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
-                this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
+                this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
+                this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
                 this.table.SetEdge(0, 0, 9, r+1, Edge.Box, BorderStyle.Single, 1, Colors.Black);
-                //adds an invisible row to space out the two tables 
-                //row3 = table.AddRow();
-                //row3.Borders.Visible = false;
             }
             //--------------------------------------------------------------------------//
             //------//-----------//----  Tie Downs Table     -----//----------//--------//
@@ -628,13 +620,19 @@ namespace PitchATent
                 //row.Cells[2].MergeDown = 1;
                 b++;                
             }
-            this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
-            this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
-            this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single, 1, Colors.Black);
-            //adds an invisible row to space out the two tables 
-            //row = table.AddRow();
-            //row.Borders.Visible = false;
+            this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
+            this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
+            this.table.SetEdge(0, 0, 9, r + 1, Edge.Left, BorderStyle.Single, 1, Colors.Black);
+            this.table.SetEdge(0, 0, 9, r + 1, Edge.Right, BorderStyle.Single, 1, Colors.Black);
+            //this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single, 0.5, Colors.Black);
 
+            if (Acc == null)
+            {
+                //adds an invisible row to space out the two tables
+                this.table.SetEdge(0, 0, 9, r + 1, Edge.Bottom, BorderStyle.Single, 1, Colors.Black);
+                row = table.AddRow();
+                row.Borders.Visible = false;
+            }
             //--------------------------------------------------------------------------//
             //------//-----------//----   Accessories Table  -----//----------//--------//
             //--------------------------------------------------------------------------//
@@ -729,14 +727,14 @@ namespace PitchATent
                     //row.Cells[2].MergeDown = 1;
                     b++;
                 }
-            }
-            this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
-            this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 1, Colors.Black);
-            this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single, 1, Colors.Black);
-            //adds an invisible row to space out the two tables 
-            //row = table.AddRow();
-            //row.Borders.Visible = false;
 
+                this.table.SetEdge(0, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
+                this.table.SetEdge(3, 1, 3, r, Edge.Right, BorderStyle.Single, 2, Colors.Black);
+                this.table.SetEdge(0, 0, 9, r + 1, Edge.Box, BorderStyle.Single, 0.5, Colors.Black); // check this out later *****
+                //adds an invisible row to space out the two tables 
+                row = table.AddRow();
+                row.Borders.Visible = false;
+            }
 
             // not sure what this does yet but pretty sure it makes an edge that surrounds the table kind of like thick borders
             //this.table.SetEdge(0, 0, 3, 1, Edge.Box, BorderStyle.Single, 1, Color.Empty);
@@ -749,15 +747,16 @@ namespace PitchATent
 
             //document.AddSection();
 
-            MigraDoc.DocumentObjectModel.Paragraph paragraph1 = section.AddParagraph();
-            paragraph1.Format.LineSpacingRule = MigraDoc.DocumentObjectModel.LineSpacingRule.Exactly;
-            paragraph1.Format.LineSpacing = MigraDoc.DocumentObjectModel.Unit.FromMillimeter(40);
+            //MigraDoc.DocumentObjectModel.Paragraph paragraph1 = section.AddParagraph();
+            //paragraph1.Format.LineSpacingRule = MigraDoc.DocumentObjectModel.LineSpacingRule.Exactly;
+            //paragraph1.Format.LineSpacing = MigraDoc.DocumentObjectModel.Unit.FromMillimeter(40);
 
             //--------------------------------------------------------------------------//
             //------//-----------//---  Unforgetables Table  -----//----------//--------//
             //--------------------------------------------------------------------------//
 
             // Create the item table
+            //this.document.LastSection.AddSection();
             this.table1 = section.AddTable();
             table1.Rows.Alignment = RowAlignment.Center;
             //table1.Rows.Alignment = VerticalAlignment.Bottom;
@@ -872,6 +871,8 @@ namespace PitchATent
             paragraph = section.AddParagraph();
             //this.document.LastSection.AddParagraph();
             paragraph.Format.SpaceBefore = "0.5cm";
+            paragraph.Format.SpaceAfter = "0.5cm";
+            //paragraph.Format.Alignment = ParagraphAlignment.Bottom;
             paragraph.Format.Borders.Width = 0.75;
             paragraph.Format.Borders.Distance = 3;
             paragraph.Format.Borders.Color = Colors.Black;
