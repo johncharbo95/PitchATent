@@ -374,12 +374,12 @@ namespace PitchATent
                         AccList.Add(acc);
                     }
                     // Generate the PDF
-                    pdf = new Createpdf(truck, trailer, driver, counts, AccList);
+                    pdf = new Createpdf(truck, trailer, driver, counts, AccList,date);
                 }
                 else
                 {
                     // Generate the PDF
-                    pdf = new Createpdf(truck, trailer, driver, counts);
+                    pdf = new Createpdf(truck, trailer, driver, counts, date);
                 }
 
                 // Create a MigraDoc document
