@@ -26,26 +26,29 @@ namespace PitchATent
         // Default Constructor
         public Createpdf() { }
 
-        public Createpdf(string truck, string trailer, string driver, ItemCounts counts)
+        public Createpdf(string truck, string trailer, string driver, ItemCounts counts, string installDate)
         {
             this.Truck = truck;
             this.Trailer = trailer;
             this.Driver = driver;
             this.Counts = counts;
+            this.InstallDate = installDate;
         }
-        public Createpdf(string truck, string trailer, string driver, ItemCounts counts,List<Accessory> acc)
+        public Createpdf(string truck, string trailer, string driver, ItemCounts counts,List<Accessory> acc, string installDate)
         {
             this.Truck = truck;
             this.Trailer = trailer;
             this.Driver = driver;
             this.Counts = counts;
             this.Acc = acc;
+            this.InstallDate = installDate;
         }
         public string Truck { get; set; }
         public string Trailer { get; set; }
         public string Driver { get; set; }
         public ItemCounts Counts { get; set; }
         public List<Accessory> Acc { get; set; }
+        public string InstallDate { get; set; }
 
         /// <summary>
         /// The MigraDoc document that represents the invoice.
@@ -185,7 +188,7 @@ namespace PitchATent
             paragraph.AddTab();
             // TODO: Revisit exceptions (like not having a trailer)
             paragraph.AddText(string.Format("Vehicle: {0}, Trailer: {1}, ", Truck, Trailer));
-            paragraph.AddDateField("dd.MM.yyyy");
+            paragraph.AddText(InstallDate);
             paragraph.Format.Font.Size = 14;
 
             // Add the print date field
