@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 using System.Diagnostics;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.Rendering;
@@ -25,13 +27,24 @@ namespace PitchATent
             ResizeRedraw = true;
         }
 
-        public enum Tent { Small, Large, Frame, ClearSpan};
+        public enum Tent
+        {
+            [XmlEnum(Name = "SmallTent")]
+            Small,
+            [XmlEnum(Name = "LargeTent")]
+            Large,
+            [XmlEnum(Name = "Frame")]
+            Frame,
+            [XmlEnum(Name = "ClearSpan")]
+            ClearSpan
+        };
 
         private int TentCtr { get; set; }
         private bool NewAccessory { get; set; } = true;
         public DateTime InstallDate { get; set; }
         public bool ShowPDF { get; set; } = true;
-
+        public string AccFileName { get; set; }
+        
         #region Add Tent Buttons
         private void btn_addSmallTent_Click(object sender, EventArgs e)
         {
@@ -82,8 +95,6 @@ namespace PitchATent
 
                 if (pdialog.ShowDialog() == DialogResult.OK)
                 {
-
-                    
 
                     ProcessStartInfo info = new ProcessStartInfo
                     {
@@ -144,13 +155,16 @@ namespace PitchATent
             {
                 AccessoryDialog.AccList.ForEach(i => Console.WriteLine(i.Item + ", " +  i.Qty.ToString()));
                 NewAccessory = false;
+                
             }
             else
-            {   
-                AccessoryDialog.LoadAccessoryList();
+            {
+                AccessoryDialog.LoadAccessoryList(AccFileName);
                 NewAccessory = false;
             }
+
             AccessoryDialog.ShowDialog();
+            AccFileName = AccessoryDialog.filename;
             if (accDGV.Rows.Count != 0)
             {
                 accDGV.Rows.Clear();
@@ -542,5 +556,107 @@ namespace PitchATent
             tentDGV.ClearSelection();
         }
         #endregion
+
+        private void UserInterface_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Delete Temporary Accessory file
+            if (File.Exists(AccFileName))
+            {
+                File.Delete(AccFileName);
+            }
+
+            // Path to write XML
+            string XMLpath = @"C:\ProgramData\Charbonneau Vendette Solutions\";
+
+            // XML Filename
+            // TODO: Custom filename for list of tents, prompt user if not coming from FormClosing event
+            string XMLfilename = @"Tents.xml";
+
+            // Full XML path
+            string XMLFullPath = XMLpath + XMLfilename;
+
+            // Create the path
+            using (StreamWriter file = new StreamWriter(XMLFullPath))
+            {
+                StringBuilder output = SaveJob();
+                file.Write(output.ToString());
+            }
+
+        }
+
+        private StringBuilder SaveJob()
+        {
+            // Declare new writer
+            StringBuilder output = new StringBuilder();
+            var writer = new StringWriter(output);
+
+            // Declare the serializer
+            XmlSerializer serializer = new XmlSerializer(typeof(List<TentListItem>));
+
+            // Read the tentDGV
+            List<TentListItem> TentList = ReadTentDGV();
+            
+            if (TentList != null)
+            {
+                // Serialize
+                serializer.Serialize(writer, TentList);
+
+                return output;
+            }
+            else
+            {
+                return null;
+            }
+            
+
+        }
+
+        private List<TentListItem> ReadTentDGV()
+        {
+            // Declare dummy variables
+            Tent TentType = 0;
+            string TentSize = string.Empty;
+            int TentQty = 0;
+            string TentCoverTypes = string.Empty;
+            string TentHoldDowns = string.Empty;
+            string TentWalls = string.Empty;
+            string TentLegs = string.Empty;
+
+            // Declare the list of TentListItems objects
+            List<TentListItem> ListOfTentItems = new List<TentListItem>();
+
+            if (this.tentDGV == null)
+            {
+                Console.WriteLine("tentDGV is null");
+                return null;
+            }
+
+            // Loop through DGV and populate the object
+            for (int i = 0; i < tentDGV.Rows.Count; ++i)
+            {
+                TentType = (Tent)this.tentDGV.Rows[i].Cells[0].Value;
+                TentSize = this.tentDGV.Rows[i].Cells[1].Value.ToString();
+                TentQty = Convert.ToInt32(this.tentDGV.Rows[i].Cells[2].Value);
+                TentCoverTypes = this.tentDGV.Rows[i].Cells[3].Value.ToString();
+                TentHoldDowns = this.tentDGV.Rows[i].Cells[4].Value.ToString();
+                TentWalls = this.tentDGV.Rows[i].Cells[5].Value.ToString();
+                TentLegs = this.tentDGV.Rows[i].Cells[6].Value.ToString();
+
+                TentListItem item = new TentListItem();
+
+                item.tentType = TentType;
+                item.tentSizes = TentSize;
+                item.tentQties = TentQty;
+                item.tentCoverTypes = TentCoverTypes;
+                item.tentHoldDowns = TentHoldDowns;
+                item.tentWalls = TentWalls;
+                item.tentLegs = TentLegs;
+
+                //Console.WriteLine("Item tent size = {0}", item.tentSizes);
+                ListOfTentItems.Add(item);
+            }
+
+            return ListOfTentItems;
+        }
     }
 }

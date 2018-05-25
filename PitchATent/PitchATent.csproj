@@ -102,6 +102,7 @@
     <Compile Include="TypeDefinitions\ItemCounts.cs" />
     <Compile Include="TypeDefinitions\ListNames.cs" />
     <Compile Include="TypeDefinitions\TentItems.cs" />
+    <Compile Include="TypeDefinitions\TentListItems.cs" />
     <Compile Include="UserInterface.cs">
       <SubType>Form</SubType>
     </Compile>

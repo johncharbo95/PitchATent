@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
 
@@ -21,8 +22,6 @@ namespace PitchATent
 
         #region Properties
         
-        
-
         // List of accessories
         public List<Accessory> AccList = new List<Accessory>();
 
@@ -291,6 +290,10 @@ namespace PitchATent
                 CheckList("Gutter 20'", _Gutter20);
             }
         }
+
+        public string filename { get; set; }
+
+
         /// <summary>
         /// Checks the existing accessory list  for the a string. 
         /// 
@@ -353,7 +356,10 @@ namespace PitchATent
             this.Gutter10 = Convert.ToInt32(nud_Gutter10.Value);
             this.Gutter15 = Convert.ToInt32(nud_Gutter15.Value);
             this.Gutter20 = Convert.ToInt32(nud_Gutter20.Value);
-            SaveAccessoryList();
+            if (!SaveAccessoryList())
+            {
+                MessageBox.Show("There was a problem retaining the accessories entered into the dialog.", "Accessories", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
             this.Close();
         }
         
@@ -364,13 +370,29 @@ namespace PitchATent
         /// <summary>
         /// Saves the list of accessories to a Comma-Separated Value file for later use if needed.
         /// </summary>
-        private void SaveAccessoryList()
+        private bool SaveAccessoryList()
         {
-            string filename = "AccessoryQty.csv";
+            // Temporary file for storing accessory data
+            string fname = "AccessoryData.csv";
+
+            // Check if output folder already exists
+            string OutputPath = @"C:\ProgramData\Charbonneau Vendette Solutions\";
+           
+            if (!Directory.Exists(OutputPath))
+            {
+                Directory.CreateDirectory(OutputPath);
+                Console.WriteLine("Creating new path {0}.", OutputPath);
+            }
+
+            // Create full path for file for storing accessory data
+            filename = OutputPath + fname;
+            
+            
             try
             {
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(filename))
                 {
+                    Console.WriteLine("Writing to {0}.", filename);
                     file.WriteLine("BlackFloor,{0}",BlackFloor.ToString());
                     file.WriteLine("VarnishFloor,{0}", VarnishFloor.ToString());
                     file.WriteLine("TarFiller,{0}", TarFiller.ToString());
@@ -382,6 +404,7 @@ namespace PitchATent
                     file.WriteLine("Extension25,{0}", Extension25.ToString());
                     file.WriteLine("Extension50,{0}", Extension50.ToString());
                     file.WriteLine("Extension100,{0}", Extension100.ToString());
+                    file.WriteLine("ExitSign,{0}", ExitSign.ToString());
                     file.WriteLine("SingleDoor,{0}", SingleDoor.ToString());
                     file.WriteLine("DoubleDoor,{0}", DoubleDoor.ToString());
                     file.WriteLine("FireExtinguisher,{0}", FireExtinguisher.ToString());
@@ -390,121 +413,128 @@ namespace PitchATent
                     file.WriteLine("Gutter15,{0}", Gutter15.ToString());
                     file.WriteLine("Gutter20,{0}", Gutter20.ToString());
                 }
+                return true;
             }
             catch
             {
-                MessageBox.Show("Unable to open or write to file. Restarting at 0 for all.","Accessories", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                return false;
             }
         }
         
         /// <summary>
         /// Loads the list of accessories from a Comma-Separated Value file.
         /// </summary>
-        public void LoadAccessoryList()
+        public void LoadAccessoryList(string fname)
         {
-            string filename = "AccessoryQty.csv";
-
-            // Read each line into a string array
             
-            string[] lines = System.IO.File.ReadAllLines(filename);
-            foreach (string line in lines)
-            {
-#if DEBUG
-                //Console.WriteLine(line);
-#endif
-                string[] tokens = line.Split(',');
-                switch (tokens[0])
+            
+                // Read each line into a string array
+                Console.WriteLine("Reading from {0}.",fname);
+                string[] lines = System.IO.File.ReadAllLines(fname);
+                foreach (string line in lines)
                 {
-                    case "BlackFloor":
-                        BlackFloor = Convert.ToInt32(tokens[1]);
-                        nud_BlackFloor.Value = Convert.ToDecimal(BlackFloor);
-                        break;
-                    case "VarnishFloor":
-                        VarnishFloor = Convert.ToInt32(tokens[1]);
-                        nud_VarnishFloor.Value = Convert.ToDecimal(VarnishFloor);
-                        break;
-                    case "TarFiller":
-                        if (tokens[1] == "False")
-                        {
-                            TarFiller = false;
-                        }
-                        else
-                        {
-                            TarFiller = true;
-                        }
-                        checkbox_TarFiller.Checked = TarFiller;
-                        break;
-                    case "SpotLights":
-                        SpotLights = Convert.ToInt32(tokens[1]);
-                        nud_SpotLight.Value = Convert.ToDecimal(SpotLights);
-                        break;
-                    case "Chandelier":
-                        Chandelier = Convert.ToInt32(tokens[1]);
-                        nud_Chandelier.Value = Convert.ToDecimal(Chandelier);
-                        break;
-                    case "Cafe25":
-                        Cafe25 = Convert.ToInt32(tokens[1]);
-                        nud_25CL.Value = Convert.ToDecimal(Cafe25);
-                        break;
-                    case "Cafe50":
-                        Cafe50 = Convert.ToInt32(tokens[1]);
-                        nud_50CL.Value = Convert.ToDecimal(Cafe50);
-                        break;
-                    case "Cafe100":
-                        Cafe100 = Convert.ToInt32(tokens[1]);
-                        nud_100CL.Value = Convert.ToDecimal(Cafe100);
-                        break;
-                    case "Extension25":
-                        Extension25 = Convert.ToInt32(tokens[1]);
-                        nud_Extension25.Value = Convert.ToDecimal(Extension25);
-                        break;
-                    case "Extension50":
-                        Extension50 = Convert.ToInt32(tokens[1]);
-                        nud_Extension50.Value = Convert.ToDecimal(Extension50);
-                        break;
-                    case "Extension100":
-                        Extension100 = Convert.ToInt32(tokens[1]);
-                        nud_Extension100.Value = Convert.ToDecimal(Extension100);
-                        break;
-                    case "SingleDoor":
-                        SingleDoor = Convert.ToInt32(tokens[1]);
-                        nud_SingleDoor.Value = Convert.ToDecimal(SingleDoor);
-                        break;
-                    case "DoubleDoor":
-                        DoubleDoor = Convert.ToInt32(tokens[1]);
-                        nud_DoubleDoor.Value = Convert.ToDecimal(DoubleDoor);
-                        break;
-                    case "ExitSign":
-                        ExitSign = Convert.ToInt32(tokens[1]);
-                        nud_ExitSign.Value = Convert.ToDecimal(ExitSign);
-                        break;
-                    case "FireExtinguisher":
-                        FireExtinguisher = Convert.ToInt32(tokens[1]);
-                        nud_Extinguisher.Value = Convert.ToDecimal(FireExtinguisher);
-                        break;
-                    case "BlockCover":
-                        BlockCover = Convert.ToInt32(tokens[1]);
-                        nud_BlockCovers.Value = Convert.ToDecimal(BlockCover);
-                        break;
-                    case "Gutter10":
-                        Gutter10 = Convert.ToInt32(tokens[1]);
-                        nud_Gutter10.Value = Convert.ToDecimal(Gutter10);
-                        break;
-                    case "Gutter15":
-                        Gutter15 = Convert.ToInt32(tokens[1]);
-                        nud_Gutter15.Value = Convert.ToDecimal(Gutter15);
-                        break;
-                    case "Gutter20":
-                        Gutter20 = Convert.ToInt32(tokens[1]);
-                        nud_Gutter20.Value = Convert.ToDecimal(Gutter20);
-                        break;
-                    default:
 #if DEBUG
-                        MessageBox.Show("Unknown option");
+                    //Console.WriteLine(line);
 #endif
-                        break;
+                    string[] tokens = line.Split(',');
+                    switch (tokens[0])
+                    {
+                        case "BlackFloor":
+                            BlackFloor = Convert.ToInt32(tokens[1]);
+                            nud_BlackFloor.Value = Convert.ToDecimal(BlackFloor);
+                            break;
+                        case "VarnishFloor":
+                            VarnishFloor = Convert.ToInt32(tokens[1]);
+                            nud_VarnishFloor.Value = Convert.ToDecimal(VarnishFloor);
+                            break;
+                        case "TarFiller":
+                            if (tokens[1] == "False")
+                            {
+                                TarFiller = false;
+                            }
+                            else
+                            {
+                                TarFiller = true;
+                            }
+                            checkbox_TarFiller.Checked = TarFiller;
+                            break;
+                        case "SpotLights":
+                            SpotLights = Convert.ToInt32(tokens[1]);
+                            nud_SpotLight.Value = Convert.ToDecimal(SpotLights);
+                            break;
+                        case "Chandelier":
+                            Chandelier = Convert.ToInt32(tokens[1]);
+                            nud_Chandelier.Value = Convert.ToDecimal(Chandelier);
+                            break;
+                        case "Cafe25":
+                            Cafe25 = Convert.ToInt32(tokens[1]);
+                            nud_25CL.Value = Convert.ToDecimal(Cafe25);
+                            break;
+                        case "Cafe50":
+                            Cafe50 = Convert.ToInt32(tokens[1]);
+                            nud_50CL.Value = Convert.ToDecimal(Cafe50);
+                            break;
+                        case "Cafe100":
+                            Cafe100 = Convert.ToInt32(tokens[1]);
+                            nud_100CL.Value = Convert.ToDecimal(Cafe100);
+                            break;
+                        case "Extension25":
+                            Extension25 = Convert.ToInt32(tokens[1]);
+                            nud_Extension25.Value = Convert.ToDecimal(Extension25);
+                            break;
+                        case "Extension50":
+                            Extension50 = Convert.ToInt32(tokens[1]);
+                            nud_Extension50.Value = Convert.ToDecimal(Extension50);
+                            break;
+                        case "Extension100":
+                            Extension100 = Convert.ToInt32(tokens[1]);
+                            nud_Extension100.Value = Convert.ToDecimal(Extension100);
+                            break;
+                        case "SingleDoor":
+                            SingleDoor = Convert.ToInt32(tokens[1]);
+                            nud_SingleDoor.Value = Convert.ToDecimal(SingleDoor);
+                            break;
+                        case "DoubleDoor":
+                            DoubleDoor = Convert.ToInt32(tokens[1]);
+                            nud_DoubleDoor.Value = Convert.ToDecimal(DoubleDoor);
+                            break;
+                        case "ExitSign":
+                            ExitSign = Convert.ToInt32(tokens[1]);
+                            nud_ExitSign.Value = Convert.ToDecimal(ExitSign);
+                            break;
+                        case "FireExtinguisher":
+                            FireExtinguisher = Convert.ToInt32(tokens[1]);
+                            nud_Extinguisher.Value = Convert.ToDecimal(FireExtinguisher);
+                            break;
+                        case "BlockCover":
+                            BlockCover = Convert.ToInt32(tokens[1]);
+                            nud_BlockCovers.Value = Convert.ToDecimal(BlockCover);
+                            break;
+                        case "Gutter10":
+                            Gutter10 = Convert.ToInt32(tokens[1]);
+                            nud_Gutter10.Value = Convert.ToDecimal(Gutter10);
+                            break;
+                        case "Gutter15":
+                            Gutter15 = Convert.ToInt32(tokens[1]);
+                            nud_Gutter15.Value = Convert.ToDecimal(Gutter15);
+                            break;
+                        case "Gutter20":
+                            Gutter20 = Convert.ToInt32(tokens[1]);
+                            nud_Gutter20.Value = Convert.ToDecimal(Gutter20);
+                            break;
+                        default:
+#if DEBUG
+                            MessageBox.Show("Unknown option");
+#endif
+                            break;
+                    }
                 }
-            }
+            
+            //catch
+            //{
+            //    MessageBox.Show("Unable to open to file. Restarting at 0 for all.", "Accessories", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //}
+
         }
         #endregion
 

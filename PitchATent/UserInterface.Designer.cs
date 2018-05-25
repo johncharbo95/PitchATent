@@ -49,7 +49,7 @@
             this.hiddenTieDownIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hiddenWallsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hiddenLegsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tentContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.RightClickMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addSmallTentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addLargeTentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,10 +62,10 @@
             this.Accessory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_addSmallTent = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MainGUIMenuStrip = new System.Windows.Forms.MenuStrip();
             this.file = new System.Windows.Forms.ToolStripMenuItem();
-            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Print = new System.Windows.Forms.ToolStripMenuItem();
+            this.CloseSession = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
@@ -89,12 +89,15 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btn_ClearTents = new System.Windows.Forms.Button();
             this.btn_ClearAcc = new System.Windows.Forms.Button();
+            this.NewSession = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.Save = new System.Windows.Forms.ToolStripMenuItem();
             this.tentGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tentDGV)).BeginInit();
-            this.tentContextMenu.SuspendLayout();
+            this.RightClickMenuStrip.SuspendLayout();
             this.accGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.accDGV)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.MainGUIMenuStrip.SuspendLayout();
             this.previewGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -135,7 +138,7 @@
             this.hiddenTieDownIndex,
             this.hiddenWallsIndex,
             this.hiddenLegsIndex});
-            this.tentDGV.ContextMenuStrip = this.tentContextMenu;
+            this.tentDGV.ContextMenuStrip = this.RightClickMenuStrip;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -163,7 +166,7 @@
             this.tentType.Name = "tentType";
             this.tentType.ReadOnly = true;
             this.tentType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tentType.Width = 65;
+            this.tentType.Width = 63;
             // 
             // tentSize
             // 
@@ -189,7 +192,7 @@
             this.tentCoverType.ReadOnly = true;
             this.tentCoverType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.tentCoverType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.tentCoverType.Width = 94;
+            this.tentCoverType.Width = 93;
             // 
             // tentHoldDown
             // 
@@ -209,7 +212,7 @@
             this.tentWalls.ReadOnly = true;
             this.tentWalls.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.tentWalls.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.tentWalls.Width = 54;
+            this.tentWalls.Width = 53;
             // 
             // tentLegs
             // 
@@ -241,9 +244,9 @@
             this.hiddenLegsIndex.Visible = false;
             this.hiddenLegsIndex.Width = 162;
             // 
-            // tentContextMenu
+            // RightClickMenuStrip
             // 
-            this.tentContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RightClickMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addSmallTentToolStripMenuItem,
             this.addLargeTentToolStripMenuItem,
             this.addFrameToolStripMenuItem,
@@ -251,53 +254,53 @@
             this.toolStripSeparator1,
             this.editRowToolStripMenuItem,
             this.deleteRowToolStripMenuItem});
-            this.tentContextMenu.Name = "tentContextMenu";
-            this.tentContextMenu.Size = new System.Drawing.Size(156, 142);
+            this.RightClickMenuStrip.Name = "tentContextMenu";
+            this.RightClickMenuStrip.Size = new System.Drawing.Size(155, 142);
             // 
             // addSmallTentToolStripMenuItem
             // 
             this.addSmallTentToolStripMenuItem.Name = "addSmallTentToolStripMenuItem";
-            this.addSmallTentToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.addSmallTentToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.addSmallTentToolStripMenuItem.Text = "Add Small Tent";
             this.addSmallTentToolStripMenuItem.Click += new System.EventHandler(this.addSmallTentToolStripMenuItem_Click);
             // 
             // addLargeTentToolStripMenuItem
             // 
             this.addLargeTentToolStripMenuItem.Name = "addLargeTentToolStripMenuItem";
-            this.addLargeTentToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.addLargeTentToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.addLargeTentToolStripMenuItem.Text = "Add Large Tent";
             this.addLargeTentToolStripMenuItem.Click += new System.EventHandler(this.addLargeTentToolStripMenuItem_Click);
             // 
             // addFrameToolStripMenuItem
             // 
             this.addFrameToolStripMenuItem.Name = "addFrameToolStripMenuItem";
-            this.addFrameToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.addFrameToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.addFrameToolStripMenuItem.Text = "Add Frame";
             this.addFrameToolStripMenuItem.Click += new System.EventHandler(this.addFrameToolStripMenuItem_Click);
             // 
             // addClearSpanToolStripMenuItem
             // 
             this.addClearSpanToolStripMenuItem.Name = "addClearSpanToolStripMenuItem";
-            this.addClearSpanToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.addClearSpanToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.addClearSpanToolStripMenuItem.Text = "Add ClearSpan";
             this.addClearSpanToolStripMenuItem.Click += new System.EventHandler(this.addClearSpanToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(151, 6);
             // 
             // editRowToolStripMenuItem
             // 
             this.editRowToolStripMenuItem.Name = "editRowToolStripMenuItem";
-            this.editRowToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.editRowToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.editRowToolStripMenuItem.Text = "Edit Row...";
             this.editRowToolStripMenuItem.Click += new System.EventHandler(this.editRowToolStripMenuItem_Click);
             // 
             // deleteRowToolStripMenuItem
             // 
             this.deleteRowToolStripMenuItem.Name = "deleteRowToolStripMenuItem";
-            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.deleteRowToolStripMenuItem.Text = "Delete Row";
             this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.deleteRowToolStripMenuItem_Click);
             // 
@@ -369,41 +372,44 @@
             this.btn_addSmallTent.UseVisualStyleBackColor = true;
             this.btn_addSmallTent.Click += new System.EventHandler(this.btn_addSmallTent_Click);
             // 
-            // menuStrip1
+            // MainGUIMenuStrip
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainGUIMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.MainGUIMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.file,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(956, 24);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
+            this.MainGUIMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.MainGUIMenuStrip.Name = "MainGUIMenuStrip";
+            this.MainGUIMenuStrip.Size = new System.Drawing.Size(956, 24);
+            this.MainGUIMenuStrip.TabIndex = 3;
+            this.MainGUIMenuStrip.Text = "menuStrip1";
             // 
             // file
             // 
             this.file.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.printToolStripMenuItem,
-            this.closeToolStripMenuItem});
+            this.NewSession,
+            this.Save,
+            this.SaveAs,
+            this.Print,
+            this.CloseSession});
             this.file.Name = "file";
             this.file.Size = new System.Drawing.Size(37, 20);
             this.file.Text = "File";
             // 
-            // printToolStripMenuItem
+            // Print
             // 
-            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.printToolStripMenuItem.Text = "Print";
-            this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
+            this.Print.Name = "Print";
+            this.Print.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.Print.Size = new System.Drawing.Size(195, 22);
+            this.Print.Text = "Print...";
+            this.Print.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
-            // closeToolStripMenuItem
+            // CloseSession
             // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.closeToolStripMenuItem.Text = "Close";
-            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            this.CloseSession.Name = "CloseSession";
+            this.CloseSession.Size = new System.Drawing.Size(195, 22);
+            this.CloseSession.Text = "Close";
+            this.CloseSession.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -426,7 +432,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(9, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 21);
+            this.label1.Size = new System.Drawing.Size(50, 21);
             this.label1.TabIndex = 4;
             this.label1.Text = "Truck:";
             // 
@@ -444,7 +450,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(184, 31);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 21);
+            this.label2.Size = new System.Drawing.Size(56, 21);
             this.label2.TabIndex = 6;
             this.label2.Text = "Trailer:";
             // 
@@ -664,6 +670,28 @@
             this.btn_ClearAcc.UseVisualStyleBackColor = true;
             this.btn_ClearAcc.Click += new System.EventHandler(this.btn_ClearAcc_Click);
             // 
+            // NewSession
+            // 
+            this.NewSession.Name = "NewSession";
+            this.NewSession.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.NewSession.Size = new System.Drawing.Size(195, 22);
+            this.NewSession.Text = "New...";
+            // 
+            // SaveAs
+            // 
+            this.SaveAs.Name = "SaveAs";
+            this.SaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.SaveAs.Size = new System.Drawing.Size(195, 22);
+            this.SaveAs.Text = "Save As...";
+            // 
+            // Save
+            // 
+            this.Save.Name = "Save";
+            this.Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.Save.Size = new System.Drawing.Size(195, 22);
+            this.Save.Text = "Save";
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -692,7 +720,7 @@
             this.Controls.Add(this.btn_addSmallTent);
             this.Controls.Add(this.accGroupBox);
             this.Controls.Add(this.tentGroupBox);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.MainGUIMenuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(100, 100);
@@ -700,13 +728,14 @@
             this.Name = "UserInterface";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "PitchATent";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserInterface_FormClosing);
             this.tentGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tentDGV)).EndInit();
-            this.tentContextMenu.ResumeLayout(false);
+            this.RightClickMenuStrip.ResumeLayout(false);
             this.accGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.accDGV)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.MainGUIMenuStrip.ResumeLayout(false);
+            this.MainGUIMenuStrip.PerformLayout();
             this.previewGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.previewDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -721,10 +750,10 @@
         private System.Windows.Forms.GroupBox tentGroupBox;
         private System.Windows.Forms.GroupBox accGroupBox;
         private System.Windows.Forms.Button btn_addSmallTent;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip MainGUIMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem file;
-        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Print;
+        private System.Windows.Forms.ToolStripMenuItem CloseSession;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tb_truck;
@@ -741,7 +770,7 @@
         private System.Windows.Forms.Button btn_addClearSpan;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button btn_AddAcc;
-        private System.Windows.Forms.ContextMenuStrip tentContextMenu;
+        private System.Windows.Forms.ContextMenuStrip RightClickMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem addSmallTentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addLargeTentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addFrameToolStripMenuItem;
@@ -770,6 +799,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Accessory;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
+        private System.Windows.Forms.ToolStripMenuItem NewSession;
+        private System.Windows.Forms.ToolStripMenuItem Save;
+        private System.Windows.Forms.ToolStripMenuItem SaveAs;
     }
 }
 
