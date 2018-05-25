@@ -44,6 +44,7 @@ namespace PitchATent
         public DateTime InstallDate { get; set; }
         public bool ShowPDF { get; set; } = true;
         public string AccFileName { get; set; }
+        private string SaveFilePath { get; set; }
         
         #region Add Tent Buttons
         private void btn_addSmallTent_Click(object sender, EventArgs e)
@@ -570,21 +571,17 @@ namespace PitchATent
 
             // XML Filename
             // TODO: Custom filename for list of tents, prompt user if not coming from FormClosing event
-            string XMLfilename = @"Tents.xml";
+            string XMLfilename = @"JobList.xml";
 
             // Full XML path
             string XMLFullPath = XMLpath + XMLfilename;
 
-            // Create the path
-            using (StreamWriter file = new StreamWriter(XMLFullPath))
-            {
-                StringBuilder output = SaveJob();
-                file.Write(output.ToString());
-            }
-
+            // Save the current job
+            SaveJob();
+            
         }
 
-        private StringBuilder SaveJob()
+        private void SaveJob(string filename = @"JobList.xml")
         {
             // Declare new writer
             StringBuilder output = new StringBuilder();
@@ -595,20 +592,26 @@ namespace PitchATent
 
             // Read the tentDGV
             List<TentListItem> TentList = ReadTentDGV();
+
+            if (filename == @"JobList.xml")
+            {
+                filename = @"C:\ProgramData\Charbonneau Vendette Solutions\" + filename;    
+            }
+            else
+            {
+                SaveFilePath = filename;
+            }
             
             if (TentList != null)
             {
                 // Serialize
                 serializer.Serialize(writer, TentList);
-
-                return output;
             }
-            else
+
+            using (StreamWriter file = new StreamWriter(filename))
             {
-                return null;
+                file.Write(output.ToString());
             }
-            
-
         }
 
         private List<TentListItem> ReadTentDGV()
@@ -657,6 +660,73 @@ namespace PitchATent
             }
 
             return ListOfTentItems;
+        }
+
+        private void SaveAs_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog SaveDlg = new SaveFileDialog();
+            SaveDlg.Filter = "XML files(*.xml)| *.xml | All files(*.*) | *.* ";
+            SaveDlg.FilterIndex = 0;
+
+            // Get the My Documents path
+            string MyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            SaveDlg.InitialDirectory = MyDocumentsPath;
+
+            string filepath = string.Empty;
+
+            if (this.tentDGV.Rows.Count != 0)
+            {
+                if (SaveDlg.ShowDialog() == DialogResult.OK)
+                {
+                    filepath = SaveDlg.FileName;
+                    SaveJob(filepath);
+                }
+
+            }
+           
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            if(!String.IsNullOrEmpty(SaveFilePath))
+            {
+                SaveJob(SaveFilePath);
+            }
+            else
+            {
+                SaveAs_Click(sender, e);
+            }
+        }
+
+        private void NewSession_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("This will clear all unsaved work. Continue?","New Job",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                // Clear the tent datagridview
+                this.tentDGV.Rows.Clear();
+
+                // Update the counts
+                UpdateList();
+
+                // Clear the preview datagridview
+                this.previewDGV.Rows.Clear();
+
+                // Reset the tent counter to 0
+                TentCtr = 0;
+
+                // Clear the accessory datagridview
+                this.accDGV.Rows.Clear();
+                NewAccessory = true;
+
+                // Set the SaveFilePath to empty
+                SaveFilePath = string.Empty;
+
+                // Set the driver, truck and trailer textboxes to empty
+                tb_driver.Text = string.Empty;
+                tb_truck.Text = string.Empty;
+                tb_trailer.Text = string.Empty;
+            }
         }
     }
 }
