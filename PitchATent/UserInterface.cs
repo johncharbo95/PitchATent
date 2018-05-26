@@ -45,6 +45,7 @@ namespace PitchATent
         public bool ShowPDF { get; set; } = true;
         public string AccFileName { get; set; }
         private string SaveFilePath { get; set; }
+        private bool JobSaved { get; set; } = true;
         
         #region Add Tent Buttons
         private void btn_addSmallTent_Click(object sender, EventArgs e)
@@ -560,24 +561,47 @@ namespace PitchATent
 
         private void UserInterface_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Delete Temporary Accessory file
-            if (File.Exists(AccFileName))
+            if (JobSaved == false)
             {
-                File.Delete(AccFileName);
-            }
+                DialogResult res = MessageBox.Show("Any unsaved changes will be lost. Would you like to save your changes?", "Unsaved changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
-            // Path to write XML
-            string XMLpath = @"C:\ProgramData\Charbonneau Vendette Solutions\";
+                if (res == DialogResult.Yes)
+                {
+                    if (string.IsNullOrEmpty(SaveFilePath))
+                    {
+                        SaveAs_Click(sender, e);
+                    }
+                    else
+                    {
+                        Save_Click(sender, e);
+                    }
+                }
+                else if (res == DialogResult.No)
+                {
+                    // Delete Temporary Accessory file
+                    if (File.Exists(AccFileName))
+                    {
+                        File.Delete(AccFileName);
+                    }
 
-            // XML Filename
-            // TODO: Custom filename for list of tents, prompt user if not coming from FormClosing event
-            string XMLfilename = @"JobList.xml";
+                    // Path to write XML
+                    string XMLpath = @"C:\ProgramData\Charbonneau Vendette Solutions\";
 
-            // Full XML path
-            string XMLFullPath = XMLpath + XMLfilename;
+                    // XML Filename
+                    // TODO: Custom filename for list of tents, prompt user if not coming from FormClosing event
+                    string XMLfilename = @"JobList.xml";
 
-            // Save the current job
-            SaveJob();
+                    // Full XML path
+                    string XMLFullPath = XMLpath + XMLfilename;
+
+                    // Save the current job
+                    SaveJob();
+                }
+                else
+                {
+                    return;
+                }
+           }
             
         }
 
@@ -611,6 +635,7 @@ namespace PitchATent
             using (StreamWriter file = new StreamWriter(filename))
             {
                 file.Write(output.ToString());
+                JobSaved = true;
             }
         }
 
@@ -662,11 +687,11 @@ namespace PitchATent
             return ListOfTentItems;
         }
 
+        #region Save Events
         private void SaveAs_Click(object sender, EventArgs e)
         {
             SaveFileDialog SaveDlg = new SaveFileDialog();
-            SaveDlg.Filter = "XML files(*.xml)| *.xml | All files(*.*) | *.* ";
-            SaveDlg.FilterIndex = 0;
+            SaveDlg.Filter = "XML files(*.xml)|*.xml|All files(*.*) |*.*";
 
             // Get the My Documents path
             string MyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -675,20 +700,28 @@ namespace PitchATent
 
             string filepath = string.Empty;
 
+            // If the tent datagridview is not empty
             if (this.tentDGV.Rows.Count != 0)
             {
                 if (SaveDlg.ShowDialog() == DialogResult.OK)
                 {
+                    // Get filepath from dialog
                     filepath = SaveDlg.FileName;
-                    SaveJob(filepath);
-                }
 
+                    // Change the name of the form
+                    this.Text = "Pitch-A-Tent - " + filepath;
+
+                    // Save the job
+                    SaveJob(filepath);
+                    JobSaved = true;
+                }
+                
             }
-           
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
+            // If SaveFilePath exists, save the job. Else, open savedialog
             if(!String.IsNullOrEmpty(SaveFilePath))
             {
                 SaveJob(SaveFilePath);
@@ -698,7 +731,7 @@ namespace PitchATent
                 SaveAs_Click(sender, e);
             }
         }
-
+        #endregion 
         private void NewSession_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("This will clear all unsaved work. Continue?","New Job",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question) == DialogResult.Yes)
@@ -726,7 +759,32 @@ namespace PitchATent
                 tb_driver.Text = string.Empty;
                 tb_truck.Text = string.Empty;
                 tb_trailer.Text = string.Empty;
+
+                // Reset the name of this form
+                this.Text = "Pitch-A-Tent";
             }
         }
+
+        #region DGV Rows Added/Removed Events
+        private void tentDGV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            JobSaved = false;
+        }
+
+        private void tentDGV_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            JobSaved = false;
+        }
+
+        private void accDGV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            JobSaved = false;
+        }
+
+        private void accDGV_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            JobSaved = false;
+        }
+        #endregion
     }
 }
