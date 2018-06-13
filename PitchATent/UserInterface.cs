@@ -69,6 +69,12 @@ namespace PitchATent
         }
         #endregion
 
+        public class Utf8StringWriter:StringWriter
+        {
+            public override Encoding Encoding => Encoding.UTF8;
+        }
+
+
         private void tentDGV_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             // Cancel the error
@@ -607,35 +613,41 @@ namespace PitchATent
 
         private void SaveJob(string filename = @"JobList.xml")
         {
-            // Declare new writer
-            StringBuilder output = new StringBuilder();
-            var writer = new StringWriter(output);
-
-            // Declare the serializer
-            XmlSerializer serializer = new XmlSerializer(typeof(List<TentListItem>));
-
-            // Read the tentDGV
-            List<TentListItem> TentList = ReadTentDGV();
-
-            if (filename == @"JobList.xml")
+            XmlWriterSettings xmlWriterSettings = new XmlWriterSettings
             {
-                filename = @"C:\ProgramData\Charbonneau Vendette Solutions\" + filename;    
-            }
-            else
-            {
-                SaveFilePath = filename;
-            }
-            
-            if (TentList != null)
-            {
-                // Serialize
-                serializer.Serialize(writer, TentList);
-            }
+                Indent = true,
+                Encoding = Encoding.UTF8
+            };
 
-            using (StreamWriter file = new StreamWriter(filename))
+            string utf8;
+
+            using (MemoryStream memoryStream = new MemoryStream() )
+            using (XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings))
             {
-                file.Write(output.ToString());
-                JobSaved = true;
+                XmlSerializer serializer = new XmlSerializer(typeof(List<TentListItem>));
+
+                // Read the tentDGV
+                List<TentListItem> TentList = ReadTentDGV();
+
+                if (filename == @"JobList.xml")
+                {
+                    filename = @"C:\ProgramData\Charbonneau Vendette Solutions\" + filename;
+                }
+                else
+                {
+                    SaveFilePath = filename;
+                }
+
+                if (TentList != null)
+                {
+                    using (StringWriter writer = new Utf8StringWriter())
+                    {
+                        serializer.Serialize(writer, TentList);
+                        utf8 = writer.ToString();
+                        File.WriteAllText(filename, utf8);
+                        JobSaved = true;
+                    }   
+                }
             }
         }
 
@@ -786,5 +798,31 @@ namespace PitchATent
             JobSaved = false;
         }
         #endregion
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Show an open file dialog
+            OpenFileDialog OpenDlg = new OpenFileDialog();
+            OpenDlg.RestoreDirectory = true;
+            OpenDlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            
+            if (OpenDlg.ShowDialog() == DialogResult.OK)
+            {
+                // Filename to open
+                string FileToOpen = OpenDlg.FileName;
+
+                // Read the xml contents to a string
+                string xmlContents = File.ReadAllText(FileToOpen);
+                
+                // Declare a deserializer.
+                XmlSerializer deserializer = new XmlSerializer(typeof(List<TentListItem>));
+
+                // Deserialize to list of TentListItems objects.
+                using (TextReader reader = new StringReader(xmlContents))
+                {
+                    List<TentListItem> TentList = (List<TentListItem>)deserializer.Deserialize(reader);
+                }
+            }
+        }
     }
 }

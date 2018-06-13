@@ -92,6 +92,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btn_ClearTents = new System.Windows.Forms.Button();
             this.btn_ClearAcc = new System.Windows.Forms.Button();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tentGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tentDGV)).BeginInit();
             this.RightClickMenuStrip.SuspendLayout();
@@ -392,6 +393,7 @@
             // 
             this.file.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewSession,
+            this.openToolStripMenuItem,
             this.Save,
             this.SaveAs,
             this.Print,
@@ -699,6 +701,14 @@
             this.btn_ClearAcc.UseVisualStyleBackColor = true;
             this.btn_ClearAcc.Click += new System.EventHandler(this.btn_ClearAcc_Click);
             // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.openToolStripMenuItem.Text = "Open...";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -809,6 +819,7 @@
         private System.Windows.Forms.ToolStripMenuItem NewSession;
         private System.Windows.Forms.ToolStripMenuItem Save;
         private System.Windows.Forms.ToolStripMenuItem SaveAs;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
     }
 }
 
