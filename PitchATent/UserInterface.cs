@@ -452,6 +452,16 @@ namespace PitchATent
         #region ClearButtons
         private void btn_ClearTents_Click(object sender, EventArgs e)
         {
+            ClearTents(); 
+        }
+
+        private void btn_ClearAcc_Click(object sender, EventArgs e)
+        {
+            ClearAcc();
+        }
+
+        private void ClearTents()
+        {
             int tentCount = this.tentDGV.Rows.Count;
             if (tentCount > 0)
             {
@@ -465,7 +475,7 @@ namespace PitchATent
             }
         }
 
-        private void btn_ClearAcc_Click(object sender, EventArgs e)
+        private void ClearAcc()
         {
             int accCount = this.accDGV.Rows.Count;
             if (accCount > 0)
@@ -699,6 +709,27 @@ namespace PitchATent
             return ListOfTentItems;
         }
 
+        private void WriteTentDGV(List<TentListItem> tents, bool clear)
+        {
+            // Clear existing dgv content if desired
+            if (clear == true)
+                ClearTents();
+
+            // Add information to the DGV
+            foreach(var tent in tents)
+            {
+                this.tentDGV.Rows.Add();
+                this.tentDGV.Rows[TentCtr].Cells[0].Value = tent.tentType;
+                this.tentDGV.Rows[TentCtr].Cells[1].Value = tent.tentSizes;
+                this.tentDGV.Rows[TentCtr].Cells[2].Value = tent.tentQties.ToString();
+                this.tentDGV.Rows[TentCtr].Cells[3].Value = tent.tentCoverTypes;
+                this.tentDGV.Rows[TentCtr].Cells[4].Value = tent.tentHoldDowns;
+                this.tentDGV.Rows[TentCtr].Cells[5].Value = tent.tentWalls;
+                this.tentDGV.Rows[TentCtr].Cells[6].Value = tent.tentLegs;
+                TentCtr++;
+            }
+        }
+
         #region Save Events
         private void SaveAs_Click(object sender, EventArgs e)
         {
@@ -821,6 +852,7 @@ namespace PitchATent
                 using (TextReader reader = new StringReader(xmlContents))
                 {
                     List<TentListItem> TentList = (List<TentListItem>)deserializer.Deserialize(reader);
+                    WriteTentDGV(TentList, true);
                 }
             }
         }
