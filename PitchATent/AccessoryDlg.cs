@@ -22,8 +22,7 @@ namespace PitchATent
 
         #region Properties
         
-        // List of accessories
-        public List<Accessory> AccList = new List<Accessory>();
+        
 
         private int _BlackFloor = 0;
         public int BlackFloor
@@ -35,7 +34,7 @@ namespace PitchATent
             set
             {
                 _BlackFloor = value;
-                CheckList("Black Floor", Convert.ToInt32(_BlackFloor));
+                DataHandler.HandleList("Black Floor", Convert.ToInt32(_BlackFloor),UserInterface.AccList);
             }
 
         }
@@ -50,7 +49,7 @@ namespace PitchATent
             set
             {
                 _VarnishFloor = value;
-                CheckList("Varnish Floor", Convert.ToInt32(_VarnishFloor));
+                DataHandler.HandleList("Varnish Floor", Convert.ToInt32(_VarnishFloor), UserInterface.AccList);
             }
         }
         private bool _TarFiller;
@@ -63,7 +62,7 @@ namespace PitchATent
             set
             {
                 _TarFiller = value;
-                CheckList("Tar Filler", Convert.ToInt32(_TarFiller));
+                DataHandler.HandleList("Tar Filler", Convert.ToInt32(_TarFiller), UserInterface.AccList);
             }
         }
 
@@ -77,7 +76,7 @@ namespace PitchATent
             set
             {
                 _SpotLights = value;
-                CheckList("Spot Lights", _SpotLights);
+                DataHandler.HandleList("Spot Lights", _SpotLights, UserInterface.AccList);
             }
         }
 
@@ -91,7 +90,7 @@ namespace PitchATent
             set
             {
                 _Chandelier = value;
-                CheckList("Chandelier", _Chandelier);
+                DataHandler.HandleList("Chandelier", _Chandelier, UserInterface.AccList);
             }
         }
 
@@ -105,7 +104,7 @@ namespace PitchATent
             set
             {
                 _Cafe25 = value;
-                CheckList("Cafe Lights, 25 ft.", _Cafe25);
+                DataHandler.HandleList("Cafe Lights, 25 ft.", _Cafe25, UserInterface.AccList);
             }
         }
 
@@ -119,7 +118,7 @@ namespace PitchATent
             set
             {
                 _Cafe50 = value;
-                CheckList("Cafe Lights, 50 ft.", _Cafe50);
+                DataHandler.HandleList("Cafe Lights, 50 ft.", _Cafe50, UserInterface.AccList);
             }
         }
 
@@ -133,7 +132,7 @@ namespace PitchATent
             set
             {
                 _Cafe100 = value;
-                CheckList("Cafe Lights, 100 ft.", _Cafe100);
+                DataHandler.HandleList("Cafe Lights, 100 ft.", _Cafe100, UserInterface.AccList);
             }
         }
 
@@ -147,7 +146,7 @@ namespace PitchATent
             set
             {
                 _Extension25 = value;
-                CheckList("Extension 25'", _Extension25);
+                DataHandler.HandleList("Extension 25'", _Extension25, UserInterface.AccList);
             }
         }
 
@@ -161,7 +160,7 @@ namespace PitchATent
             set
             {
                 _Extension50 = value;
-                CheckList("Extension 50'", _Extension50);
+                DataHandler.HandleList("Extension 50'", _Extension50, UserInterface.AccList);
             }
         }
 
@@ -175,7 +174,7 @@ namespace PitchATent
             set
             {
                 _Extension100 = value;
-                CheckList("Extension 100'", _Extension100);
+                DataHandler.HandleList("Extension 100'", _Extension100, UserInterface.AccList);
             }
         }
 
@@ -189,7 +188,7 @@ namespace PitchATent
             set
             {
                 _SingleDoor = value;
-                CheckList("Single Door", _SingleDoor);
+                DataHandler.HandleList("Single Door", _SingleDoor, UserInterface.AccList);
             }
         }
 
@@ -203,7 +202,7 @@ namespace PitchATent
             set
             {
                 _DoubleDoor = value;
-                CheckList("Double Door", _DoubleDoor);
+                DataHandler.HandleList("Double Door", _DoubleDoor, UserInterface.AccList);
             }
         }
 
@@ -217,7 +216,7 @@ namespace PitchATent
             set
             {
                 _ExitSign = value;
-                CheckList("Exit Sign", _ExitSign);
+                DataHandler.HandleList("Exit Sign", _ExitSign, UserInterface.AccList);
             }
         }
 
@@ -231,7 +230,7 @@ namespace PitchATent
             set
             {
                 _FireExtinguisher = value;
-                CheckList("Fire Extinguisher", _FireExtinguisher);
+                DataHandler.HandleList("Fire Extinguisher", _FireExtinguisher, UserInterface.AccList);
             }
         }
 
@@ -245,7 +244,7 @@ namespace PitchATent
             set
             {
                 _BlockCover = value;
-                CheckList("Block Cover", _BlockCover);
+                DataHandler.HandleList("Block Cover", _BlockCover, UserInterface.AccList);
             }
         }
 
@@ -259,7 +258,7 @@ namespace PitchATent
             set
             {
                 _Gutter10 = value;
-                CheckList("Gutter 10'", _Gutter10);
+                DataHandler.HandleList("Gutter 10'", _Gutter10, UserInterface.AccList);
             }
         }
 
@@ -273,7 +272,7 @@ namespace PitchATent
             set
             {
                 _Gutter15 = value;
-                CheckList("Gutter 15'", _Gutter15);
+                DataHandler.HandleList("Gutter 15'", _Gutter15, UserInterface.AccList);
             }
         }
 
@@ -287,45 +286,14 @@ namespace PitchATent
             set
             {
                 _Gutter20 = value;
-                CheckList("Gutter 20'", _Gutter20);
+                DataHandler.HandleList("Gutter 20'", _Gutter20, UserInterface.AccList);
             }
         }
 
         public string filename { get; set; }
 
 
-        /// <summary>
-        /// Checks the existing accessory list  for the a string. 
-        /// 
-        /// If the string does not exist, it adds the object to the list.
-        /// If the string exists in the list and the current quantity is zero, the object is removed from the list.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="quantity"></param>
-        private void CheckList(string item, int quantity)
-        {
-            // If item is not in the list and quantity is not 0
-            if (!AccList.Any(a => a.Item == item) && quantity != 0)
-            {
-                // Add it to the list
-                AccList.Add(new Accessory(item, quantity));
-            }
-            // Else, if the item is in the list and quantity is not 0
-            else if(AccList.Any(a => a.Item == item) && quantity != 0)
-            {
-                // Remove the previous item
-                AccList.RemoveAll(a => a.Item == item);
-
-                // Add the one with new quantity
-                AccList.Add(new Accessory(item, quantity));
-            }
-            // Else, if the item is in the list and quantity is 0
-            else if (quantity == 0 && AccList.Any(a => a.Item == item))
-            {
-                // Remove it from the list
-                AccList.RemoveAll(a => a.Item == item);
-            }
-        }
+        
 
         #endregion
 

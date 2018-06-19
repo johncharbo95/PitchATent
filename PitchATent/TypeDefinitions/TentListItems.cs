@@ -8,7 +8,9 @@ using System.Xml.Serialization;
 
 namespace PitchATent
 {
-    
+    /// <summary>
+    /// Characteristics of a tent.
+    /// </summary>
     public class TentListItem
     {
         public TentListItem() { }

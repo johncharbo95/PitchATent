@@ -447,6 +447,7 @@ namespace PitchATent
         {
             UpdateProperties();
             this.Code = true;
+            DialogResult = DialogResult.OK;
             this.Close();
         }
 

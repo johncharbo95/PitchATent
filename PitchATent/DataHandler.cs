@@ -358,7 +358,8 @@ namespace PitchATent
             return records;
 
         }
-        
+
+        #region ListOperations
         private static void HandleList(string item, int quantity, List<TentItems> list)
         {
             // If item is not in the list and quantity is not 0
@@ -382,6 +383,40 @@ namespace PitchATent
             }
             
         }
+
+        /// <summary>
+        /// Checks the existing accessory list  for the a string. 
+        /// 
+        /// If the string does not exist, it adds the object to the list.
+        /// If the string exists in the list and the current quantity is zero, the object is removed from the list.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="quantity"></param>
+        public static void HandleList(string item, int quantity,List<Accessory> AccList)
+        {
+            // If item is not in the list and quantity is not 0
+            if (!AccList.Any(a => a.Item == item) && quantity != 0)
+            {
+                // Add it to the list
+                AccList.Add(new Accessory(item, quantity));
+            }
+            // Else, if the item is in the list and quantity is not 0
+            else if (AccList.Any(a => a.Item == item) && quantity != 0)
+            {
+                // Remove the previous item
+                AccList.RemoveAll(a => a.Item == item);
+
+                // Add the one with new quantity
+                AccList.Add(new Accessory(item, quantity));
+            }
+            // Else, if the item is in the list and quantity is 0
+            else if (quantity == 0 && AccList.Any(a => a.Item == item))
+            {
+                // Remove it from the list
+                AccList.RemoveAll(a => a.Item == item);
+            }
+        }
+        #endregion
 
 
     }

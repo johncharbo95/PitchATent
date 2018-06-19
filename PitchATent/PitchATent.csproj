@@ -73,7 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accessory.cs" />
+    <Compile Include="TypeDefinitions\Accessory.cs" />
     <Compile Include="AccessoryDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +101,7 @@
     <Compile Include="TentDatabaseClasses\SmallTentDB.cs" />
     <Compile Include="TypeDefinitions\ItemCounts.cs" />
     <Compile Include="TypeDefinitions\ListNames.cs" />
+    <Compile Include="TypeDefinitions\PitchATentJob.cs" />
     <Compile Include="TypeDefinitions\TentItems.cs" />
     <Compile Include="TypeDefinitions\TentListItems.cs" />
     <Compile Include="UserInterface.cs">

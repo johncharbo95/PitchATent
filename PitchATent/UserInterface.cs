@@ -46,7 +46,10 @@ namespace PitchATent
         public string AccFileName { get; set; }
         private string SaveFilePath { get; set; }
         private bool JobSaved { get; set; } = true;
-        
+
+        // List of accessories
+        public static List<Accessory> AccList = new List<Accessory>();
+
         #region Add Tent Buttons
         private void btn_addSmallTent_Click(object sender, EventArgs e)
         {
@@ -161,7 +164,7 @@ namespace PitchATent
             var AccessoryDialog = new AccessoryDlg();
             if (NewAccessory == true)
             {
-                AccessoryDialog.AccList.ForEach(i => Console.WriteLine(i.Item + ", " +  i.Qty.ToString()));
+                UserInterface.AccList.ForEach(i => Console.WriteLine(i.Item + ", " +  i.Qty.ToString()));
                 NewAccessory = false;
                 
             }
@@ -177,7 +180,7 @@ namespace PitchATent
             {
                 accDGV.Rows.Clear();
             }
-            foreach (var n in AccessoryDialog.AccList)
+            foreach (var n in UserInterface.AccList)
             {
                 accDGV.Rows.Add(n.Item, n.Qty.ToString());
             }
@@ -634,10 +637,16 @@ namespace PitchATent
             using (MemoryStream memoryStream = new MemoryStream() )
             using (XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<TentListItem>));
+                XmlSerializer serializer = new XmlSerializer(typeof(PitchATentJob));
 
                 // Read the tentDGV
                 List<TentListItem> TentList = ReadTentDGV();
+
+                // Read the accDGV
+                List<Accessory> AccList = ReadAccDGV();
+
+                // Construct an object from both lists
+                PitchATentJob Job = new PitchATentJob(TentList, AccList);
 
                 if (filename == @"JobList.xml")
                 {
@@ -652,13 +661,34 @@ namespace PitchATent
                 {
                     using (StringWriter writer = new Utf8StringWriter())
                     {
-                        serializer.Serialize(writer, TentList);
+                        serializer.Serialize(writer, Job);
                         utf8 = writer.ToString();
                         File.WriteAllText(filename, utf8);
                         JobSaved = true;
                     }   
                 }
             }
+        }
+
+        #region ReadUIElements
+        private List<Accessory> ReadAccDGV()
+        {
+            List<Accessory> accList = new List<PitchATent.Accessory>();
+
+            if (this.accDGV.Rows.Count != 0)
+            {
+                foreach (DataGridViewRow row in this.accDGV.Rows)
+                {
+                    string item = row.Cells[0].Value.ToString();
+                    int qty = Convert.ToInt32(row.Cells[1].Value);
+
+                    Accessory acc = new Accessory(item, qty);
+
+                    accList.Add(acc);
+                }
+            }
+            
+            return accList;
         }
 
         private List<TentListItem> ReadTentDGV()
@@ -708,6 +738,9 @@ namespace PitchATent
 
             return ListOfTentItems;
         }
+        #endregion
+
+        #region WriteUIElements
 
         private void WriteTentDGV(List<TentListItem> tents, bool clear)
         {
@@ -729,6 +762,29 @@ namespace PitchATent
                 TentCtr++;
             }
         }
+
+        private void WriteAccDGV(List<Accessory> accList, bool clear)
+        { 
+            if (clear == true)
+            {
+                ClearAcc();
+            }
+
+            foreach(var acc in accList)
+            {
+                DataHandler.HandleList(acc.Item,acc.Qty,AccList);
+            }
+
+            for(int i = 0; i < AccList.Count; i++)
+            {
+                this.accDGV.Rows.Add();
+                this.accDGV.Rows[i].Cells[0].Value = AccList[i].Item;
+                this.accDGV.Rows[i].Cells[1].Value = AccList[i].Qty.ToString();
+            }
+
+        }
+
+        #endregion
 
         #region Save Events
         private void SaveAs_Click(object sender, EventArgs e)
@@ -846,13 +902,17 @@ namespace PitchATent
                 string xmlContents = File.ReadAllText(FileToOpen);
                 
                 // Declare a deserializer.
-                XmlSerializer deserializer = new XmlSerializer(typeof(List<TentListItem>));
+                XmlSerializer deserializer = new XmlSerializer(typeof(PitchATentJob));
 
                 // Deserialize to list of TentListItems objects.
                 using (TextReader reader = new StringReader(xmlContents))
                 {
-                    List<TentListItem> TentList = (List<TentListItem>)deserializer.Deserialize(reader);
-                    WriteTentDGV(TentList, true);
+                    // Get the information from the file
+                    PitchATentJob Job = (PitchATentJob)deserializer.Deserialize(reader);
+
+                    // Write UI Elements
+                    WriteTentDGV(Job.TentList, true);
+                    WriteAccDGV(Job.AccList, true);
                 }
             }
         }
